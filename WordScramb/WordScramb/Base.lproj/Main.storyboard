@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vKK-XB-48A">
-                                <rect key="frame" x="20" y="160" width="374" height="112"/>
+                                <rect key="frame" x="20" y="160" width="374" height="104"/>
                                 <color key="backgroundColor" red="0.72941176470588232" green="0.87450980392156863" blue="0.85882352941176465" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="51"/>
                                 <nil key="textColor"/>
@@ -34,7 +34,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <state key="normal" title="Undo">
-                                    <color key="titleColor" red="0.15051472190000001" green="0.24843236799999999" blue="0.47061109540000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="titleColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="undoPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wWT-sQ-8WU"/>
@@ -48,7 +48,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <state key="normal" title="Check">
-                                    <color key="titleColor" red="0.15051472190000001" green="0.24843236799999999" blue="0.47061109540000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="titleColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="checkPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Lxe-7v-J5X"/>
@@ -64,9 +64,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="0nM-7E-CsY">
-                                <rect key="frame" x="20" y="344" width="374" height="28"/>
+                                <rect key="frame" x="20" y="336" width="374" height="36"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="27" id="qRr-50-sfJ"/>
+                                    <constraint firstAttribute="height" constant="35" id="qRr-50-sfJ"/>
                                 </constraints>
                                 <segments>
                                     <segment title="First"/>
@@ -87,7 +87,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <state key="normal" title="New Word">
-                                    <color key="titleColor" red="0.15051472190000001" green="0.24843236799999999" blue="0.47061109540000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="titleColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="newWordPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dmb-kX-sq5"/>

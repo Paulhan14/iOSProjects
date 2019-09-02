@@ -74,13 +74,13 @@ class ViewController: UIViewController {
     //When user press Check button
     @IBAction func checkPressed(_ sender: Any) {
         //Check user's guess
-        if wordModel.isDefined(userGuess) {
+        if userGuess == currentWord {
             gameOutcomeLabel.text = "Correct!"
         } else {
             gameOutcomeLabel.text = "Wrong!"
         }
-        //Reset the variable used as a game has ended
         userAnswerLabel.text = currentWord
+        //Reset the variable used as a game has ended
         userGuess = ""
         currentWordInChar = []
         lastSelectedLetters = []
@@ -103,6 +103,9 @@ class ViewController: UIViewController {
         //Get a new word based on the word length user picked
         wordModel.setCurrentWordSize(newSize: currentWordLength)
         currentWord = wordModel.randomWord
+        while (wordModel.isDefined(currentWord) == false) {
+            currentWord = wordModel.randomWord
+        }
         currentWordInChar = [Character](currentWord)
         currentWordInChar.shuffle() //Randomly reorder the letters
         for i in 0...currentWordLength-1 {
