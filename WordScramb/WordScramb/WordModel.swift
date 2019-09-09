@@ -56,14 +56,17 @@ class WordModel {
         }
     }
     
+    //  Created by Jiaxing Han on 9/5/19.
+    //  Copyright © 2019 Jiaxing Han. All rights reserved.
+    //  Give a response when answer is correct
     func correctResponse() -> String {
         let response = ["Congrats!👏", "Nice!👍", "Awesome✌️"]
         return response.randomElement()!
     }
-    
+    //  Give a response when answer is wrong
     func wrongResponse() -> String {
-        let response = ["Not right😕", "👋Not it", "Try next👇"]
+        let response = ["Not right😕", "👋Not it", "❌Try next"]
         return response.randomElement()!
     }
-    
+    //End of additional functions
 }
