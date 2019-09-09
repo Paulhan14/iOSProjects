@@ -56,4 +56,14 @@ class WordModel {
         }
     }
     
+    func correctResponse() -> String {
+        let response = ["Congrats!👏", "Nice!👍", "Awesome✌️"]
+        return response.randomElement()!
+    }
+    
+    func wrongResponse() -> String {
+        let response = ["Not right😕", "👋Not it", "Try next👇"]
+        return response.randomElement()!
+    }
+    
 }

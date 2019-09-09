@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,31 +13,35 @@
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="We_Are" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fNo-jB-jPv"/>
+                        <viewControllerLayoutGuide type="bottom" id="KkL-oh-MKI"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EJi-lL-tsT">
-                                <rect key="frame" x="20" y="94" width="374" height="531"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Penn State" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jrC-rv-OWh">
+                                <rect key="frame" x="20" y="675" width="374" height="42"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EJi-lL-tsT">
+                                <rect key="frame" x="60" y="52" width="293" height="532"/>
+                                <color key="backgroundColor" red="0.98823529409999999" green="0.97647058819999999" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="530" id="IVP-OZ-13B"/>
+                                </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="We Are" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cPO-lf-MnQ">
-                                <rect key="frame" x="20" y="633" width="374" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We Are" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cPO-lf-MnQ">
+                                <rect key="frame" x="20" y="613" width="20" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Penn State" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jrC-rv-OWh">
-                                <rect key="frame" x="20" y="691" width="374" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a3K-Qk-vCn">
-                                <rect key="frame" x="163" y="771" width="89" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a3K-Qk-vCn">
+                                <rect key="frame" x="151" y="720" width="73" height="50"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <state key="normal" title="Cheer">
                                     <color key="titleColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -49,7 +52,26 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.15051472190000001" green="0.24843236799999999" blue="0.47061109540000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <constraints>
+                            <constraint firstItem="jrC-rv-OWh" firstAttribute="trailing" secondItem="cPO-lf-MnQ" secondAttribute="trailing" id="2L3-iD-3Z4"/>
+                            <constraint firstItem="a3K-Qk-vCn" firstAttribute="top" secondItem="jrC-rv-OWh" secondAttribute="bottom" constant="55" id="3mw-b9-t71"/>
+                            <constraint firstItem="EJi-lL-tsT" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-120" id="4Pu-NK-wSe"/>
+                            <constraint firstItem="jrC-rv-OWh" firstAttribute="width" secondItem="cPO-lf-MnQ" secondAttribute="width" id="6px-Ug-hB7"/>
+                            <constraint firstItem="KkL-oh-MKI" firstAttribute="top" secondItem="a3K-Qk-vCn" secondAttribute="bottom" constant="40" id="Ac9-GW-sty"/>
+                            <constraint firstItem="EJi-lL-tsT" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="25" id="F3J-cT-04q"/>
+                            <constraint firstItem="jrC-rv-OWh" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="HJc-WV-B2r"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="EJi-lL-tsT" secondAttribute="trailing" constant="25" id="I3r-jP-tuT"/>
+                            <constraint firstItem="a3K-Qk-vCn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Ihq-6L-aQf"/>
+                            <constraint firstItem="jrC-rv-OWh" firstAttribute="leading" secondItem="cPO-lf-MnQ" secondAttribute="leading" id="XvX-lE-AbB"/>
+                            <constraint firstItem="jrC-rv-OWh" firstAttribute="top" secondItem="cPO-lf-MnQ" secondAttribute="bottom" constant="20" id="ZWq-8K-8fc"/>
+                            <constraint firstItem="cPO-lf-MnQ" firstAttribute="top" secondItem="EJi-lL-tsT" secondAttribute="bottom" constant="20" id="aGS-hb-lrr"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="a3K-Qk-vCn" secondAttribute="trailing" constant="142" id="b9i-27-DeN"/>
+                            <constraint firstItem="cPO-lf-MnQ" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="eaf-tT-zc3"/>
+                            <constraint firstItem="cPO-lf-MnQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="jki-I9-hbM"/>
+                            <constraint firstItem="EJi-lL-tsT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="mbF-Hu-yYs"/>
+                            <constraint firstItem="a3K-Qk-vCn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="142" id="t6X-uA-yxC"/>
+                            <constraint firstItem="jrC-rv-OWh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="ybl-Jj-iRB"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="pennStateLabel" destination="jrC-rv-OWh" id="KjW-bv-z19"/>
@@ -58,7 +80,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137.68115942028987" y="126.5625"/>
+            <point key="canvasLocation" x="136.80000000000001" y="126.35467980295567"/>
         </scene>
     </scenes>
 </document>
