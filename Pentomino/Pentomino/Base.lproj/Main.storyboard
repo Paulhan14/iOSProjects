@@ -181,6 +181,9 @@
                                 <state key="normal" title="Solve">
                                     <color key="titleColor" red="0.72941176470000002" green="0.87450980389999999" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="solvePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="inq-Vu-g6E"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="72M-0a-91u">
                                 <rect key="frame" x="386" y="494" width="63" height="54"/>
@@ -215,6 +218,9 @@
                                 <state key="normal" title="Reset">
                                     <color key="titleColor" red="0.72941176470000002" green="0.87450980389999999" blue="0.85882352939999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="resetPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pYg-RT-jbB"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.38039215686274508" green="0.52941176470588236" blue="0.49019607843137253" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DA0923CD232DC71600A2D8B0 /* PiecesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0923CC232DC71600A2D8B0 /* PiecesModel.swift */; };
+		DA0923CD232DC71600A2D8B0 /* PieceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0923CC232DC71600A2D8B0 /* PieceModel.swift */; };
+		DA0923CF232ED56C00A2D8B0 /* Solutions.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA0923CE232ED56C00A2D8B0 /* Solutions.plist */; };
+		DA0923D32330384200A2D8B0 /* SingleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0923D22330384200A2D8B0 /* SingleModel.swift */; };
 		DAFE02A3232AE4C700E14ADD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFE02A2232AE4C700E14ADD /* AppDelegate.swift */; };
 		DAFE02A5232AE4C700E14ADD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFE02A4232AE4C700E14ADD /* ViewController.swift */; };
 		DAFE02A8232AE4C700E14ADD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAFE02A6232AE4C700E14ADD /* Main.storyboard */; };
@@ -28,7 +30,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		DA0923CC232DC71600A2D8B0 /* PiecesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiecesModel.swift; sourceTree = "<group>"; };
+		DA0923CC232DC71600A2D8B0 /* PieceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceModel.swift; sourceTree = "<group>"; };
+		DA0923CE232ED56C00A2D8B0 /* Solutions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Solutions.plist; sourceTree = "<group>"; };
+		DA0923D22330384200A2D8B0 /* SingleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleModel.swift; sourceTree = "<group>"; };
 		DAFE029F232AE4C700E14ADD /* Pentomino.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pentomino.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAFE02A2232AE4C700E14ADD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DAFE02A4232AE4C700E14ADD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -86,9 +90,11 @@
 				DAFE02A6232AE4C700E14ADD /* Main.storyboard */,
 				DAFE02A9232AE4C800E14ADD /* Assets.xcassets */,
 				DAFE02AB232AE4C800E14ADD /* LaunchScreen.storyboard */,
-				DAFE02C2232AE59900E14ADD /* PentominoModel.swift */,
 				DAFE02AE232AE4C800E14ADD /* Info.plist */,
-				DA0923CC232DC71600A2D8B0 /* PiecesModel.swift */,
+				DA0923CE232ED56C00A2D8B0 /* Solutions.plist */,
+				DAFE02C2232AE59900E14ADD /* PentominoModel.swift */,
+				DA0923CC232DC71600A2D8B0 /* PieceModel.swift */,
+				DA0923D22330384200A2D8B0 /* SingleModel.swift */,
 			);
 			path = Pentomino;
 			sourceTree = "<group>";
@@ -184,6 +190,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DAFE02AD232AE4C800E14ADD /* LaunchScreen.storyboard in Resources */,
+				DA0923CF232ED56C00A2D8B0 /* Solutions.plist in Resources */,
 				DAFE02AA232AE4C800E14ADD /* Assets.xcassets in Resources */,
 				DAFE02A8232AE4C700E14ADD /* Main.storyboard in Resources */,
 			);
@@ -204,8 +211,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				DAFE02A5232AE4C700E14ADD /* ViewController.swift in Sources */,
+				DA0923D32330384200A2D8B0 /* SingleModel.swift in Sources */,
 				DAFE02A3232AE4C700E14ADD /* AppDelegate.swift in Sources */,
-				DA0923CD232DC71600A2D8B0 /* PiecesModel.swift in Sources */,
+				DA0923CD232DC71600A2D8B0 /* PieceModel.swift in Sources */,
 				DAFE02C3232AE59900E14ADD /* PentominoModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

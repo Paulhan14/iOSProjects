@@ -24,6 +24,8 @@ typealias Solutions = [Solution]
 class Model {
 
     let allSolutions : Solutions //[[String:[String:Int]]]
+    private var boardType: Int
+    
     init () {
         let mainBundle = Bundle.main
         let solutionURL = mainBundle.url(forResource: "Solutions", withExtension: "plist")
@@ -36,6 +38,17 @@ class Model {
             print(error)
             allSolutions = []
         }
+        
+        self.boardType = 0
+    }
+    
+    func setBoardType(type: Int) {
+        self.boardType = type-1
+    }
+    
+    func findSolutionForPiece(name: String) -> Position{
+        let solution = allSolutions[self.boardType]
+        return solution[name]!
     }
 
 }
