@@ -10,10 +10,15 @@ import Foundation
 
 //  Class for a single pentomino piece
 class PentominoPiece {
+    //  Letter name
     let shape: String
+    //  x value on pieces board
     var originalX: Double
+    //  y value on pieces board
     var originalY: Double
+    //  width at first
     var width: Double
+    //  height at first
     var height: Double
     
     init(shape:String) {

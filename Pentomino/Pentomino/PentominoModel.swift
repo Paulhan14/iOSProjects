@@ -24,6 +24,8 @@ typealias Solutions = [Solution]
 class Model {
 
     let allSolutions : Solutions //[[String:[String:Int]]]
+    //  Variable added by Jiaxing Han
+    //  Keep track of which board is displayed in the main board view
     private var boardType: Int
     
     init () {
@@ -38,14 +40,14 @@ class Model {
             print(error)
             allSolutions = []
         }
-        
+        //  Initialize board type to 0
         self.boardType = 0
     }
-    
+    //  Set current board type
     func setBoardType(type: Int) {
         self.boardType = type-1
     }
-    
+    //  Find position of a piece on the CURRENT board type
     func findSolutionForPiece(name: String) -> Position{
         let solution = allSolutions[self.boardType]
         return solution[name]!

@@ -38,6 +38,7 @@ class ViewController: UIViewController {
         super.init(coder: aDecoder)
     }
     
+    // viewDidLoad method
     override func viewDidLoad() {
         super.viewDidLoad()
         initBoardButtonTags()
@@ -50,30 +51,36 @@ class ViewController: UIViewController {
         resetButton.setTitleColor(UIColor.lightGray, for: .disabled)
     }
     
+    //  Place each piece on the board
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        let widthOfEach = 120
+        let xOffset = 30
+        let xIncrementValue = 110
+        let yOffset = 30
+        let yIncrementValue = 180
         let widthOfBoard = piecesBoardView.frame.width
-        let numberOfPiecesOneLine = Int(widthOfBoard / 120)
+        let numberOfPiecesOneLine = Int(widthOfBoard) / widthOfEach
         let numberOfLines = piecesModel.getPiecesCount() / numberOfPiecesOneLine
         let lastLine = piecesModel.getPiecesCount() % numberOfPiecesOneLine
-        
+        //  Handles pentomino pieces except last row
         for i in 0..<numberOfLines {
             for j in 0..<numberOfPiecesOneLine {
                 let aPieceView = piecesViews[j + i * numberOfPiecesOneLine]
-                let x = CGFloat(j * 100 + 30)
-                let y = CGFloat(30 + 180 * i)
+                let x = CGFloat(j * xIncrementValue + xOffset)
+                let y = CGFloat(yOffset + yIncrementValue * i)
                 let width = aPieceView.frame.width
                 let height = aPieceView.frame.height
                 let frame = CGRect(x: x, y: y, width: width, height: height)
                 aPieceView.frame = frame
             }
         }
-        
+        //  If last row has pieces in it
         if lastLine != 0 {
             for i in 0..<lastLine {
                 let aPieceView = piecesViews[i + numberOfLines * numberOfPiecesOneLine]
-                let x = CGFloat(i * 100 + 30)
-                let y = CGFloat(210 * numberOfLines)
+                let x = CGFloat(i * xIncrementValue + xOffset)
+                let y = CGFloat(yIncrementValue * numberOfLines)
                 let width = aPieceView.frame.width
                 let height = aPieceView.frame.height
                 let frame = CGRect(x: x, y: y, width: width, height: height)
@@ -82,10 +89,12 @@ class ViewController: UIViewController {
         }
     }
     
-
     //  MARK:actions
+    //  When board buttons are pressed
     @IBAction func BoardButtonPressed(_ sender: UIButton) {
+        //  load board image to mian board view based on the selection
         loadBoardImage(sender.tag)
+        //  turns solve button and reset button on and off
         if sender.tag != 0 {
             solveButton.isEnabled = true
             solutionModel.setBoardType(type: sender.tag)
@@ -94,35 +103,39 @@ class ViewController: UIViewController {
             resetButton.isEnabled = false
         }
     }
-    
+    //  When solve button is pressed
     @IBAction func solvePressed(_ sender: UIButton) {
+        //  Disable buttons
         for button in boardButtons {
             button.isEnabled = false
         }
         self.solveButton.isEnabled = false
+        //  Handles transformation
         UIView.animate(withDuration: kAnimationDuration, animations: {
             for i in 0..<self.piecesModel.getPiecesCount() {
+                let gridSize = 30.0
                 let aPiece = self.piecesModel.pieces[i]
                 let shape = aPiece.shape
                 let position = self.solutionModel.findSolutionForPiece(name: shape)
                 let rotationDegree = self.degreeToRadian(position.rotations)
+                //  Back up original origin and size values
                 aPiece.setOriginalX(x: Double(self.piecesViews[i].frame.origin.x))
                 aPiece.setOriginalY(y: Double(self.piecesViews[i].frame.origin.y))
                 aPiece.setWidth(width: Double(self.piecesViews[i].frame.size.width))
                 aPiece.setHeight(height: Double(self.piecesViews[i].frame.size.height))
-                
-                var transform = CGAffineTransform.identity
+                //  Rotation and then flip, if necessary
+                var transform = CGAffineTransform(rotationAngle: rotationDegree)
                 if position.isFlipped {
-                    transform = transform.scaledBy(x: 1.0, y: -1.0)
+                    transform = transform.scaledBy(x: -1.0, y: 1.0)
                 }
-                self.piecesViews[i].transform = transform.rotated(by: rotationDegree)
-                
-                let x = CGFloat(Double(position.x) * 30.0)
-                let y = CGFloat(Double(position.y) * 30.0)
+                self.piecesViews[i].transform = transform
+                //  Generate new frame based on the updated information
+                let x = CGFloat(Double(position.x) * gridSize)
+                let y = CGFloat(Double(position.y) * gridSize)
                 let width = self.piecesViews[i].frame.width
                 let height = self.piecesViews[i].frame.height
                 let frame = CGRect(x: x, y: y, width: width, height: height)
-                
+                //  Convert to main board
                 let convert = self.mainBoardImageView.convert(frame, to: self.piecesBoardView)
                 self.piecesViews[i].frame = convert
             }
@@ -131,12 +144,16 @@ class ViewController: UIViewController {
         }
     }
     
+    //  When reset is pressed
     @IBAction func resetPressed(_ sender: Any) {
+        // Disable itself
         self.resetButton.isEnabled = false
+        //  Handles transformation
         UIView.animate(withDuration: kAnimationDuration, animations: {
             for i in 0..<self.piecesModel.getPiecesCount() {
                 let aPiece = self.piecesModel.pieces[i]
                 let aPieceView = self.piecesViews[i]
+                //  Use back-up information to reconstruct frame
                 let x = aPiece.originalX
                 let y = aPiece.originalY
                 let width = aPiece.width
@@ -153,12 +170,14 @@ class ViewController: UIViewController {
         }
     }
     
-    //  Other functions
+    //  MARK:Helper Functions
+    //  Load board image to main board
     func loadBoardImage(_ label:Int) {
-        let image = UIImage(named:"Board\(label)")
+        let boards = BoardsModel()
+        let image = UIImage(named:boards.getBoardNameOf(index: label))
         mainBoardImageView.image = image
     }
-    
+    //  Assign a tag to each of the board buttons
     func initBoardButtonTags() {
         var i = 0
         for button in boardButtons {
@@ -166,7 +185,7 @@ class ViewController: UIViewController {
             i += 1
         }
     }
-    
+    //  Convert degrees to radians
     func degreeToRadian(_ numberOf90Degree: Int) -> CGFloat {
         return CGFloat(Double(numberOf90Degree) * .pi / 2)
     }
