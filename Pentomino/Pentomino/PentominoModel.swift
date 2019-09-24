@@ -45,11 +45,15 @@ class Model {
     }
     //  Set current board type
     func setBoardType(type: Int) {
-        self.boardType = type-1
+        self.boardType = type
+    }
+    
+    func getBoardType() -> Int {
+        return boardType
     }
     //  Find position of a piece on the CURRENT board type
     func findSolutionForPiece(name: String) -> Position{
-        let solution = allSolutions[self.boardType]
+        let solution = allSolutions[self.boardType-1]
         return solution[name]!
     }
 

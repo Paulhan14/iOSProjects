@@ -27,4 +27,8 @@ class PiecesModel {
     func getPiecesCount() -> Int {
         return pieces.count
     }
+    
+    func getAPiece(index: Int) -> PentominoPiece {
+        return pieces[index]
+    }
 }
