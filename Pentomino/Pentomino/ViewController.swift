@@ -162,7 +162,7 @@ class ViewController: UIViewController {
                 let height = self.piecesViews[i].frame.height
                 let frame = CGRect(x: x, y: y, width: width, height: height)
                 //  Convert to main board
-                let convert = self.mainBoardImageView.convert(frame, to: self.piecesBoardView)
+                let convert = self.mainBoardImageView.convert(frame, to: self.piecesViews[i].superview!)
                 self.piecesViews[i].frame = convert
             }
         }) { (finished) in
