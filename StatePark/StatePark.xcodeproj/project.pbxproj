@@ -83,11 +83,14 @@
 		DA329FA8233BAF4200EAD345 /* StatePark */ = {
 			isa = PBXGroup;
 			children = (
+				DA329FCF233BB34E00EAD345 /* LaunchScreen.storyboard */,
+				DA329FD0233BB34E00EAD345 /* Main.storyboard */,
+				DA329FD1233BB34E00EAD345 /* AppDelegate.swift */,
+				DA329FD2233BB34E00EAD345 /* Info.plist */,
 				DA329FCA233BB1E600EAD345 /* Model */,
 				DA329FC9233BB17900EAD345 /* Controller */,
 				DA329FCB233BB1F100EAD345 /* View */,
 				DA329FD9233BB55700EAD345 /* Resources */,
-				DA329FCE233BB34E00EAD345 /* SupportFiles */,
 			);
 			path = StatePark;
 			sourceTree = "<group>";
@@ -124,17 +127,6 @@
 				DA6C8218233D094900D1EAC2 /* ParkScrollView.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		DA329FCE233BB34E00EAD345 /* SupportFiles */ = {
-			isa = PBXGroup;
-			children = (
-				DA329FCF233BB34E00EAD345 /* LaunchScreen.storyboard */,
-				DA329FD0233BB34E00EAD345 /* Main.storyboard */,
-				DA329FD1233BB34E00EAD345 /* AppDelegate.swift */,
-				DA329FD2233BB34E00EAD345 /* Info.plist */,
-			);
-			path = SupportFiles;
 			sourceTree = "<group>";
 		};
 		DA329FD9233BB55700EAD345 /* Resources */ = {
@@ -394,7 +386,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "$(SRCROOT)/StatePark/SupportFiles/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/StatePark/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -411,7 +403,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = "$(SRCROOT)/StatePark/SupportFiles/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/StatePark/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
