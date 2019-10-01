@@ -31,6 +31,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         mainScrollView.showsHorizontalScrollIndicator = false
     }
     
+    // MARK: functions load view components
     func initParkScrollView() {
         mainScrollView.delegate = self
         let size = mainScrollView.bounds.size
@@ -75,33 +76,6 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
-    func addArrowIcon() {
-        // Icons made by Smashicons https://www.flaticon.com/authors/smashicons from Flaticon https://www.flaticon.com/
-        let upArrowIcon = UIImageView(image: UIImage(named: "uparrow"))
-        self.view.addSubview(upArrowIcon)
-        upArrowIcon.center = CGPoint(x: self.view.bounds.width/2.0, y: self.view.bounds.height/10.0)
-        arrowIcons["up"] = upArrowIcon
-        upArrowIcon.isHidden = true
-        
-        let downArrowIcon = UIImageView(image: UIImage(named: "downarrow"))
-        self.view.addSubview(downArrowIcon)
-        downArrowIcon.center = CGPoint(x: self.view.bounds.width/2.0, y: 9.0 * self.view.bounds.height/10.0)
-        arrowIcons["down"] = downArrowIcon
-        downArrowIcon.isHidden = true
-        
-        let rightArrowIcon = UIImageView(image: UIImage(named: "rightarrow"))
-        self.view.addSubview(rightArrowIcon)
-        rightArrowIcon.center = CGPoint(x: 9.0 * self.view.bounds.width/10.0, y: self.view.bounds.height/2.0)
-        arrowIcons["right"] = rightArrowIcon
-        rightArrowIcon.isHidden = true
-        
-        let leftArrowIcon = UIImageView(image: UIImage(named: "leftarrow"))
-        self.view.addSubview(leftArrowIcon)
-        leftArrowIcon.center = CGPoint(x: self.view.bounds.width/10.0, y: self.view.bounds.height/2.0)
-        arrowIcons["left"] = leftArrowIcon
-        leftArrowIcon.isHidden = true
-    }
-    
     @objc func zoomImage(_ sender: UIPinchGestureRecognizer) {
         let currentPark = parkScrollViews[currentParkIndex]
         if currentPark.currentImageIndex > -1 {
@@ -111,9 +85,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
                 self.view.addSubview(zoomView)
                 self.view.bringSubviewToFront(zoomView)
             case .changed:
-                if sender.scale > 1 {
-                    zoomImageView.transform = CGAffineTransform(scaleX: sender.scale, y: sender.scale)
-                }
+                zoomView.zoomScale = sender.scale
             default:
                 break
             }
@@ -140,7 +112,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         let scaleFrame = CGRect(origin: zoomImageView.frame.origin, size: CGSize(width: minScale * zoomImageView.frame.width, height: minScale * zoomImageView.frame.height))
         zoomImageView.frame = scaleFrame
         zoomImageView.center = CGPoint(x: zoomView.bounds.width/2.0, y: zoomView.bounds.height/2.0)
-        zoomView.setZoomScale( 0.375, animated: false)
+        //zoomView.setZoomScale( 0.375, animated: false)
         zoomView.minimumZoomScale = 1.0
         zoomView.maximumZoomScale = 10.0
         zoomView.delegate = self
@@ -214,7 +186,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         zoomImageView.center = CGPoint(x: scrollView.contentSize.width * 0.5 + offsetX, y: scrollView.contentSize.height * 0.5 + offsetY)
     }
     
-    // MARK: Helper function
+    // MARK: Helper functions
     // Set arrow icons visibility
     func setIndicators(up: Bool, down: Bool, left: Bool, right: Bool) {
         self.arrowIcons["up"]!.isHidden = up
@@ -227,9 +199,40 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         let viewSize = zoomView.bounds.size
         let widthScale = viewSize.width/size.width
         let heightScale = viewSize.height/size.height
-        var minScale = min(widthScale,heightScale)
-        if minScale > 1 {minScale = 1.0}
-        return minScale
+        return min(widthScale,heightScale)
     }
+    
+    func addArrowIcon() {
+        // Icons made by Smashicons https://www.flaticon.com/authors/smashicons from Flaticon https://www.flaticon.com/
+        let arrowSize = CGSize(width: 35.0, height: 35.0 )
+        let upArrowIcon = UIImageView(image: UIImage(named: "uparrow"))
+        self.view.addSubview(upArrowIcon)
+        upArrowIcon.frame.size = arrowSize
+        upArrowIcon.center = CGPoint(x: self.view.bounds.width/2.0, y: self.view.bounds.height/10.0)
+        arrowIcons["up"] = upArrowIcon
+        upArrowIcon.isHidden = true
+        
+        let downArrowIcon = UIImageView(image: UIImage(named: "downarrow"))
+        self.view.addSubview(downArrowIcon)
+        downArrowIcon.frame.size = arrowSize
+        downArrowIcon.center = CGPoint(x: self.view.bounds.width/2.0, y: 9.0 * self.view.bounds.height/10.0)
+        arrowIcons["down"] = downArrowIcon
+        downArrowIcon.isHidden = true
+        
+        let rightArrowIcon = UIImageView(image: UIImage(named: "rightarrow"))
+        self.view.addSubview(rightArrowIcon)
+        rightArrowIcon.frame.size = arrowSize
+        rightArrowIcon.center = CGPoint(x: 9.0 * self.view.bounds.width/10.0, y: self.view.bounds.height/2.0)
+        arrowIcons["right"] = rightArrowIcon
+        rightArrowIcon.isHidden = true
+        
+        let leftArrowIcon = UIImageView(image: UIImage(named: "leftarrow"))
+        self.view.addSubview(leftArrowIcon)
+        leftArrowIcon.frame.size = arrowSize
+        leftArrowIcon.center = CGPoint(x: self.view.bounds.width/10.0, y: self.view.bounds.height/2.0)
+        arrowIcons["left"] = leftArrowIcon
+        leftArrowIcon.isHidden = true
+    }
+    
 }
 
