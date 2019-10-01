@@ -28,6 +28,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         initParkScrollView()
         addImageView()
         addArrowIcon()
+        mainScrollView.showsHorizontalScrollIndicator = false
     }
     
     func initParkScrollView() {
@@ -46,6 +47,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
             parkView.initParkImages(imageNames: parkImageNames, imageCount: parkImageCount)
             let pinch = UIPinchGestureRecognizer(target: self, action: #selector(zoomImage(_:)))
             parkView.addGestureRecognizer(pinch)
+            parkView.showsVerticalScrollIndicator = false
             parkView.delegate = self
             parkScrollViews.append(parkView)
         }
@@ -137,8 +139,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         let minScale = scaleFor(size: zoomImage.size)
         let scaleFrame = CGRect(origin: zoomImageView.frame.origin, size: CGSize(width: minScale * zoomImageView.frame.width, height: minScale * zoomImageView.frame.height))
         zoomImageView.frame = scaleFrame
-        zoomImageView.center = CGPoint(x: zoomView.bounds.width/2.0,
-                                       y: zoomView.bounds.height/2.0)
+        zoomImageView.center = CGPoint(x: zoomView.bounds.width/2.0, y: zoomView.bounds.height/2.0)
         zoomView.setZoomScale( 0.375, animated: false)
         zoomView.minimumZoomScale = 1.0
         zoomView.maximumZoomScale = 10.0
@@ -146,14 +147,21 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         startScale = zoomView.zoomScale
     }
 
-    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-        // Set horizontal scroll view enabled or not
+    
+    // MARK: Delegate functions
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        // Set horizontal scroll view enabled or disabled
         let currentPark = parkScrollViews[currentParkIndex]
         mainScrollView.isScrollEnabled = currentPark.isAllowedOrNot()
+    }
+    
+    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+        // "Remove" arrows
         setIndicators(up: true, down: true, left: true, right: true)
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        // Add arrows based on the current page
         let currentPark = parkScrollViews[currentParkIndex]
         let imageIndex = currentPark.currentImageIndex
         let max = parksModel.getParkCount()-1
@@ -191,12 +199,22 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
+        // When image view goes back to the normal scale, then remove the zoom view
         if scale == startScale{
             zoomImageView.removeFromSuperview()
             zoomView.removeFromSuperview()
         }
     }
     
+    // Center the image view when zooming
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        let offsetX = max((scrollView.bounds.size.width - scrollView.contentSize.width) * 0.5, 0.0)
+        let offsetY = max((scrollView.bounds.size.height - scrollView.contentSize.height) * 0.5, 0.0)
+        // adjust the center of image view
+        zoomImageView.center = CGPoint(x: scrollView.contentSize.width * 0.5 + offsetX, y: scrollView.contentSize.height * 0.5 + offsetY)
+    }
+    
+    // MARK: Helper function
     // Set arrow icons visibility
     func setIndicators(up: Bool, down: Bool, left: Bool, right: Bool) {
         self.arrowIcons["up"]!.isHidden = up
