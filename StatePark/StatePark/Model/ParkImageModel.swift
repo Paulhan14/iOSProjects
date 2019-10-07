@@ -10,19 +10,22 @@ import Foundation
 
 struct StatePark: Codable {
     var name: String
-    var count: Int
+    var photos: [Photo]
 }
 
-typealias Names = [String]
+struct Photo: Codable {
+    var imageName: String
+    var caption: String
+}
+
 
 class ParkImageModel {
     
     private let parks: [StatePark]
-    private let imageNames: [String:Names]
     
     init() {
         let mainBundle = Bundle.main
-        let url = mainBundle.url(forResource: "Parks", withExtension: "plist")
+        let url = mainBundle.url(forResource: "StateParks", withExtension: "plist")
         do {
             let data = try Data(contentsOf: url!)
             let decoder = PropertyListDecoder()
@@ -31,16 +34,6 @@ class ParkImageModel {
             print(error)
             parks = []
         }
-        
-        var _imageNames: [String:Names] = [:]
-        for park in self.parks {
-            var names: [String] = []
-            for i in 0..<park.count {
-                names.append("\(park.name)0\(i+1)")
-            }
-            _imageNames[park.name] = names
-        }
-        imageNames = _imageNames
     }
     
     func getParkNameAt(index: Int) -> String {
@@ -48,14 +41,26 @@ class ParkImageModel {
     }
     
     func getParkImageCountAt(index: Int) -> Int {
-        return self.parks[index].count
+        return self.parks[index].photos.count
     }
     
-    func getImageNameOfPark(name: String) -> [String] {
-        return self.imageNames[name] ?? []
+    func getImageNameOfParkAt(index: Int) -> [String] {
+        var _imageNames: [String] = []
+        for photo in self.parks[index].photos {
+            _imageNames.append(photo.imageName)
+        }
+        return _imageNames
     }
     
     func getParkCount() -> Int {
         return self.parks.count
+    }
+    
+    func getCaptionsOfParkAt(index: Int) -> [String] {
+        var _captions: [String] = []
+        for photo in self.parks[index].photos {
+            _captions.append(photo.caption)
+        }
+        return _captions
     }
 }

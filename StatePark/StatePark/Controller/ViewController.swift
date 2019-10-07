@@ -43,7 +43,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
             let name = parksModel.getParkNameAt(index: i)
             let parkView = ParkScrollView.init(parkName: name, frame: frame)
             self.mainScrollView.addSubview(parkView)
-            let parkImageNames = self.parksModel.getImageNameOfPark(name: name)
+            let parkImageNames = self.parksModel.getImageNameOfParkAt(index: i)
             let parkImageCount = self.parksModel.getParkImageCountAt(index: i)
             parkView.initParkImages(imageNames: parkImageNames, imageCount: parkImageCount)
             let pinch = UIPinchGestureRecognizer(target: self, action: #selector(zoomImage(_:)))
@@ -102,7 +102,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         // Add the displayed image to this zoom view
         let currentPark = parkScrollViews[currentParkIndex]
         let currentImage = currentPark.currentImageIndex
-        let imageNames = parksModel.getImageNameOfPark(name: currentPark.getParkName())
+        let imageNames = parksModel.getImageNameOfParkAt(index: currentParkIndex)
         zoomImage = UIImage(named: imageNames[currentImage])!
         zoomImageView = UIImageView(image: zoomImage)
         zoomView.contentSize = zoomImage.size

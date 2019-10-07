@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="D77-Zn-00p">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -34,5 +34,202 @@
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="126.5625"/>
         </scene>
+        <!--State Park Table-->
+        <scene sceneID="TXY-3n-kzw">
+            <objects>
+                <tableViewController id="XFJ-VK-ezo" customClass="ParkTableViewController" customModule="StatePark" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="mAw-SR-9MM">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.98823529409999999" green="0.97647058819999999" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ParkCells" rowHeight="100" id="0PM-8k-LvV" customClass="ParkTableViewCell" customModule="StatePark" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="100"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0PM-8k-LvV" id="g0M-mz-oua">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="99.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TTc-3W-ESN">
+                                            <rect key="frame" x="20" y="30" width="200" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="200" id="VIL-CF-CPF"/>
+                                                <constraint firstAttribute="height" constant="30" id="ZyV-ef-xEn"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="17n-bP-qda">
+                                            <rect key="frame" x="254" y="5" width="160" height="89.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="160" id="FcN-xY-hwf"/>
+                                                <constraint firstAttribute="height" constant="89.5" id="l5p-mH-nCc"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="TTc-3W-ESN" firstAttribute="leading" secondItem="g0M-mz-oua" secondAttribute="leadingMargin" id="By8-Zh-uCm"/>
+                                        <constraint firstItem="17n-bP-qda" firstAttribute="top" secondItem="g0M-mz-oua" secondAttribute="top" constant="5" id="X0s-CP-mmd"/>
+                                        <constraint firstItem="TTc-3W-ESN" firstAttribute="top" secondItem="g0M-mz-oua" secondAttribute="topMargin" constant="19" id="ZgF-ba-8K8"/>
+                                        <constraint firstAttribute="trailing" secondItem="17n-bP-qda" secondAttribute="trailing" id="eeA-Vm-Aur"/>
+                                        <constraint firstAttribute="bottom" secondItem="17n-bP-qda" secondAttribute="bottom" constant="5" id="qvx-VX-apj"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="ParkImageView" destination="17n-bP-qda" id="QNY-8a-qp0"/>
+                                    <outlet property="captionLabel" destination="TTc-3W-ESN" id="K8y-ao-5Ae"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="XFJ-VK-ezo" id="Y5u-GF-cnE"/>
+                            <outlet property="delegate" destination="XFJ-VK-ezo" id="OMl-Tb-m6T"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="State Park Table" id="0zE-L1-8n8"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zhw-O1-6Yw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2923.1884057971015" y="460.71428571428567"/>
+        </scene>
+        <!--State Park Collection-->
+        <scene sceneID="Tff-iU-aFf">
+            <objects>
+                <collectionViewController id="3Xd-OP-uBr" customClass="ParkCollectionViewController" customModule="StatePark" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="VqG-M8-eCN">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.98823529409999999" green="0.97647058819999999" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="drS-86-J7j">
+                            <size key="itemSize" width="115" height="117"/>
+                            <size key="headerReferenceSize" width="50" height="50"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ParkCollectionCell" id="iQt-cS-eVu" customClass="ParkCollectionViewCell" customModule="StatePark" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="50" width="115" height="117"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                    <rect key="frame" x="0.0" y="0.0" width="115" height="117"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="o2q-jW-Beg">
+                                            <rect key="frame" x="0.0" y="10" width="115" height="100"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="100" id="u3n-vO-Wzc"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="o2q-jW-Beg" firstAttribute="top" secondItem="iQt-cS-eVu" secondAttribute="top" constant="10" id="N6f-uH-itj"/>
+                                    <constraint firstAttribute="trailing" secondItem="o2q-jW-Beg" secondAttribute="trailing" id="VJn-b5-fGT"/>
+                                    <constraint firstItem="o2q-jW-Beg" firstAttribute="leading" secondItem="iQt-cS-eVu" secondAttribute="leading" id="fSD-GI-py3"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="parkCollectionImage" destination="o2q-jW-Beg" id="dnN-f9-5gG"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="ParkCollectionHeader" id="0kP-6d-keD" customClass="ParkCollectionReusableView" customModule="StatePark" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vzQ-0k-oGi">
+                                    <rect key="frame" x="18" y="8" width="177" height="34"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="34" id="HV1-By-Sux"/>
+                                        <constraint firstAttribute="width" constant="177" id="q23-QM-YGY"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="vzQ-0k-oGi" firstAttribute="top" secondItem="0kP-6d-keD" secondAttribute="topMargin" id="5MR-9X-FdS"/>
+                                <constraint firstItem="vzQ-0k-oGi" firstAttribute="leading" secondItem="0kP-6d-keD" secondAttribute="leadingMargin" constant="10" id="xvf-gj-cct"/>
+                            </constraints>
+                            <connections>
+                                <outlet property="parkCollectionHeaderLabel" destination="vzQ-0k-oGi" id="VcK-fi-C3u"/>
+                            </connections>
+                        </collectionReusableView>
+                        <connections>
+                            <outlet property="dataSource" destination="3Xd-OP-uBr" id="ajc-4V-im3"/>
+                            <outlet property="delegate" destination="3Xd-OP-uBr" id="Y8S-Z2-WCz"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" title="State Park Collection" id="D0x-Ki-dlv"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pTY-VR-KNK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2921.739130434783" y="-233.03571428571428"/>
+        </scene>
+        <!--State Park-->
+        <scene sceneID="W5n-vf-nFk">
+            <objects>
+                <tabBarController title="State Park" extendedLayoutIncludesOpaqueBars="YES" id="D77-Zn-00p" sceneMemberID="viewController">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bQV-sK-J8K">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="7it-GQ-Fow" kind="relationship" relationship="viewControllers" id="EuC-sV-Raw"/>
+                        <segue destination="Qvl-cA-qxG" kind="relationship" relationship="viewControllers" id="JnO-ob-6tF"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="29s-mI-gSD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1016" y="127"/>
+        </scene>
+        <!--Table-->
+        <scene sceneID="83Q-A5-3Xy">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" hidesBarsWhenVerticallyCompact="YES" id="7it-GQ-Fow" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Table" image="tableview" id="gQJ-BT-pz0"/>
+                    <toolbarItems/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7Ju-UQ-JyS">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="XFJ-VK-ezo" kind="relationship" relationship="rootViewController" id="wOY-SS-kae"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tNg-Ps-5pO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2013.0434782608697" y="460.71428571428567"/>
+        </scene>
+        <!--Collection-->
+        <scene sceneID="dK4-9e-Mnh">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" hidesBarsWhenVerticallyCompact="YES" id="Qvl-cA-qxG" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Collection" image="collectionview" id="l05-HE-IAt"/>
+                    <toolbarItems/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="udF-gh-G3X">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="3Xd-OP-uBr" kind="relationship" relationship="rootViewController" id="q54-Vr-gZE"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="m82-tg-0h2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2011.594202898551" y="-233.03571428571428"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="collectionview" width="30" height="30"/>
+        <image name="tableview" width="30" height="30"/>
+    </resources>
 </document>
