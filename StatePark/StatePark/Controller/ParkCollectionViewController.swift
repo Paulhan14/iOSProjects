@@ -16,21 +16,23 @@ class ParkCollectionViewController: UICollectionViewController {
     // Full-screen image
     private var scrollView = UIScrollView()
     private var imageView = UIImageView()
+    private var imageToDisplay: UIImage? = nil
     private var thumbnailFrame = CGRect()
     // Check device orientation
     private var orientation = UIDeviceOrientation.portrait
+    // support
+    private let animateDuration = 0.38
+    private let titleWhite = UIColor(red: 246/255, green: 246/255, blue: 242/255, alpha: 1)
+    private let titleGreenBlue = UIColor(red: 56/255, green: 128/255, blue: 135/255, alpha: 1)
+    private let titleFont = UIFont.init(name: "Rockwell-Bold", size: 20)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
         // Register cell classes
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        
+        // set up the scroll view
         scrollView.frame = self.view.bounds
-        scrollView.backgroundColor = .white
+        scrollView.backgroundColor = .black
         scrollView.minimumZoomScale = 1.0
         scrollView.maximumZoomScale = 10.0
         scrollView.delegate = self
@@ -38,29 +40,24 @@ class ParkCollectionViewController: UICollectionViewController {
         scrollView.addGestureRecognizer(tapClose)
         UIApplication.shared.keyWindow!.addSubview(scrollView)
         scrollView.isHidden = true
+        // store current orientation
         orientation = UIDevice.current.orientation
     }
     
     override func viewDidLayoutSubviews() {
         if UIDevice.current.orientation != orientation {
             scrollView.frame.size = CGSize(width: self.view.frame.width, height: self.view.frame.height)
+            if imageToDisplay != nil {
+                let minScale = scaleFor(size: imageToDisplay!.size)
+                let scaleSize = CGSize(width: minScale * imageToDisplay!.size.width, height: minScale * imageToDisplay!.size.height)
+                self.imageView.frame.size = scaleSize
+            }
+            self.imageView.center = CGPoint(x: self.scrollView.bounds.width/2.0, y: self.scrollView.bounds.height/2.0)
             orientation = UIDevice.current.orientation
         }
     }
 
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
     // MARK: UICollectionViewDataSource
-
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return parksModel.getParkCount()
     }
@@ -75,6 +72,7 @@ class ParkCollectionViewController: UICollectionViewController {
         
         let imageNames = parksModel.getImageNameOfParkAt(index: indexPath.section)
         cell.parkCollectionImage!.image = UIImage(named: imageNames[indexPath.row])
+        cell.parkCollectionImage!.layer.cornerRadius = 8
     
         return cell
     }
@@ -85,64 +83,35 @@ class ParkCollectionViewController: UICollectionViewController {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "ParkCollectionHeader", for: indexPath) as! ParkCollectionReusableView
-            headerView.parkCollectionHeaderLabel!.text = parksModel.getParkNameAt(index: indexPath.section)
-            headerView.parkCollectionHeaderLabel!.textColor = UIColor(red: 188/255, green: 143/255, blue: 143/255, alpha: 1)
-            headerView.backgroundColor = UIColor(red: 232/255, green: 233/255, blue: 243/255, alpha: 1)
+            headerView.parkCollectionHeaderLabel!.text =  " " + parksModel.getParkNameAt(index: indexPath.section)
+            headerView.parkCollectionHeaderLabel!.font = titleFont
+            headerView.parkCollectionHeaderLabel!.textColor = titleWhite
+            headerView.backgroundColor = titleGreenBlue
             return headerView
         default:
             assert(false, "Unhandled Element Kind")
         }
     }
 
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
-    
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         scrollView.isHidden = false
-        let selectedCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ParkCollectionCell", for: indexPath) as! ParkCollectionViewCell
+        let selectedCell = collectionView.cellForItem(at: indexPath) as! ParkCollectionViewCell
         let thumbnail = selectedCell.parkCollectionImage
         let thumbnailSuperView = thumbnail!.superview!
-        
         // Get image
         let imageNames = parksModel.getImageNameOfParkAt(index: indexPath.section)
-        let imageToDisplay = UIImage(named: imageNames[indexPath.row])
+        imageToDisplay = UIImage(named: imageNames[indexPath.row])
         imageView.image = imageToDisplay
         thumbnailFrame = thumbnailSuperView.convert(thumbnail!.frame, to: scrollView)
         scrollView.addSubview(imageView)
         imageView.frame = thumbnailFrame
         // center frame
         let minScale = scaleFor(size: imageToDisplay!.size)
-        let scaleFrame = CGRect(origin: imageView.frame.origin, size: CGSize(width: minScale * imageView.frame.width, height: minScale * imageView.frame.height))
-        UIView.animate(withDuration: 0.38) {
+        let scaleFrame = CGRect(origin: imageView.frame.origin, size: CGSize(width: minScale * imageToDisplay!.size.width, height: minScale * imageToDisplay!.size.height))
+        UIView.animate(withDuration: animateDuration) {
             self.imageView.frame = scaleFrame
             self.imageView.center = CGPoint(x: self.scrollView.bounds.width/2.0, y: self.scrollView.bounds.height/2.0)
-            
+
         }
         scrollView.contentSize = imageToDisplay!.size
         self.view.bringSubviewToFront(scrollView)
@@ -163,11 +132,12 @@ class ParkCollectionViewController: UICollectionViewController {
     // MARK: Gesture respond
     @objc func zoomImageTapped(recognizer: UITapGestureRecognizer) {
         if scrollView.zoomScale == 1 {
-            UIView.animate(withDuration: 0.38, animations: {
+            UIView.animate(withDuration: animateDuration, animations: {
                 self.imageView.frame = self.thumbnailFrame
             }) { (finished) in
                 self.imageView.removeFromSuperview()
                 self.imageView = UIImageView()
+                self.imageToDisplay = nil
                 self.scrollView.isHidden = true
             }
         }

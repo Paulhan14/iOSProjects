@@ -9,29 +9,32 @@
 import UIKit
 
 class ParkTableViewController: UITableViewController {
-    
+    // model instance
     private let parksModel = ParkImageModel()
+    // flag for each section
     private var collapsed = [Bool]()
+    // full-screen image view
     private var scrollView = UIScrollView()
     private var imageView = UIImageView()
+    private var imageToDisplay: UIImage? = nil
     private var thumbnailFrame = CGRect()
+    // store device orientation
     private var orientation = UIDeviceOrientation.portrait
+    // support
+    private let animateDuration = 0.38
+    private let titleWhite = UIColor(red: 246/255, green: 246/255, blue: 242/255, alpha: 1)
+    private let titleGreenBlue = UIColor(red: 56/255, green: 128/255, blue: 135/255, alpha: 1)
+    private let titleFont = UIFont.init(name: "Rockwell-Bold", size: 20)
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        
+        // init collapsed array
         for _ in 0..<parksModel.getParkCount() {
             collapsed.append(false)
         }
+        // set up scroll view
         scrollView.frame = self.view.frame
-        scrollView.backgroundColor = .white
+        scrollView.backgroundColor = .black
         scrollView.minimumZoomScale = 1.0
         scrollView.maximumZoomScale = 10.0
         scrollView.delegate = self
@@ -43,42 +46,48 @@ class ParkTableViewController: UITableViewController {
     }
     
     override func viewDidLayoutSubviews() {
+        // if device changed orientation, update full-screen image view
         if UIDevice.current.orientation != orientation {
             scrollView.frame = self.view.frame
+            if imageToDisplay != nil {
+                let minScale = scaleFor(size: imageToDisplay!.size)
+                let scaleSize = CGSize(width: minScale * imageToDisplay!.size.width, height: minScale * imageToDisplay!.size.height)
+                self.imageView.frame.size = scaleSize
+            }
             self.imageView.center = CGPoint(x: self.scrollView.bounds.width/2.0, y: self.scrollView.bounds.height/2.0)
             orientation = UIDevice.current.orientation
         }
     }
 
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         return parksModel.getParkCount()
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // prevent this section from loading if it is collapsed
         if collapsed[section] {
             return 0
         }
         return parksModel.getParkImageCountAt(index: section)
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ParkCells", for: indexPath) as! ParkTableViewCell
-        
+        // prevent this cell from loading if it is in collapsed section
         if collapsed[indexPath.section] {
             return cell
         }
-        
+        // configure cell
         let captions = parksModel.getCaptionsOfParkAt(index: indexPath.section)
         let imageNames = parksModel.getImageNameOfParkAt(index: indexPath.section)
         cell.captionLabel!.text = captions[indexPath.row]
         cell.ParkImageView!.image = UIImage(named: imageNames[indexPath.row])
-
+        cell.ParkImageView!.layer.cornerRadius = 6.18
         return cell
     }
     
+    // MARK: TableView header and cell custumization
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 45))
         let label = UILabel()
@@ -87,11 +96,12 @@ class ParkTableViewController: UITableViewController {
         } else {
             label.text = "- " + parksModel.getParkNameAt(index: section)
         }
-        label.font = UIFont.systemFont(ofSize: 20)
-        label.textColor = UIColor(red: 188/255, green: 143/255, blue: 143/255, alpha: 1)
+        // configure title
+        label.font = titleFont
+        label.textColor = titleWhite
         headerView.addSubview(label)
-        label.frame = CGRect(x: 10, y: 5, width: headerView.frame.width-10, height: headerView.frame.height-10)
-        headerView.backgroundColor = UIColor(red: 232/255, green: 233/255, blue: 243/255, alpha: 1)
+        label.frame = CGRect(x: 10, y: 14, width: headerView.frame.width-10, height: headerView.frame.height-10)
+        headerView.backgroundColor = titleGreenBlue
         let headerTapped = UITapGestureRecognizer(target: self, action: #selector(sectionHeaderTapped(recognizer:)))
         headerView.addGestureRecognizer(headerTapped)
         headerView.tag = section
@@ -99,82 +109,36 @@ class ParkTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 45
+        return 49
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if collapsed[indexPath.section] {
             return 0
         }
-        
         return 100
     }
     
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
+    // Select row to display image
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.scrollView.isHidden = false
         self.view.bringSubviewToFront(scrollView)
-        let selectedCell = tableView.dequeueReusableCell(withIdentifier: "ParkCells", for: indexPath) as! ParkTableViewCell
+        let selectedCell = tableView.cellForRow(at: indexPath) as! ParkTableViewCell
         let thumbnail = selectedCell.ParkImageView
         let thumbnailSuperView = thumbnail!.superview!
-        
         // get the image
         let imageNames = parksModel.getImageNameOfParkAt(index: indexPath.section)
-        let imageToDisplay = UIImage(named: imageNames[indexPath.row])
+        imageToDisplay = UIImage(named: imageNames[indexPath.row])!
         imageView.image = imageToDisplay
         thumbnailFrame = thumbnailSuperView.convert(thumbnail!.frame, to: scrollView)
         scrollView.addSubview(imageView)
         imageView.frame = thumbnailFrame
         // center frame
         let minScale = scaleFor(size: imageToDisplay!.size)
-        let scaleFrame = CGRect(origin: imageView.frame.origin, size: CGSize(width: minScale * imageToDisplay!.size.width, height: minScale * imageToDisplay!.size.height))
+        let scaleSize = CGSize(width: minScale * imageToDisplay!.size.width, height: minScale * imageToDisplay!.size.height)
         // set center frame
-        UIView.animate(withDuration: 0.38) {
-            self.imageView.frame = scaleFrame
+        UIView.animate(withDuration: animateDuration) {
+            self.imageView.frame.size = scaleSize
             self.imageView.center = CGPoint(x: self.scrollView.bounds.width/2.0, y: self.scrollView.bounds.height/2.0)
         }
         
@@ -204,12 +168,13 @@ class ParkTableViewController: UITableViewController {
     
     @objc func zoomImageTapped(recognizer: UITapGestureRecognizer) {
         if scrollView.zoomScale == 1 {
-            UIView.animate(withDuration: 0.38, animations: {
+            UIView.animate(withDuration: animateDuration, animations: {
                 self.imageView.frame = self.thumbnailFrame
             }) { (finished) in
                 self.imageView.removeFromSuperview()
                 self.imageView = UIImageView()
                 self.scrollView.isHidden = true
+                self.imageToDisplay = nil
                 self.tableView.isScrollEnabled = true
             }
         }
