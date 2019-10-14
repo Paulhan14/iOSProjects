@@ -21,6 +21,11 @@
 		DA3ED9952346A17200041254 /* ParkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3ED9942346A17200041254 /* ParkCollectionViewCell.swift */; };
 		DA3ED9972346A5C800041254 /* ParkCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3ED9962346A5C800041254 /* ParkCollectionReusableView.swift */; };
 		DA6C8219233D094900D1EAC2 /* ParkScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6C8218233D094900D1EAC2 /* ParkScrollView.swift */; };
+		DAA33C422353A70F001E1DAD /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA33C412353A70F001E1DAD /* PageViewController.swift */; };
+		DAA33C442353A72A001E1DAD /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA33C432353A72A001E1DAD /* IntroViewController.swift */; };
+		DAA33C462353ABB9001E1DAD /* IntroModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA33C452353ABB9001E1DAD /* IntroModel.swift */; };
+		DADCDB04234E173D00CBF0FF /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADCDB03234E173D00CBF0FF /* DetailViewController.swift */; };
+		DADCDB06234E17BA00CBF0FF /* MasterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADCDB05234E17BA00CBF0FF /* MasterTableViewController.swift */; };
 		DAF9AF6B2344050200863430 /* StateParks.plist in Resources */ = {isa = PBXBuildFile; fileRef = DAF9AF6A2344050200863430 /* StateParks.plist */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +58,11 @@
 		DA3ED9942346A17200041254 /* ParkCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkCollectionViewCell.swift; sourceTree = "<group>"; };
 		DA3ED9962346A5C800041254 /* ParkCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkCollectionReusableView.swift; sourceTree = "<group>"; };
 		DA6C8218233D094900D1EAC2 /* ParkScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParkScrollView.swift; sourceTree = "<group>"; };
+		DAA33C412353A70F001E1DAD /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
+		DAA33C432353A72A001E1DAD /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
+		DAA33C452353ABB9001E1DAD /* IntroModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroModel.swift; sourceTree = "<group>"; };
+		DADCDB03234E173D00CBF0FF /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		DADCDB05234E17BA00CBF0FF /* MasterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterTableViewController.swift; sourceTree = "<group>"; };
 		DAF9AF6A2344050200863430 /* StateParks.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = StateParks.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,9 +129,13 @@
 		DA329FC9233BB17900EAD345 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				DA329FAB233BAF4200EAD345 /* ViewController.swift */,
+				DAA33C432353A72A001E1DAD /* IntroViewController.swift */,
+				DAA33C412353A70F001E1DAD /* PageViewController.swift */,
+				DADCDB03234E173D00CBF0FF /* DetailViewController.swift */,
+				DADCDB05234E17BA00CBF0FF /* MasterTableViewController.swift */,
 				DA37EDAE2344255C00C71171 /* ParkTableViewController.swift */,
 				DA3ED99223469FD300041254 /* ParkCollectionViewController.swift */,
+				DA329FAB233BAF4200EAD345 /* ViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -129,6 +143,7 @@
 		DA329FCA233BB1E600EAD345 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				DAA33C452353ABB9001E1DAD /* IntroModel.swift */,
 				DA32A01B233BB63400EAD345 /* ParkImageModel.swift */,
 				DAF9AF6A2344050200863430 /* StateParks.plist */,
 				DA32A01D233BB82000EAD345 /* Parks.plist */,
@@ -259,12 +274,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA3ED9972346A5C800041254 /* ParkCollectionReusableView.swift in Sources */,
+				DAA33C442353A72A001E1DAD /* IntroViewController.swift in Sources */,
 				DA6C8219233D094900D1EAC2 /* ParkScrollView.swift in Sources */,
 				DA329FD5233BB34E00EAD345 /* AppDelegate.swift in Sources */,
+				DAA33C462353ABB9001E1DAD /* IntroModel.swift in Sources */,
+				DAA33C422353A70F001E1DAD /* PageViewController.swift in Sources */,
+				DADCDB06234E17BA00CBF0FF /* MasterTableViewController.swift in Sources */,
 				DA329FAC233BAF4200EAD345 /* ViewController.swift in Sources */,
 				DA37EDB12344261500C71171 /* ParkTableViewCell.swift in Sources */,
 				DA3ED9952346A17200041254 /* ParkCollectionViewCell.swift in Sources */,
 				DA3ED99323469FD300041254 /* ParkCollectionViewController.swift in Sources */,
+				DADCDB04234E173D00CBF0FF /* DetailViewController.swift in Sources */,
 				DA37EDAF2344255C00C71171 /* ParkTableViewController.swift in Sources */,
 				DA32A01C233BB63400EAD345 /* ParkImageModel.swift in Sources */,
 			);
