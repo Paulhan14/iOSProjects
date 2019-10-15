@@ -20,11 +20,13 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Default: display the first park
         if (parkImageName == nil) {
             parkImageName = parksModel.getImageNameOfParkAt(index: 0)[0]
             captionLabelText = parksModel.getCaptionsOfParkAt(index: 0)[0]
         }
         
+        // Set detail view
         let image = UIImage(named: parkImageName!)
         let scale = scaleFor(size: image!.size)
         parkImageView.image = image
@@ -34,15 +36,17 @@ class DetailViewController: UIViewController {
     
     }
     
+    // Walkthrough support for iPads
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         displayIntro()
     }
     
+    // Show walkthrough
     func displayIntro() {
         let userDefaults = UserDefaults.standard
         let displayed = userDefaults.bool(forKey: "Displayed")
-        
+        // IF USER HAVE CLICKED START BUTTON, DON'T DISPLAY
         if !displayed {
             if let pageViewController = self.storyboard?.instantiateViewController(withIdentifier: "PageViewController") {
                 self.present(pageViewController, animated: true, completion: nil)
@@ -50,6 +54,7 @@ class DetailViewController: UIViewController {
         }
     }
     
+    // Reposition the image when orientation changed
     override func viewDidLayoutSubviews() {
         if (parkImageView.image != nil) {
             let size = parkImageView.image!.size

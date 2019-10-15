@@ -24,6 +24,7 @@ class IntroViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Configure page components based on the page index
         pageControl.currentPage = index
         finishButton.isHidden = true
         let image = UIImage(named: imageName!)
@@ -46,18 +47,19 @@ class IntroViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-    
+    // Set page details
     func configureWith(_ index: Int, _ des: String, _ imageName: String) {
         self.index = index
         self.descriptionForPage = des
         self.imageName = imageName
     }
-
+    
+    // NEXT button reaction
     @IBAction func nextButtonClicked(_ sender: Any) {
         let pageViewController = self.parent as! PageViewController
         pageViewController.nextPagePresent(index+1)
     }
-    
+    // dismiss the walkthrough
     @IBAction func finishButtonClicked(_ sender: Any) {
         let userDefaults = UserDefaults.standard
         userDefaults.set(true, forKey: "Displayed")

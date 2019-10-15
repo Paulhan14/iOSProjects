@@ -15,6 +15,7 @@ class MasterViewController: UITableViewController {
     private let parksModel = ParkImageModel()
     // flag for each section
     private var collapsed = [Bool]()
+    // Appearance customization
     private let titleWhite = UIColor(red: 246/255, green: 246/255, blue: 242/255, alpha: 1)
     private let titleGreenBlue = UIColor(red: 56/255, green: 128/255, blue: 135/255, alpha: 1)
     private let titleFont = UIFont.init(name: "Rockwell-Bold", size: 20)
@@ -23,12 +24,11 @@ class MasterViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         // init collapsed array
         for _ in 0..<parksModel.getParkCount() {
             collapsed.append(false)
         }
-        
+        // Bring up detail view
         if let split = splitViewController {
             let controllers = split.viewControllers
             detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
@@ -44,7 +44,7 @@ class MasterViewController: UITableViewController {
     func displayIntro() {
         let userDefaults = UserDefaults.standard
         let displayed = userDefaults.bool(forKey: "Displayed")
-        
+        // IF USER HAVE CLICKED START BUTTON ONCE, DON'T DISPLAY
         if !displayed {
             if let pageViewController = self.storyboard?.instantiateViewController(withIdentifier: "PageViewController") {
                 self.present(pageViewController, animated: true, completion: nil)

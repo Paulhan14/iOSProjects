@@ -16,6 +16,8 @@ class PageViewController: UIPageViewController {
         super.viewDidLoad()
 
         self.dataSource = self
+        self.view.backgroundColor = .white
+        // Set start page
         if let startIntroPage = self.viewControllerAt(0) {
             setViewControllers([startIntroPage], direction: .forward, animated: true, completion: nil)
         }
@@ -32,10 +34,12 @@ class PageViewController: UIPageViewController {
     }
     */
     
+    // Build the next page on request
     func viewControllerAt(_ index: Int) -> UIViewController? {
         guard index >= 0 && index < introModel.pageNum else {return nil}
         
         if let introViewController = self.storyboard?.instantiateViewController(withIdentifier: "IntroViewController") as? IntroViewController {
+            // Set page content
             let descriptionForPage = introModel.descriptions[index]
             let imageName = introModel.imageNames[index]
             introViewController.configureWith(index, descriptionForPage, imageName)
@@ -44,6 +48,7 @@ class PageViewController: UIPageViewController {
         return nil
     }
     
+    // Support for NEXT button
     func nextPagePresent(_ index: Int) {
         if let nextIntroPage = self.viewControllerAt(index) {
             setViewControllers([nextIntroPage], direction: .forward, animated: true, completion: nil)
@@ -52,7 +57,7 @@ class PageViewController: UIPageViewController {
 }
 
 extension PageViewController: UIPageViewControllerDataSource {
-    
+    // Data source functions
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         var index = (viewController as! IntroViewController).index
         index -= 1

@@ -15,7 +15,7 @@ class IntroModel {
     
     init() {
         self.pageNum = 3
-        self.descriptions = ["Collapsable sections", "Tappable cells to display image", "Full-screen image view with captions"]
+        self.descriptions = ["Tap the section to collapse the images", "Tap a cell to display detail of the selected image", "Supports full-screen image view with captions"]
         self.imageNames = ["collapse", "tap", "fullscreen"]
     }
     
