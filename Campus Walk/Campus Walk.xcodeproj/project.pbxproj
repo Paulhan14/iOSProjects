@@ -1,0 +1,515 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DAAB62D0235AA02C00A02BE2 /* ListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAB62CF235AA02C00A02BE2 /* ListTableViewController.swift */; };
+		DAD7DC8723591A9D0008FE7E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD7DC8623591A9D0008FE7E /* AppDelegate.swift */; };
+		DAD7DC8923591A9D0008FE7E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD7DC8823591A9D0008FE7E /* ViewController.swift */; };
+		DAD7DC8C23591A9D0008FE7E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAD7DC8A23591A9D0008FE7E /* Main.storyboard */; };
+		DAD7DC8E23591A9E0008FE7E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DAD7DC8D23591A9E0008FE7E /* Assets.xcassets */; };
+		DAD7DC9123591A9E0008FE7E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAD7DC8F23591A9E0008FE7E /* LaunchScreen.storyboard */; };
+		DAD7DC9C23591A9E0008FE7E /* Campus_WalkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD7DC9B23591A9E0008FE7E /* Campus_WalkTests.swift */; };
+		DAD7DCAA23591CE50008FE7E /* buildings.plist in Resources */ = {isa = PBXBuildFile; fileRef = DAD7DCA923591CE50008FE7E /* buildings.plist */; };
+		DAD7DCAC23591D1A0008FE7E /* BuildingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD7DCAB23591D1A0008FE7E /* BuildingModel.swift */; };
+		DAFB9984235AD869008EF23E /* FavoriteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFB9983235AD869008EF23E /* FavoriteTableViewController.swift */; };
+		DAFB9986235B68CC008EF23E /* FavoriteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFB9985235B68CC008EF23E /* FavoriteModel.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DAD7DC9823591A9E0008FE7E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DAD7DC7B23591A9D0008FE7E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DAD7DC8223591A9D0008FE7E;
+			remoteInfo = "Campus Walk";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		DAAB62CF235AA02C00A02BE2 /* ListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ListTableViewController.swift; path = "Campus Walk/ListTableViewController.swift"; sourceTree = "<group>"; };
+		DAD7DC8323591A9D0008FE7E /* Campus Walk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Campus Walk.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DAD7DC8623591A9D0008FE7E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DAD7DC8823591A9D0008FE7E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		DAD7DC8B23591A9D0008FE7E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DAD7DC8D23591A9E0008FE7E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DAD7DC9023591A9E0008FE7E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		DAD7DC9223591A9E0008FE7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DAD7DC9723591A9E0008FE7E /* Campus WalkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Campus WalkTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DAD7DC9B23591A9E0008FE7E /* Campus_WalkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Campus_WalkTests.swift; sourceTree = "<group>"; };
+		DAD7DC9D23591A9E0008FE7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DAD7DCA923591CE50008FE7E /* buildings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = buildings.plist; sourceTree = "<group>"; };
+		DAD7DCAB23591D1A0008FE7E /* BuildingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BuildingModel.swift; path = "Campus Walk/BuildingModel.swift"; sourceTree = "<group>"; };
+		DAFB9983235AD869008EF23E /* FavoriteTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FavoriteTableViewController.swift; path = "Campus Walk/FavoriteTableViewController.swift"; sourceTree = "<group>"; };
+		DAFB9985235B68CC008EF23E /* FavoriteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteModel.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DAD7DC8023591A9D0008FE7E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DAD7DC9423591A9E0008FE7E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DAD7DC7A23591A9D0008FE7E = {
+			isa = PBXGroup;
+			children = (
+				DAD7DC8523591A9D0008FE7E /* Campus Walk */,
+				DAD7DC9A23591A9E0008FE7E /* Campus WalkTests */,
+				DAD7DC8423591A9D0008FE7E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DAD7DC8423591A9D0008FE7E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DAD7DC8323591A9D0008FE7E /* Campus Walk.app */,
+				DAD7DC9723591A9E0008FE7E /* Campus WalkTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DAD7DC8523591A9D0008FE7E /* Campus Walk */ = {
+			isa = PBXGroup;
+			children = (
+				DAD7DCA823591B110008FE7E /* Model */,
+				DAD7DCA623591ABA0008FE7E /* Controller */,
+				DAD7DCA723591AE50008FE7E /* View */,
+				DAD7DC8623591A9D0008FE7E /* AppDelegate.swift */,
+				DAD7DC8F23591A9E0008FE7E /* LaunchScreen.storyboard */,
+				DAD7DC8A23591A9D0008FE7E /* Main.storyboard */,
+				DAD7DC8D23591A9E0008FE7E /* Assets.xcassets */,
+				DAD7DC9223591A9E0008FE7E /* Info.plist */,
+				DAD7DCA923591CE50008FE7E /* buildings.plist */,
+			);
+			path = "Campus Walk";
+			sourceTree = "<group>";
+		};
+		DAD7DC9A23591A9E0008FE7E /* Campus WalkTests */ = {
+			isa = PBXGroup;
+			children = (
+				DAD7DC9B23591A9E0008FE7E /* Campus_WalkTests.swift */,
+				DAD7DC9D23591A9E0008FE7E /* Info.plist */,
+			);
+			path = "Campus WalkTests";
+			sourceTree = "<group>";
+		};
+		DAD7DCA623591ABA0008FE7E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DAAB62CF235AA02C00A02BE2 /* ListTableViewController.swift */,
+				DAFB9983235AD869008EF23E /* FavoriteTableViewController.swift */,
+				DAD7DC8823591A9D0008FE7E /* ViewController.swift */,
+			);
+			name = Controller;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		DAD7DCA723591AE50008FE7E /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		DAD7DCA823591B110008FE7E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DAFB9985235B68CC008EF23E /* FavoriteModel.swift */,
+				DAD7DCAB23591D1A0008FE7E /* BuildingModel.swift */,
+			);
+			name = Model;
+			path = ..;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DAD7DC8223591A9D0008FE7E /* Campus Walk */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DAD7DCA023591A9E0008FE7E /* Build configuration list for PBXNativeTarget "Campus Walk" */;
+			buildPhases = (
+				DAD7DC7F23591A9D0008FE7E /* Sources */,
+				DAD7DC8023591A9D0008FE7E /* Frameworks */,
+				DAD7DC8123591A9D0008FE7E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Campus Walk";
+			productName = "Campus Walk";
+			productReference = DAD7DC8323591A9D0008FE7E /* Campus Walk.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DAD7DC9623591A9E0008FE7E /* Campus WalkTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DAD7DCA323591A9E0008FE7E /* Build configuration list for PBXNativeTarget "Campus WalkTests" */;
+			buildPhases = (
+				DAD7DC9323591A9E0008FE7E /* Sources */,
+				DAD7DC9423591A9E0008FE7E /* Frameworks */,
+				DAD7DC9523591A9E0008FE7E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DAD7DC9923591A9E0008FE7E /* PBXTargetDependency */,
+			);
+			name = "Campus WalkTests";
+			productName = "Campus WalkTests";
+			productReference = DAD7DC9723591A9E0008FE7E /* Campus WalkTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DAD7DC7B23591A9D0008FE7E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1030;
+				LastUpgradeCheck = 1030;
+				ORGANIZATIONNAME = "Jiaxing Han";
+				TargetAttributes = {
+					DAD7DC8223591A9D0008FE7E = {
+						CreatedOnToolsVersion = 10.3;
+					};
+					DAD7DC9623591A9E0008FE7E = {
+						CreatedOnToolsVersion = 10.3;
+						TestTargetID = DAD7DC8223591A9D0008FE7E;
+					};
+				};
+			};
+			buildConfigurationList = DAD7DC7E23591A9D0008FE7E /* Build configuration list for PBXProject "Campus Walk" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DAD7DC7A23591A9D0008FE7E;
+			productRefGroup = DAD7DC8423591A9D0008FE7E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DAD7DC8223591A9D0008FE7E /* Campus Walk */,
+				DAD7DC9623591A9E0008FE7E /* Campus WalkTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DAD7DC8123591A9D0008FE7E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DAD7DC9123591A9E0008FE7E /* LaunchScreen.storyboard in Resources */,
+				DAD7DC8E23591A9E0008FE7E /* Assets.xcassets in Resources */,
+				DAD7DCAA23591CE50008FE7E /* buildings.plist in Resources */,
+				DAD7DC8C23591A9D0008FE7E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DAD7DC9523591A9E0008FE7E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DAD7DC7F23591A9D0008FE7E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DAFB9984235AD869008EF23E /* FavoriteTableViewController.swift in Sources */,
+				DAD7DC8923591A9D0008FE7E /* ViewController.swift in Sources */,
+				DAD7DCAC23591D1A0008FE7E /* BuildingModel.swift in Sources */,
+				DAFB9986235B68CC008EF23E /* FavoriteModel.swift in Sources */,
+				DAD7DC8723591A9D0008FE7E /* AppDelegate.swift in Sources */,
+				DAAB62D0235AA02C00A02BE2 /* ListTableViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DAD7DC9323591A9E0008FE7E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DAD7DC9C23591A9E0008FE7E /* Campus_WalkTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DAD7DC9923591A9E0008FE7E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DAD7DC8223591A9D0008FE7E /* Campus Walk */;
+			targetProxy = DAD7DC9823591A9E0008FE7E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		DAD7DC8A23591A9D0008FE7E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DAD7DC8B23591A9D0008FE7E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		DAD7DC8F23591A9E0008FE7E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DAD7DC9023591A9E0008FE7E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DAD7DC9E23591A9E0008FE7E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		DAD7DC9F23591A9E0008FE7E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DAD7DCA123591A9E0008FE7E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HZW2XLNU57;
+				INFOPLIST_FILE = "Campus Walk/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.psu.cse.juh379.Campus-Walk";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DAD7DCA223591A9E0008FE7E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HZW2XLNU57;
+				INFOPLIST_FILE = "Campus Walk/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.psu.cse.juh379.Campus-Walk";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		DAD7DCA423591A9E0008FE7E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Campus WalkTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.psu.cse.juh379.Campus-WalkTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Campus Walk.app/Campus Walk";
+			};
+			name = Debug;
+		};
+		DAD7DCA523591A9E0008FE7E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "Campus WalkTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.psu.cse.juh379.Campus-WalkTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Campus Walk.app/Campus Walk";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DAD7DC7E23591A9D0008FE7E /* Build configuration list for PBXProject "Campus Walk" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DAD7DC9E23591A9E0008FE7E /* Debug */,
+				DAD7DC9F23591A9E0008FE7E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DAD7DCA023591A9E0008FE7E /* Build configuration list for PBXNativeTarget "Campus Walk" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DAD7DCA123591A9E0008FE7E /* Debug */,
+				DAD7DCA223591A9E0008FE7E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DAD7DCA323591A9E0008FE7E /* Build configuration list for PBXNativeTarget "Campus WalkTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DAD7DCA423591A9E0008FE7E /* Debug */,
+				DAD7DCA523591A9E0008FE7E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DAD7DC7B23591A9D0008FE7E /* Project object */;
+}
