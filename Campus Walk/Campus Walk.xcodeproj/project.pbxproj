@@ -18,6 +18,7 @@
 		DAD7DCAC23591D1A0008FE7E /* BuildingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD7DCAB23591D1A0008FE7E /* BuildingModel.swift */; };
 		DAFB9984235AD869008EF23E /* FavoriteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFB9983235AD869008EF23E /* FavoriteTableViewController.swift */; };
 		DAFB9986235B68CC008EF23E /* FavoriteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFB9985235B68CC008EF23E /* FavoriteModel.swift */; };
+		DAFB9989235D33DA008EF23E /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFB9988235D33DA008EF23E /* SettingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,8 @@
 		DAD7DCAB23591D1A0008FE7E /* BuildingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BuildingModel.swift; path = "Campus Walk/BuildingModel.swift"; sourceTree = "<group>"; };
 		DAFB9983235AD869008EF23E /* FavoriteTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FavoriteTableViewController.swift; path = "Campus Walk/FavoriteTableViewController.swift"; sourceTree = "<group>"; };
 		DAFB9985235B68CC008EF23E /* FavoriteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteModel.swift; sourceTree = "<group>"; };
+		DAFB9987235CB2F1008EF23E /* location_sim.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = location_sim.gpx; path = "Campus Walk/location_sim.gpx"; sourceTree = "<group>"; };
+		DAFB9988235D33DA008EF23E /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingViewController.swift; path = "Campus Walk/SettingViewController.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +72,7 @@
 		DAD7DC7A23591A9D0008FE7E = {
 			isa = PBXGroup;
 			children = (
+				DAFB9987235CB2F1008EF23E /* location_sim.gpx */,
 				DAD7DC8523591A9D0008FE7E /* Campus Walk */,
 				DAD7DC9A23591A9E0008FE7E /* Campus WalkTests */,
 				DAD7DC8423591A9D0008FE7E /* Products */,
@@ -112,6 +116,7 @@
 		DAD7DCA623591ABA0008FE7E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				DAFB9988235D33DA008EF23E /* SettingViewController.swift */,
 				DAAB62CF235AA02C00A02BE2 /* ListTableViewController.swift */,
 				DAFB9983235AD869008EF23E /* FavoriteTableViewController.swift */,
 				DAD7DC8823591A9D0008FE7E /* ViewController.swift */,
@@ -245,6 +250,7 @@
 				DAD7DCAC23591D1A0008FE7E /* BuildingModel.swift in Sources */,
 				DAFB9986235B68CC008EF23E /* FavoriteModel.swift in Sources */,
 				DAD7DC8723591A9D0008FE7E /* AppDelegate.swift in Sources */,
+				DAFB9989235D33DA008EF23E /* SettingViewController.swift in Sources */,
 				DAAB62D0235AA02C00A02BE2 /* ListTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

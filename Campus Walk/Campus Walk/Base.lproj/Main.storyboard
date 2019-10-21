@@ -10,6 +10,79 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Setting View Controller-->
+        <scene sceneID="P8g-1O-mmd">
+            <objects>
+                <viewController id="bjB-PQ-urq" customClass="SettingViewController" customModule="Campus_Walk" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Tbp-qM-TKx">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Display Favorite on map" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PGD-GT-UOf">
+                                <rect key="frame" x="20" y="643" width="207" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="31" id="Pla-KS-dhr"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="2Jj-vQ-X7K">
+                                <rect key="frame" x="20" y="724" width="374" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="gIv-F5-MAm"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="First"/>
+                                    <segment title="Second"/>
+                                    <segment title=""/>
+                                </segments>
+                            </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j7t-AD-Pei">
+                                <rect key="frame" x="100" y="802" width="214" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="GUp-de-8Wn"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="OK"/>
+                                <connections>
+                                    <action selector="okButtonPressed:" destination="bjB-PQ-urq" eventType="touchUpInside" id="vvk-oT-Ts0"/>
+                                </connections>
+                            </button>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7St-Va-LiB">
+                                <rect key="frame" x="347" y="643" width="49" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="31" id="6ao-dB-Vwh"/>
+                                    <constraint firstAttribute="width" constant="47" id="dvG-P6-vUY"/>
+                                </constraints>
+                            </switch>
+                        </subviews>
+                        <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="SKx-y7-4wd" firstAttribute="trailing" secondItem="j7t-AD-Pei" secondAttribute="trailing" constant="100" id="5Pw-lh-3V4"/>
+                            <constraint firstItem="2Jj-vQ-X7K" firstAttribute="top" secondItem="7St-Va-LiB" secondAttribute="bottom" constant="50" id="HGl-1T-9xO"/>
+                            <constraint firstItem="j7t-AD-Pei" firstAttribute="leading" secondItem="SKx-y7-4wd" secondAttribute="leading" constant="100" id="MPp-ft-XN5"/>
+                            <constraint firstItem="SKx-y7-4wd" firstAttribute="trailing" secondItem="7St-Va-LiB" secondAttribute="trailing" constant="20" id="U3K-3U-Kir"/>
+                            <constraint firstItem="2Jj-vQ-X7K" firstAttribute="top" secondItem="PGD-GT-UOf" secondAttribute="bottom" constant="50" id="aut-cn-CKS"/>
+                            <constraint firstItem="2Jj-vQ-X7K" firstAttribute="leading" secondItem="SKx-y7-4wd" secondAttribute="leading" constant="20" id="dCg-gW-T2c"/>
+                            <constraint firstItem="SKx-y7-4wd" firstAttribute="bottom" secondItem="j7t-AD-Pei" secondAttribute="bottom" constant="24" id="g1J-iG-lDQ"/>
+                            <constraint firstItem="7St-Va-LiB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="PGD-GT-UOf" secondAttribute="trailing" constant="100" id="g76-FB-XLz"/>
+                            <constraint firstItem="j7t-AD-Pei" firstAttribute="top" secondItem="2Jj-vQ-X7K" secondAttribute="bottom" constant="50" id="haq-Ko-Ojf"/>
+                            <constraint firstItem="SKx-y7-4wd" firstAttribute="trailing" secondItem="2Jj-vQ-X7K" secondAttribute="trailing" constant="20" id="rQp-Oc-7UJ"/>
+                            <constraint firstItem="PGD-GT-UOf" firstAttribute="leading" secondItem="SKx-y7-4wd" secondAttribute="leading" constant="20" id="rsy-fo-iEv"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="SKx-y7-4wd"/>
+                    </view>
+                    <connections>
+                        <outlet property="favoriteSwitch" destination="7St-Va-LiB" id="IvW-SB-RXU"/>
+                        <outlet property="mapTypeSegment" destination="2Jj-vQ-X7K" id="X72-gS-iIz"/>
+                        <outlet property="okButton" destination="j7t-AD-Pei" id="R5f-7Y-M7Y"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Q0U-e7-ODy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="924.63768115942037" y="-749.33035714285711"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -28,19 +101,26 @@
                     </view>
                     <toolbarItems>
                         <barButtonItem image="list" width="168" id="Lra-fO-l9G">
+                            <color key="tintColor" red="0.53725490196078429" green="0.63921568627450975" blue="0.69803921568627447" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="Gv3-tS-hYu" kind="presentation" identifier="DropPin" id="yd6-r0-0jo"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem width="321" style="plain" systemItem="fixedSpace" id="bc8-bG-jxU"/>
+                        <barButtonItem width="714" style="plain" systemItem="fixedSpace" id="bc8-bG-jxU"/>
                         <barButtonItem image="favourites" id="PAz-uc-Djp">
+                            <color key="tintColor" red="0.53725490196078429" green="0.63921568627450975" blue="0.69803921568627447" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="F60-h5-1sb" kind="presentation" identifier="OpenFavorite" id="PgD-BW-02P"/>
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="uFN-6b-Ecl">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="zbG-cN-7CT"/>
+                        <barButtonItem key="rightBarButtonItem" image="settings" id="zbG-cN-7CT">
+                            <color key="tintColor" red="0.53725490196078429" green="0.63921568627450975" blue="0.69803921568627447" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <segue destination="bjB-PQ-urq" kind="presentation" identifier="ToSettings" id="Srf-4e-WJt"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -59,6 +139,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="sectionIndexBackgroundColor" red="0.94901960780000005" green="0.95686274510000002" blue="0.81960784310000001" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FavoriteCell" textLabel="i6a-Bw-kG4" style="IBUITableViewCellStyleDefault" id="8lY-EY-62h">
                                 <rect key="frame" x="0.0" y="28" width="414" height="44"/>
@@ -71,11 +152,12 @@
                                             <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
+                                            <color key="textColor" red="0.16078431369999999" green="0.42745098040000001" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -85,11 +167,13 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="My Favorites" id="4WG-yY-NZK">
                         <barButtonItem key="leftBarButtonItem" systemItem="add" id="qBZ-VA-Nba">
+                            <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <segue destination="Gv3-tS-hYu" kind="presentation" identifier="AddFavorite" id="TcN-rI-GCc"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="ZLf-Vk-gJf">
+                            <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="doneButtonPressed:" destination="7s3-wl-uip" id="7cm-ux-vAy"/>
                             </connections>
@@ -108,6 +192,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="sectionIndexBackgroundColor" red="0.94901960784313721" green="0.95686274509803915" blue="0.81960784313725488" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="listCell" textLabel="LEn-7r-u2b" style="IBUITableViewCellStyleDefault" id="59x-He-kNq">
                                 <rect key="frame" x="0.0" y="28" width="414" height="44"/>
@@ -120,11 +205,12 @@
                                             <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
+                                            <color key="textColor" red="0.36862745098039218" green="0.37647058823529411" blue="0.45098039215686275" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.69803921568627447" green="0.82745098039215681" blue="0.74509803921568629" alpha="1" colorSpace="calibratedRGB"/>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -132,16 +218,7 @@
                             <outlet property="delegate" destination="0pD-8k-7ow" id="kwC-4g-L0m"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="All Buildings" id="OZQ-m5-g59">
-                        <barButtonItem key="rightBarButtonItem" title="Done" id="2Ac-W2-OuH">
-                            <connections>
-                                <action selector="doneButtonPressed:" destination="0pD-8k-7ow" id="TM0-MD-dsP"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="doneButton" destination="2Ac-W2-OuH" id="5J0-oK-oMV"/>
-                    </connections>
+                    <navigationItem key="navigationItem" title="All Buildings" id="OZQ-m5-g59"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qXQ-Mb-dd8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -209,6 +286,7 @@
     <resources>
         <image name="favourites" width="24" height="24"/>
         <image name="list" width="24" height="24"/>
+        <image name="settings" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="TcN-rI-GCc"/>

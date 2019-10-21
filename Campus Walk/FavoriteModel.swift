@@ -24,10 +24,14 @@ class FavoriteModel {
         return true
     }
     
-    func removeBuildingFromList(_ index: Int) -> Bool {
-        guard index >= 0 && index < favorites.count else {return false}
-        favorites.remove(at: index)
-        return true
+    func removeBuildingFromList(_ name: String){
+        guard name != "" else {return}
+        for i in 0..<favorites.count {
+            if favorites[i].name == name {
+                favorites.remove(at: i)
+                return
+            }
+        }
     }
     
     func getFavoriteListSize() -> Int {

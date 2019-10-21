@@ -14,7 +14,6 @@ class ListTableViewController: UITableViewController {
     var segueType: String?
 //    var buildingToAdd: IndexPath?
     var closureBlock : ((_ indexPath: IndexPath) -> Void)?
-    @IBOutlet weak var doneButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,9 +111,5 @@ class ListTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-    @IBAction func doneButtonPressed(_ sender: Any) {
-//        self.dismiss(animated: true, completion: nil)
-        
-    }
     
 }
