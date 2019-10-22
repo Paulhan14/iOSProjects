@@ -16,27 +16,23 @@ class FavoriteTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-//        self.tableView.setEditing(true, animated: false)
-//        self.tableView.isEditing = true
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
+        // Favorite list has only one cell
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // Get rows from the model
         return theFavoriteModel.getFavoriteListSize()
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // Set each cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "FavoriteCell", for: indexPath)
         let name = theFavoriteModel.getBuildingNameAt(indexPath.row)
         cell.textLabel?.text = name
@@ -64,25 +60,6 @@ class FavoriteTableViewController: UITableViewController {
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
-    
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    
-    // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -91,8 +68,11 @@ class FavoriteTableViewController: UITableViewController {
             let listViewController = segue.destination.children[0] as! ListTableViewController
             listViewController.segueType = segue.identifier
             listViewController.closureBlock = {indexPath in
+                // Add building with the index path returned from the other view
                 self.addBuildingBy(indexPath)
+                // dismiss the other view
                 self.dismiss(animated: true, completion: nil)
+                // Reload the table based on new data in model
                 self.tableView.reloadData()
             }
         default:
@@ -108,14 +88,11 @@ class FavoriteTableViewController: UITableViewController {
     
     // MARK: Helper
     
+    // If user add a building to the view, add it to model
     func addBuildingBy(_ indexPath: IndexPath) {
         let key = buildingsModel.buildingKeys[indexPath.section]
         let building = buildingsModel.buildingByInitial[key]![indexPath.row]
         if theFavoriteModel.addBuildingToList(building) == false {
-            let alert = UIAlertController(title: "Already in favorite list", message: "This building has already been added to the list.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-//            self.present(alert, animated: true)
-//            UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
         }
     }
 }

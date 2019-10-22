@@ -33,23 +33,15 @@ class SettingViewController: UIViewController {
     }
     
     func configureWith(index: Int, onOff: Bool) {
+        // Set the status of views based on current setting
         self.segmentIndex = index
         self.switchStatus = onOff
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
     @IBAction func okButtonPressed(_ sender: Any) {
+        // Construct setting configuration payload
         let returnConfigure = configure(favoriteSwitch: favoriteSwitch.isOn, mapType: mapTypeSegment.selectedSegmentIndex)
+        // Return the configuration to caller view
         if let _block = closureBlock {
             _block(returnConfigure)
         }

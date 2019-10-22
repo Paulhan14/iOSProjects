@@ -4,11 +4,14 @@
 //
 //  Created by Jiaxing Han on 10/17/19.
 //  Copyright © 2019 Jiaxing Han. All rights reserved.
+//  Toolbar and navigation bar icons are made by Freepik from www.flaticon.com
+//  Signpost icon (app icon) made by Icons8
 //
 
 import UIKit
 import MapKit
 
+// For regular pin
 class BuildingPin: NSObject, MKAnnotation {
     var coordinate: CLLocationCoordinate2D
     var title: String?
@@ -18,6 +21,7 @@ class BuildingPin: NSObject, MKAnnotation {
     }
 }
 
+// For favorite pin
 class FavoritePin: NSObject, MKAnnotation {
     var coordinate: CLLocationCoordinate2D
     var title: String?
@@ -28,39 +32,41 @@ class FavoritePin: NSObject, MKAnnotation {
 }
 
 class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
-    
     var buildingModel = BuildingModel.sharedInstance
     var theFavoriteModel = FavoriteModel.theFavoriteModel
+    // All normal pin on map
     var allNormalPins = [String]()
+    // All favorite pin on map
     var allFavoritePins = [FavoritePin]()
+    // Current map type 0:standard 1:satellite 2:hybird
     var mapType = 0
+    // Display favorite list or not
     var showFavoriteOrNot = true
     let spanDelta = 0.01
     
-     let locationManager = CLLocationManager()
+    let locationManager = CLLocationManager()
     
     @IBOutlet weak var mapView: MKMapView!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Center map to Pattee Library
         let library = buildingModel.getBuildingBy(index: 36)
         let initialCoordinate = CLLocationCoordinate2D(latitude: library.latitude, longitude: library.longitude)
         let span = MKCoordinateSpan(latitudeDelta: spanDelta, longitudeDelta: spanDelta)
         let region = MKCoordinateRegion(center: initialCoordinate, span: span)
         mapView.region = region
         mapView.delegate = self
-        
+        // Add location button and show location
         self.navigationItem.leftBarButtonItem = MKUserTrackingBarButtonItem(mapView: mapView)
-        
         mapView.showsUserLocation = true
+        // Display Penn State logo
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "logo"))
     }
     
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         if CLLocationManager.locationServicesEnabled() {
             let status = CLLocationManager.authorizationStatus()
             switch status {
@@ -87,6 +93,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
+        // If user want to drop one pin
         case "DropPin":
             let listViewController = segue.destination.children[0] as! ListTableViewController
             listViewController.segueType = segue.identifier
@@ -94,6 +101,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 self.dismiss(animated: true, completion: nil)
                 self.dropPinForBuildingAt(indexPath)
             }
+        // If user want to open favorite menu
         case "OpenFavorite":
             let favoriteViewController = segue.destination.children[0] as! FavoriteTableViewController
             favoriteViewController.closureBlock = {
@@ -101,6 +109,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 //display all the favorite buildings
                 self.dropPinForFavoriteBuildings()
             }
+        // If user is going to open settings
         case "ToSettings":
             let settingViewController = segue.destination as! SettingViewController
             settingViewController.configureWith(index: self.mapType, onOff: self.showFavoriteOrNot)
@@ -117,6 +126,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        // For different category, add different pin
         switch annotation {
         case is BuildingPin:
             return annotationView(forPin: annotation as! BuildingPin)
@@ -152,6 +162,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         switch view.annotation {
+        // If it is a normal pin, configure callout
         case is BuildingPin:
             let buildingPin = view.annotation as! BuildingPin
             let alertController = UIAlertController(title: buildingPin.title!, message: "", preferredStyle: .actionSheet)
@@ -162,7 +173,15 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             alertController.addAction(actionDelete)
             let actionCancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             alertController.addAction(actionCancel)
+            
+            if let presenter = alertController.popoverPresentationController {
+                presenter.sourceView = view
+                presenter.sourceRect = view.bounds
+                mapView.deselectAnnotation(view.annotation, animated: true)
+            }
+            
             self.present(alertController, animated: true, completion: nil)
+        // If it is a favorite pin, do nothing
         case is FavoritePin:
             break
         default:
@@ -171,20 +190,30 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
     }
     
+    // Drop a pin for the building
     func dropPinForBuildingAt(_ indexPath: IndexPath) {
         let building = buildingModel.buildingAt(indexPath)
         let name = building.name
         let coordinates = CLLocationCoordinate2D(latitude: building.latitude, longitude: building.longitude)
         
+        // If it is already added, return
         guard allNormalPins.contains(name) == false else {
             centerMapCameraAt(coordinates)
             return}
+        
+        // If the favorite pins are displayed and it is in there, return
+        if theFavoriteModel.checkTheBuildingWith(name: name) && self.showFavoriteOrNot {
+            centerMapCameraAt(coordinates)
+            return
+        }
+        // Drop pin, update the all pin list and center camera
         allNormalPins.append(name)
         let pin = BuildingPin(name: name, coordinate: coordinates)
         mapView.addAnnotation(pin)
         centerMapCameraAt(coordinates)
     }
     
+    // Drop all the favorite pin
     func dropPinForFavoriteBuildings() {
         guard theFavoriteModel.getFavoriteListSize() > 0 else {return}
         mapView.removeAnnotations(allFavoritePins)
@@ -203,12 +232,15 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
     
     // MARK: Helper
+    
+    // center camera at a position
     func centerMapCameraAt(_ coordinates: CLLocationCoordinate2D) {
         UIView.animate(withDuration: 1.0) {
             self.mapView.camera = MKMapCamera(lookingAtCenter: coordinates, fromDistance: 2000, pitch: 0, heading: 0)
         }
     }
     
+    // Remove a building from the all pin list
     func removeFromAllPins(_ name: String) {
         let index = allNormalPins.firstIndex(of: name)
         if index != nil {
@@ -216,6 +248,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
     }
     
+    // Set the map type based on user's request
     func setMapType(_ mapType: Int) {
         switch mapType {
         case 0:
@@ -229,6 +262,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
     }
     
+    // Show or hide favorite pins based on user's request
     func toggleFavoritePins(_ isON: Bool) {
         if isON {
             self.mapView.addAnnotations(self.allFavoritePins)
