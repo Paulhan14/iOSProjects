@@ -62,8 +62,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         let region = MKCoordinateRegion(center: initialCoordinate, span: span)
         mapView.region = region
         mapView.delegate = self
-        // Add location button and show location
-        self.navigationItem.leftBarButtonItem = MKUserTrackingBarButtonItem(mapView: mapView)
         mapView.showsUserLocation = true
         // Display Penn State logo
         self.navigationItem.titleView = UIImageView(image: UIImage(named: "logo"))
@@ -79,6 +77,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 locationManager.requestWhenInUseAuthorization()
             case .authorizedAlways, .authorizedWhenInUse:
                 mapView.showsUserLocation = true
+                self.navigationItem.leftBarButtonItem = MKUserTrackingBarButtonItem(mapView: mapView)
             default:
                 break
             }
@@ -91,6 +90,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             mapView.showsUserLocation = false
         case .authorizedWhenInUse, .authorizedAlways:
             mapView.showsUserLocation = true
+            self.navigationItem.leftBarButtonItem = MKUserTrackingBarButtonItem(mapView: mapView)
         default:
             break
         }
@@ -171,8 +171,14 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 imageName = "nophoto"
             }
             
-            leftIconView.image = UIImage(named: imageName)
-            view.leftCalloutAccessoryView = leftIconView
+            let indexPath = theFavoriteModel.indexPaths[building.name]
+            if let userImage = userDefined.getPhotoAt(indexPath: indexPath!) {
+                leftIconView.image = userImage
+                view.leftCalloutAccessoryView = leftIconView
+            } else {
+                leftIconView.image = UIImage(named: imageName)
+                view.leftCalloutAccessoryView = leftIconView
+            }
             
             return view
         default:

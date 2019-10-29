@@ -10,6 +10,7 @@ import Foundation
 
 class FavoriteModel {
     private var favorites: [building]
+    var indexPaths = [String: IndexPath]()
     static let theFavoriteModel = FavoriteModel()
     
     init() {
@@ -17,11 +18,12 @@ class FavoriteModel {
     }
     
     // Add a building
-    func addBuildingToList(_ building: building) -> Bool {
+    func addBuildingToList(_ building: building, indexPath: IndexPath) -> Bool {
         if favorites.contains(building) {
             return false
         }
         favorites.append(building)
+        indexPaths[building.name] = indexPath
         return true
     }
     

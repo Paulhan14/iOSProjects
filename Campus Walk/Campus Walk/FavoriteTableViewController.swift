@@ -92,7 +92,7 @@ class FavoriteTableViewController: UITableViewController {
     func addBuildingBy(_ indexPath: IndexPath) {
         let key = buildingsModel.buildingKeys[indexPath.section]
         let building = buildingsModel.buildingByInitial[key]![indexPath.row]
-        if theFavoriteModel.addBuildingToList(building) == false {
+        if theFavoriteModel.addBuildingToList(building, indexPath: indexPath) == false {
         }
     }
 }

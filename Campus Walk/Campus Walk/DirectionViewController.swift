@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class DirectionViewController: UIViewController, MKMapViewDelegate {
+class DirectionViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
     // MARK: outlets
     
@@ -34,6 +34,8 @@ class DirectionViewController: UIViewController, MKMapViewDelegate {
     var endLocation: MKMapItem?
     var allSteps = [MKRoute.Step]()
     var currentStep = 1
+    
+    let locationManager = CLLocationManager()
     
     var closureBlock : (() -> Void)?
     
@@ -60,6 +62,34 @@ class DirectionViewController: UIViewController, MKMapViewDelegate {
         infoView.isHidden = true
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if CLLocationManager.locationServicesEnabled() {
+            let status = CLLocationManager.authorizationStatus()
+            switch status {
+            case .notDetermined:
+                locationManager.requestWhenInUseAuthorization()
+            case .authorizedAlways, .authorizedWhenInUse:
+                mapView.showsUserLocation = true
+                self.navigationItem.rightBarButtonItem = MKUserTrackingBarButtonItem(mapView: mapView)
+            default:
+                break
+            }
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .denied, .restricted:
+            mapView.showsUserLocation = false
+        case .authorizedWhenInUse, .authorizedAlways:
+            mapView.showsUserLocation = true
+            self.navigationItem.rightBarButtonItem = MKUserTrackingBarButtonItem(mapView: mapView)
+        default:
+            break
+        }
+    }
+    
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         switch overlay{
         case is MKPolyline:
@@ -82,6 +112,7 @@ class DirectionViewController: UIViewController, MKMapViewDelegate {
     
     @IBAction func searchPressed(_ sender: Any) {
         guard startLocation != nil && endLocation != nil else {return}
+        self.currentStep = 1
         
         let request = MKDirections.Request()
         request.source = startLocation
@@ -107,6 +138,8 @@ class DirectionViewController: UIViewController, MKMapViewDelegate {
     }
     
     @IBAction func clearButtonPressed(_ sender: Any) {
+        startLocation = nil
+        endLocation = nil
         startPickButton.setTitle("Pick Start Location", for: .normal)
         endPickButton.setTitle("Pick Destination", for: .normal)
         self.mapView.removeOverlays(self.mapView.overlays)
@@ -166,6 +199,7 @@ class DirectionViewController: UIViewController, MKMapViewDelegate {
         let place = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: building.latitude, longitude: building.longitude))
         self.startLocation = MKMapItem(placemark: place)
         self.mapView.removeOverlays(self.mapView.overlays)
+        infoView.isHidden = true
     }
     
     func setEndLocation(_ indexPath: IndexPath) {
@@ -174,6 +208,7 @@ class DirectionViewController: UIViewController, MKMapViewDelegate {
         let place = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: building.latitude, longitude: building.longitude))
         self.endLocation = MKMapItem(placemark: place)
         self.mapView.removeOverlays(self.mapView.overlays)
+        infoView.isHidden = true
     }
     
     func useCurrent(startOrEnd: Bool) {
