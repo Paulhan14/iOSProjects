@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA29637B236526E000F17AF2 /* DirectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA29637A236526E000F17AF2 /* DirectionViewController.swift */; };
+		DA3B7123236736BB00DFB940 /* StepTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3B7122236736BB00DFB940 /* StepTableViewController.swift */; };
+		DA3B71252367B94C00DFB940 /* UserDefinedPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3B71242367B94C00DFB940 /* UserDefinedPhotoView.swift */; };
 		DAAB62D0235AA02C00A02BE2 /* ListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAB62CF235AA02C00A02BE2 /* ListTableViewController.swift */; };
 		DAD7DC8723591A9D0008FE7E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD7DC8623591A9D0008FE7E /* AppDelegate.swift */; };
 		DAD7DC8923591A9D0008FE7E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD7DC8823591A9D0008FE7E /* ViewController.swift */; };
@@ -16,6 +19,7 @@
 		DAD7DC9C23591A9E0008FE7E /* Campus_WalkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD7DC9B23591A9E0008FE7E /* Campus_WalkTests.swift */; };
 		DAD7DCAA23591CE50008FE7E /* buildings.plist in Resources */ = {isa = PBXBuildFile; fileRef = DAD7DCA923591CE50008FE7E /* buildings.plist */; };
 		DAD7DCAC23591D1A0008FE7E /* BuildingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAD7DCAB23591D1A0008FE7E /* BuildingModel.swift */; };
+		DAF1C61B2362A66A003FDD79 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF1C61A2362A66A003FDD79 /* DetailViewController.swift */; };
 		DAFB9984235AD869008EF23E /* FavoriteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFB9983235AD869008EF23E /* FavoriteTableViewController.swift */; };
 		DAFB9986235B68CC008EF23E /* FavoriteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFB9985235B68CC008EF23E /* FavoriteModel.swift */; };
 		DAFB9989235D33DA008EF23E /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFB9988235D33DA008EF23E /* SettingViewController.swift */; };
@@ -32,6 +36,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DA29637A236526E000F17AF2 /* DirectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DirectionViewController.swift; path = "Campus Walk/DirectionViewController.swift"; sourceTree = "<group>"; };
+		DA3B7122236736BB00DFB940 /* StepTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StepTableViewController.swift; path = "Campus Walk/StepTableViewController.swift"; sourceTree = "<group>"; };
+		DA3B71242367B94C00DFB940 /* UserDefinedPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserDefinedPhotoView.swift; path = "Campus Walk/UserDefinedPhotoView.swift"; sourceTree = "<group>"; };
 		DAAB62CF235AA02C00A02BE2 /* ListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ListTableViewController.swift; path = "Campus Walk/ListTableViewController.swift"; sourceTree = "<group>"; };
 		DAD7DC8323591A9D0008FE7E /* Campus Walk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Campus Walk.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAD7DC8623591A9D0008FE7E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -45,6 +52,7 @@
 		DAD7DC9D23591A9E0008FE7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DAD7DCA923591CE50008FE7E /* buildings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = buildings.plist; sourceTree = "<group>"; };
 		DAD7DCAB23591D1A0008FE7E /* BuildingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BuildingModel.swift; path = "Campus Walk/BuildingModel.swift"; sourceTree = "<group>"; };
+		DAF1C61A2362A66A003FDD79 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailViewController.swift; path = "Campus Walk/DetailViewController.swift"; sourceTree = "<group>"; };
 		DAFB9983235AD869008EF23E /* FavoriteTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FavoriteTableViewController.swift; path = "Campus Walk/FavoriteTableViewController.swift"; sourceTree = "<group>"; };
 		DAFB9985235B68CC008EF23E /* FavoriteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteModel.swift; sourceTree = "<group>"; };
 		DAFB9987235CB2F1008EF23E /* location_sim.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = location_sim.gpx; path = "Campus Walk/location_sim.gpx"; sourceTree = "<group>"; };
@@ -118,8 +126,11 @@
 			children = (
 				DAFB9988235D33DA008EF23E /* SettingViewController.swift */,
 				DAAB62CF235AA02C00A02BE2 /* ListTableViewController.swift */,
+				DAF1C61A2362A66A003FDD79 /* DetailViewController.swift */,
 				DAFB9983235AD869008EF23E /* FavoriteTableViewController.swift */,
 				DAD7DC8823591A9D0008FE7E /* ViewController.swift */,
+				DA3B7122236736BB00DFB940 /* StepTableViewController.swift */,
+				DA29637A236526E000F17AF2 /* DirectionViewController.swift */,
 			);
 			name = Controller;
 			path = ..;
@@ -128,6 +139,7 @@
 		DAD7DCA723591AE50008FE7E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				DA3B71242367B94C00DFB940 /* UserDefinedPhotoView.swift */,
 			);
 			name = View;
 			path = ..;
@@ -248,10 +260,14 @@
 				DAFB9984235AD869008EF23E /* FavoriteTableViewController.swift in Sources */,
 				DAD7DC8923591A9D0008FE7E /* ViewController.swift in Sources */,
 				DAD7DCAC23591D1A0008FE7E /* BuildingModel.swift in Sources */,
+				DA3B7123236736BB00DFB940 /* StepTableViewController.swift in Sources */,
 				DAFB9986235B68CC008EF23E /* FavoriteModel.swift in Sources */,
 				DAD7DC8723591A9D0008FE7E /* AppDelegate.swift in Sources */,
+				DA29637B236526E000F17AF2 /* DirectionViewController.swift in Sources */,
 				DAFB9989235D33DA008EF23E /* SettingViewController.swift in Sources */,
+				DA3B71252367B94C00DFB940 /* UserDefinedPhotoView.swift in Sources */,
 				DAAB62D0235AA02C00A02BE2 /* ListTableViewController.swift in Sources */,
+				DAF1C61B2362A66A003FDD79 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

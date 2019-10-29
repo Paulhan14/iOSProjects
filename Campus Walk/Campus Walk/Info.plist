@@ -26,6 +26,8 @@
 	<string>Main</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Track your location on campus</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Add your own building photo</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

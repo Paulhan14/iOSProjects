@@ -15,9 +15,11 @@ import MapKit
 class BuildingPin: NSObject, MKAnnotation {
     var coordinate: CLLocationCoordinate2D
     var title: String?
-    init(name: String, coordinate: CLLocationCoordinate2D) {
+    var buildingIndex: IndexPath?
+    init(name: String, coordinate: CLLocationCoordinate2D, buildingIndex: IndexPath) {
         self.title = name
         self.coordinate = coordinate
+        self.buildingIndex = buildingIndex
     }
 }
 
@@ -25,15 +27,18 @@ class BuildingPin: NSObject, MKAnnotation {
 class FavoritePin: NSObject, MKAnnotation {
     var coordinate: CLLocationCoordinate2D
     var title: String?
-    init(name: String, coordinate: CLLocationCoordinate2D) {
+    var buildingIndex: Int?
+    init(name: String, coordinate: CLLocationCoordinate2D, buildingIndex: Int) {
         self.title = name
         self.coordinate = coordinate
+        self.buildingIndex = buildingIndex
     }
 }
 
 class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     var buildingModel = BuildingModel.sharedInstance
     var theFavoriteModel = FavoriteModel.theFavoriteModel
+    var userDefined = UserDefinedPhoto.userDefined
     // All normal pin on map
     var allNormalPins = [String]()
     // All favorite pin on map
@@ -120,6 +125,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 self.toggleFavoritePins(returnConfigure.favoriteSwitch)
                 self.showFavoriteOrNot = returnConfigure.favoriteSwitch
             }
+        case "GetDirection":
+            let directionViewController = segue.destination.children[0] as! DirectionViewController
+            directionViewController.closureBlock = {self.dismiss(animated: true, completion: nil)}
         default:
             break
         }
@@ -129,9 +137,44 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         // For different category, add different pin
         switch annotation {
         case is BuildingPin:
-            return annotationView(forPin: annotation as! BuildingPin)
+            let pin = annotation as! BuildingPin
+            let view = annotationView(forPin: pin)
+            var imageName = ""
+            let leftIconView = UIImageView(frame: CGRect.init(x: 0, y: 0, width: 53, height: 53))
+            leftIconView.contentMode = .scaleToFill
+            
+            if buildingModel.checkPhotoAt(pin.buildingIndex!) {
+                imageName = buildingModel.photoNameAt(pin.buildingIndex!)
+            } else {
+                imageName = "nophoto"
+            }
+            if let userImage = userDefined.getPhotoAt(indexPath: pin.buildingIndex!) {
+                leftIconView.image = userImage
+                view.leftCalloutAccessoryView = leftIconView
+            } else {
+                leftIconView.image = UIImage(named: imageName)
+                view.leftCalloutAccessoryView = leftIconView
+            }
+            return view
         case is FavoritePin:
-            return annotationView(forPin: annotation as! FavoritePin)
+            let pin = annotation as! FavoritePin
+            let view = annotationView(forPin: pin)
+            var imageName = ""
+            let leftIconView = UIImageView(frame: CGRect.init(x: 0, y: 0, width: 53, height: 53))
+            leftIconView.contentMode = .scaleToFill
+            
+            let building = theFavoriteModel.getBuildingBy(pin.buildingIndex!)
+            
+            if building.photo != "" {
+                imageName = building.photo
+            } else {
+                imageName = "nophoto"
+            }
+            
+            leftIconView.image = UIImage(named: imageName)
+            view.leftCalloutAccessoryView = leftIconView
+            
+            return view
         default:
             return nil
         }
@@ -155,8 +198,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
         pin.markerTintColor = .yellow
         pin.animatesWhenAdded = false
-        pin.canShowCallout = false
-        pin.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        pin.canShowCallout = true
         return pin
     }
     
@@ -208,21 +250,22 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
         // Drop pin, update the all pin list and center camera
         allNormalPins.append(name)
-        let pin = BuildingPin(name: name, coordinate: coordinates)
+        let pin = BuildingPin(name: name, coordinate: coordinates, buildingIndex: indexPath)
         mapView.addAnnotation(pin)
         centerMapCameraAt(coordinates)
     }
     
     // Drop all the favorite pin
     func dropPinForFavoriteBuildings() {
-        guard theFavoriteModel.getFavoriteListSize() > 0 else {return}
         mapView.removeAnnotations(allFavoritePins)
+        allFavoritePins = [FavoritePin]()
+        guard theFavoriteModel.getFavoriteListSize() > 0 else {return}
         var _favoritePins = [FavoritePin]()
         for index in 0..<theFavoriteModel.getFavoriteListSize() {
             let building = theFavoriteModel.getBuildingBy(index)
             let name = building.name
             let coordinates = CLLocationCoordinate2D(latitude: building.latitude, longitude: building.longitude)
-            let pin = FavoritePin(name: name, coordinate: coordinates)
+            let pin = FavoritePin(name: name, coordinate: coordinates, buildingIndex: index)
             _favoritePins.append(pin)
         }
         allFavoritePins = _favoritePins

@@ -66,4 +66,21 @@ class BuildingModel {
         return building.name
     }
     
+    func yearBuiltAt(_ indexPath: IndexPath) -> Int {
+        let building = buildingAt(indexPath)
+        return building.year_constructed
+    }
+    
+    func checkPhotoAt(_ indexPath: IndexPath) -> Bool {
+        let building = buildingAt(indexPath)
+        if building.photo == "" {
+            return false
+        }
+        return true
+    }
+    
+    func photoNameAt(_ indexPath: IndexPath) -> String {
+        let building = buildingAt(indexPath)
+        return building.photo
+    }
 }

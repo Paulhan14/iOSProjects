@@ -16,6 +16,12 @@ class ListTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if segueType == "DropPin" {
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(closeSelf))
+        }
+        if segueType == "GetStart" || segueType == "GetEnd" {
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Use Current", style: .plain, target: self, action: #selector(useCurrent))
+        }
     }
 
     // MARK: - Table view data source
@@ -53,11 +59,29 @@ class ListTableViewController: UITableViewController {
                 _block(indexPath)
             }
         case "DropPin":
+            if let detailViewController = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController {
+                detailViewController.indexPath = indexPath
+                detailViewController.closureBlock = self.closureBlock
+                navigationController?.pushViewController(detailViewController, animated: true)
+            }
+        case "GetStart":
+            fallthrough
+        case "GetEnd":
             if let _block = closureBlock {
                 _block(indexPath)
             }
         default:
             break
+        }
+    }
+    
+    @objc func closeSelf() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func useCurrent() {
+        if let _block = closureBlock {
+            _block(IndexPath())
         }
     }
 }
