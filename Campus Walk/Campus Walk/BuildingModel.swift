@@ -20,7 +20,10 @@ struct building: Codable, Equatable {
 class BuildingModel {
     fileprivate var campusBuildings: [building]
     let buildingByInitial: [String: [building]]
+    var buildingDescriptions: [String: String]
     static let sharedInstance = BuildingModel()
+    var filteredBuildings = [building]()
+    var indexPathOfBuilding = [String: IndexPath]()
     
     init() {
         let mainBundle = Bundle.main
@@ -30,22 +33,28 @@ class BuildingModel {
             let decoder = PropertyListDecoder()
             campusBuildings = try decoder.decode([building].self, from: data)
             var _buildingByInitial = [String: [building]]()
+            var _buildingDescriptions = [String: String]()
             for aBuilding in campusBuildings {
                 let firstLetter = aBuilding.name.prefix(1).uppercased()
                 if _buildingByInitial[firstLetter]?.append(aBuilding) == nil {
                     _buildingByInitial[firstLetter] = [aBuilding]
                 }
+                _buildingDescriptions[aBuilding.name] = ""
             }
             buildingByInitial = _buildingByInitial
+            buildingDescriptions = _buildingDescriptions
+            setIndexPathOfBuilding()
         } catch {
             print(error)
             campusBuildings = []
             buildingByInitial = [:]
+            buildingDescriptions = [:]
         }
     }
     
     var numberOfKeys : Int {return buildingByInitial.keys.count}
     var buildingKeys: [String] {return buildingByInitial.keys.sorted()}
+    var numberOfBuildings: Int {return campusBuildings.count}
     
     func getBuildingBy(index: Int) -> building {
         return campusBuildings[index]
@@ -82,5 +91,56 @@ class BuildingModel {
     func photoNameAt(_ indexPath: IndexPath) -> String {
         let building = buildingAt(indexPath)
         return building.photo
+    }
+    
+    func getBuildingDescription(_ indexPath: IndexPath) -> String {
+        let building = buildingAt(indexPath)
+        return buildingDescriptions[building.name]!
+    }
+    
+    func setBuildingDescription(_ indexPath: IndexPath, _ content: String) {
+        let building = buildingAt(indexPath)
+        buildingDescriptions[building.name]! = content
+    }
+    
+    func filter(_ aFilter: (_ building:building) -> Bool ) -> [building] {
+        var filtered = [building]()
+        for aBuilding in self.campusBuildings {
+            if aFilter(aBuilding) {
+                filtered.append(aBuilding)
+            }
+        }
+        return filtered
+    }
+    
+    func setIndexPathOfBuilding() {
+        for aBuilding in self.campusBuildings {
+            let firstLetter = aBuilding.name.prefix(1).uppercased()
+            let name = aBuilding.name
+            var keys = buildingByInitial.keys.sorted()
+            var section = 0
+            var row = 0
+            for i in 0..<keys.count {
+                if keys[i] == firstLetter {
+                    section = i
+                    break
+                }
+            }
+            
+            for i in 0..<buildingByInitial[firstLetter]!.count {
+                if buildingByInitial[firstLetter]![i].name == name {
+                    row = i
+                    break
+                }
+            }
+            let _indexPath = IndexPath(row: row, section: section)
+            indexPathOfBuilding[name] = _indexPath
+        }
+        
+        
+    }
+    
+    func getIndexPathOfBuildingWith(_ name: String) -> IndexPath {
+        return self.indexPathOfBuilding[name]!
     }
 }

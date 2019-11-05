@@ -13,6 +13,9 @@ class DetailViewController: UIViewController,UINavigationControllerDelegate, UII
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var yearLabel: UILabel!
     @IBOutlet weak var buildingImage: UIImageView!
+    @IBOutlet weak var detailView: UIView!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var descriptionText: UITextView!
     
     var indexPath: IndexPath?
     var closureBlock : ((_ indexPath: IndexPath) -> Void)?
@@ -48,9 +51,24 @@ class DetailViewController: UIViewController,UINavigationControllerDelegate, UII
         items.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil))
         items.append(UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editPressed)))
         self.toolbarItems = items
+        
+        self.descriptionText.delegate = self
+        let description = buildingsModel.getBuildingDescription(indexPath!)
+        if description == "" {
+            self.descriptionText.text = "Write something about this building..."
+            self.descriptionText.textColor = UIColor.lightGray
+        } else {
+            self.descriptionText.text = description
+        }
+        
+        let dismissTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        self.view.addGestureRecognizer(dismissTap)
+        
+        let center = NotificationCenter.default
+        center.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        center.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
     }
-    
-
     
     // MARK: - Button Handler
     
@@ -98,5 +116,50 @@ class DetailViewController: UIViewController,UINavigationControllerDelegate, UII
         }
         self.dismiss(animated: true, completion: nil)
     }
+    
+    @objc func dismissKeyboard() {
+        descriptionText.endEditing(true)
+    }
 
+}
+
+// MARK: - TextView Delegate Methods
+
+extension DetailViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if descriptionText.textColor == UIColor.lightGray {
+            descriptionText.text = ""
+            descriptionText.textColor = UIColor.black
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if descriptionText.text == "" {
+            descriptionText.text = "Write something about this building..."
+            descriptionText.textColor = UIColor.lightGray
+        }
+        
+        if descriptionText.text != "Write something about this building..." {
+            buildingsModel.setBuildingDescription(indexPath!, descriptionText.text)
+        }
+    }
+}
+
+extension DetailViewController {
+    //Mark: - Notification Handlers
+    @objc func keyboardWillShow(notification:Notification) {
+        let userInfo = notification.userInfo!
+        let keyboardSize = userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! CGRect
+        let contentInsets =  UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+        self.scrollView.contentInset = contentInsets
+        self.scrollView.scrollIndicatorInsets = contentInsets
+        self.scrollView.scrollIndicatorInsets = contentInsets
+        let selectedRange = self.descriptionText.selectedRange
+        self.descriptionText.scrollRangeToVisible(selectedRange)
+    }
+    
+    @objc func keyboardWillHide(notification:Notification) {
+        self.scrollView.contentInset = UIEdgeInsets.zero
+        self.scrollView.scrollIndicatorInsets = UIEdgeInsets.zero
+    }
 }
