@@ -58,7 +58,7 @@
         <!--Posts-->
         <scene sceneID="meR-7Y-Khu">
             <objects>
-                <tableViewController id="P2K-bK-V2e" customClass="PostsTableViewController" customModule="TravelDiary" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MyPosts" id="P2K-bK-V2e" customClass="PostsTableViewController" customModule="TravelDiary" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ywe-CD-D1B">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -240,39 +240,45 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pgm-23-8CX">
-                                <rect key="frame" x="20" y="94" width="374" height="568"/>
+                                <rect key="frame" x="20" y="54" width="374" height="508"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wo0-xL-Y2S">
-                                        <rect key="frame" x="0.0" y="230" width="374" height="30"/>
+                                        <rect key="frame" x="0.0" y="210" width="374" height="30"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="X1b-pT-2hb">
-                                        <rect key="frame" x="0.0" y="70" width="374" height="30"/>
+                                        <rect key="frame" x="0.0" y="50" width="374" height="30"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uVw-Pv-7c5">
-                                        <rect key="frame" x="0.0" y="150" width="374" height="30"/>
+                                        <rect key="frame" x="0.0" y="130" width="374" height="30"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="36h-mM-CNc">
-                                        <rect key="frame" x="0.0" y="310" width="374" height="30"/>
+                                        <rect key="frame" x="0.0" y="290" width="374" height="30"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OSQ-8u-u97">
+                                        <rect key="frame" x="50" y="411" width="274" height="0.0"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hy3-TN-gKV">
-                                        <rect key="frame" x="67" y="390" width="240" height="33"/>
+                                        <rect key="frame" x="67" y="370" width="240" height="36"/>
                                         <color key="backgroundColor" red="1" green="0.54117647059999996" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="240" id="DQX-Jz-Rj4"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="Create Account">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -282,11 +288,14 @@
                                     </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="OSQ-8u-u97" firstAttribute="leading" secondItem="Pgm-23-8CX" secondAttribute="leading" constant="50" id="1Ah-tI-QKi"/>
                                     <constraint firstItem="X1b-pT-2hb" firstAttribute="leading" secondItem="Pgm-23-8CX" secondAttribute="leading" id="2St-2Y-q7u"/>
                                     <constraint firstItem="36h-mM-CNc" firstAttribute="leading" secondItem="Pgm-23-8CX" secondAttribute="leading" id="3Ip-Vn-jC8"/>
                                     <constraint firstAttribute="trailing" secondItem="X1b-pT-2hb" secondAttribute="trailing" id="4S7-rv-IrP"/>
+                                    <constraint firstItem="OSQ-8u-u97" firstAttribute="top" secondItem="hy3-TN-gKV" secondAttribute="bottom" constant="5" id="9Vb-W9-Vfw"/>
                                     <constraint firstItem="hy3-TN-gKV" firstAttribute="centerX" secondItem="Pgm-23-8CX" secondAttribute="centerX" id="Af3-w4-YqS"/>
-                                    <constraint firstItem="hy3-TN-gKV" firstAttribute="top" secondItem="36h-mM-CNc" secondAttribute="bottom" constant="50" id="O2W-n2-YBs"/>
+                                    <constraint firstItem="hy3-TN-gKV" firstAttribute="top" secondItem="36h-mM-CNc" secondAttribute="bottom" constant="50" id="HUy-c8-8he"/>
+                                    <constraint firstItem="OSQ-8u-u97" firstAttribute="centerX" secondItem="hy3-TN-gKV" secondAttribute="centerX" id="RL2-gf-sLd"/>
                                     <constraint firstItem="uVw-Pv-7c5" firstAttribute="top" secondItem="X1b-pT-2hb" secondAttribute="bottom" constant="50" id="Vf3-Ap-Y31"/>
                                     <constraint firstAttribute="trailing" secondItem="wo0-xL-Y2S" secondAttribute="trailing" id="X6o-6M-jPh"/>
                                     <constraint firstItem="36h-mM-CNc" firstAttribute="top" secondItem="wo0-xL-Y2S" secondAttribute="bottom" constant="50" id="YEm-dr-JjN"/>
@@ -295,15 +304,15 @@
                                     <constraint firstItem="wo0-xL-Y2S" firstAttribute="leading" secondItem="Pgm-23-8CX" secondAttribute="leading" id="g6A-7s-DdB"/>
                                     <constraint firstItem="wo0-xL-Y2S" firstAttribute="top" secondItem="uVw-Pv-7c5" secondAttribute="bottom" constant="50" id="hA6-mJ-JTj"/>
                                     <constraint firstAttribute="trailing" secondItem="uVw-Pv-7c5" secondAttribute="trailing" id="lkL-8G-fTS"/>
-                                    <constraint firstItem="X1b-pT-2hb" firstAttribute="top" secondItem="Pgm-23-8CX" secondAttribute="top" constant="70" id="qan-Fz-tf8"/>
+                                    <constraint firstItem="X1b-pT-2hb" firstAttribute="top" secondItem="Pgm-23-8CX" secondAttribute="top" constant="50" id="qan-Fz-tf8"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Pgm-23-8CX" firstAttribute="leading" secondItem="yWb-gp-vne" secondAttribute="leading" constant="20" id="Tae-va-04r"/>
-                            <constraint firstItem="yWb-gp-vne" firstAttribute="bottom" secondItem="Pgm-23-8CX" secondAttribute="bottom" constant="200" id="kZ8-c1-9aN"/>
-                            <constraint firstItem="Pgm-23-8CX" firstAttribute="top" secondItem="yWb-gp-vne" secondAttribute="top" constant="50" id="vOG-ty-0eP"/>
+                            <constraint firstItem="yWb-gp-vne" firstAttribute="bottom" secondItem="Pgm-23-8CX" secondAttribute="bottom" constant="300" id="kZ8-c1-9aN"/>
+                            <constraint firstItem="Pgm-23-8CX" firstAttribute="top" secondItem="yWb-gp-vne" secondAttribute="top" constant="10" id="vOG-ty-0eP"/>
                             <constraint firstItem="yWb-gp-vne" firstAttribute="trailing" secondItem="Pgm-23-8CX" secondAttribute="trailing" constant="20" id="zbl-8x-pgX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="yWb-gp-vne"/>
@@ -311,6 +320,7 @@
                     <connections>
                         <outlet property="actionButton" destination="hy3-TN-gKV" id="t5h-Wi-Igc"/>
                         <outlet property="emailField" destination="wo0-xL-Y2S" id="i3V-pi-bot"/>
+                        <outlet property="errorLabel" destination="OSQ-8u-u97" id="7QQ-ha-zqC"/>
                         <outlet property="firstNameField" destination="X1b-pT-2hb" id="F0r-fB-aHP"/>
                         <outlet property="lastNameField" destination="uVw-Pv-7c5" id="Wj0-9r-b3o"/>
                         <outlet property="passwordField" destination="36h-mM-CNc" id="QdV-wV-d9r"/>

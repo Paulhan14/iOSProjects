@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		165A74AAD0D0A4EFC807317F /* Pods_TravelDiaryTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 236D2D51F803E6F281155E6A /* Pods_TravelDiaryTests.framework */; };
 		7558EF3A8C4680D530D076AC /* Pods_TravelDiary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4189C15F5AA3A3B15853F6D1 /* Pods_TravelDiary.framework */; };
+		DA20A98F237DF6AA0081DB72 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA20A98E237DF6AA0081DB72 /* DataManager.swift */; };
 		DA95BBAF2379090800880622 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA95BBAE2379090800880622 /* InfoViewController.swift */; };
 		DA95BBB1237911D400880622 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA95BBB0237911D400880622 /* Helpers.swift */; };
 		DA95BBB323791BE500880622 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA95BBB223791BE500880622 /* Constant.swift */; };
@@ -25,6 +26,9 @@
 		DA9815D823776DD00010B001 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9815D723776DD00010B001 /* EditViewController.swift */; };
 		DA9815DA237772C50010B001 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9815D9237772C50010B001 /* LoginViewController.swift */; };
 		DA9815DC237775E70010B001 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DA9815DB237775E70010B001 /* GoogleService-Info.plist */; };
+		DAA5F797237A562D00C0AC52 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA5F796237A562D00C0AC52 /* UserController.swift */; };
+		DAA5F799237A575300C0AC52 /* PostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA5F798237A575300C0AC52 /* PostController.swift */; };
+		DAA5F79C237C5B3F00C0AC52 /* travelDiary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DAA5F79A237C5B3F00C0AC52 /* travelDiary.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +46,7 @@
 		2FF470A8028DB79C3ED2DA03 /* Pods-TravelDiaryTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelDiaryTests.release.xcconfig"; path = "Target Support Files/Pods-TravelDiaryTests/Pods-TravelDiaryTests.release.xcconfig"; sourceTree = "<group>"; };
 		4189C15F5AA3A3B15853F6D1 /* Pods_TravelDiary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TravelDiary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B891CE737BB2309D8EDA5FB0 /* Pods-TravelDiaryTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelDiaryTests.debug.xcconfig"; path = "Target Support Files/Pods-TravelDiaryTests/Pods-TravelDiaryTests.debug.xcconfig"; sourceTree = "<group>"; };
+		DA20A98E237DF6AA0081DB72 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		DA95BBAE2379090800880622 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		DA95BBB0237911D400880622 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		DA95BBB223791BE500880622 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
@@ -62,6 +67,9 @@
 		DA9815D723776DD00010B001 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		DA9815D9237772C50010B001 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		DA9815DB237775E70010B001 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DAA5F796237A562D00C0AC52 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
+		DAA5F798237A575300C0AC52 /* PostController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostController.swift; sourceTree = "<group>"; };
+		DAA5F79B237C5B3F00C0AC52 /* travelDiary.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = travelDiary.xcdatamodel; sourceTree = "<group>"; };
 		E227007B686D84DB9210E08D /* Pods-TravelDiary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelDiary.release.xcconfig"; path = "Target Support Files/Pods-TravelDiary/Pods-TravelDiary.release.xcconfig"; sourceTree = "<group>"; };
 		EA80EFB42E1B8384EA4A042D /* Pods-TravelDiary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelDiary.debug.xcconfig"; path = "Target Support Files/Pods-TravelDiary/Pods-TravelDiary.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -132,14 +140,13 @@
 				DA9815CC237763CC0010B001 /* Controller */,
 				DA9815C6237762EB0010B001 /* View */,
 				DA9815C3237762B10010B001 /* Model */,
+				DAA5F795237A55EC00C0AC52 /* Utilities */,
 				DA9815A0237762430010B001 /* AppDelegate.swift */,
 				DA9815A6237762430010B001 /* Main.storyboard */,
 				DA9815A9237762440010B001 /* Assets.xcassets */,
 				DA9815AB237762440010B001 /* LaunchScreen.storyboard */,
 				DA9815AE237762440010B001 /* Info.plist */,
 				DA9815DB237775E70010B001 /* GoogleService-Info.plist */,
-				DA95BBB0237911D400880622 /* Helpers.swift */,
-				DA95BBB223791BE500880622 /* Constant.swift */,
 			);
 			path = TravelDiary;
 			sourceTree = "<group>";
@@ -156,6 +163,9 @@
 		DA9815C3237762B10010B001 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				DAA5F796237A562D00C0AC52 /* UserController.swift */,
+				DAA5F798237A575300C0AC52 /* PostController.swift */,
+				DA20A98E237DF6AA0081DB72 /* DataManager.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -180,6 +190,16 @@
 				DA95BBAE2379090800880622 /* InfoViewController.swift */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		DAA5F795237A55EC00C0AC52 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				DA95BBB223791BE500880622 /* Constant.swift */,
+				DA95BBB0237911D400880622 /* Helpers.swift */,
+				DAA5F79A237C5B3F00C0AC52 /* travelDiary.xcdatamodeld */,
+			);
+			name = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -352,15 +372,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA9815D623776DC30010B001 /* ProfileViewController.swift in Sources */,
+				DA20A98F237DF6AA0081DB72 /* DataManager.swift in Sources */,
 				DA9815D423776DB30010B001 /* CalendarViewController.swift in Sources */,
 				DA9815CE23776D300010B001 /* PlazaTableViewController.swift in Sources */,
 				DA95BBB1237911D400880622 /* Helpers.swift in Sources */,
 				DA9815D223776D8F0010B001 /* PostsTableViewController.swift in Sources */,
+				DAA5F799237A575300C0AC52 /* PostController.swift in Sources */,
 				DA95BBAF2379090800880622 /* InfoViewController.swift in Sources */,
+				DAA5F79C237C5B3F00C0AC52 /* travelDiary.xcdatamodeld in Sources */,
 				DA9815DA237772C50010B001 /* LoginViewController.swift in Sources */,
 				DA9815A1237762430010B001 /* AppDelegate.swift in Sources */,
 				DA95BBB323791BE500880622 /* Constant.swift in Sources */,
 				DA9815D023776D4D0010B001 /* MapViewController.swift in Sources */,
+				DAA5F797237A562D00C0AC52 /* UserController.swift in Sources */,
 				DA9815D823776DD00010B001 /* EditViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -628,6 +652,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		DAA5F79A237C5B3F00C0AC52 /* travelDiary.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				DAA5F79B237C5B3F00C0AC52 /* travelDiary.xcdatamodel */,
+			);
+			currentVersion = DAA5F79B237C5B3F00C0AC52 /* travelDiary.xcdatamodel */;
+			path = travelDiary.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = DA981595237762430010B001 /* Project object */;
 }

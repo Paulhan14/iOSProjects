@@ -9,23 +9,25 @@
 import UIKit
 import FirebaseAuth
 import Firebase
+import FirebaseFirestore
 
 class InfoViewController: UIViewController {
 
+    // MARK: - UI
     @IBOutlet weak var firstNameField: UITextField!
     @IBOutlet weak var lastNameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var actionButton: UIButton!
-    
+    @IBOutlet weak var errorLabel: UILabel!
+    // MARK: variable
     var parentSegue: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         fieldPlaceHolderSetUp()
+        setupKeyboardAccessory()
         switch parentSegue! {
-        case Constant.Segues.signup:
-            createAccount()
         case Constant.Segues.login:
             firstNameField.isHidden = true
             lastNameField.isHidden = true
@@ -40,43 +42,38 @@ class InfoViewController: UIViewController {
     }
     
     func fieldPlaceHolderSetUp() {
-        firstNameField.placeholder = "Enter your first name"
-        lastNameField.placeholder = "Enter your last name"
-        emailField.placeholder = "Enter your email address"
+        firstNameField.placeholder = "Ex: John"
+        lastNameField.placeholder = "Ex: Smith"
+        emailField.placeholder = "Ex: name@company.com"
         passwordField.placeholder = "Set your password"
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
     // MARK: - Buttons
     @IBAction func actionButtonPressed(_ sender: Any) {
+        // Dismiss keyboard if it is still showing
+        self.view.endEditing(true)
+        // log in or sign up
         switch parentSegue! {
         case Constant.Segues.signup:
             createAccount()
-            self.goToHomeScreen()
         case Constant.Segues.login:
             loginUser()
-            self.goToHomeScreen()
         default:
             break
         }
     }
     
-    // MARK: - Helper
+    @objc func dismissKeyboard() {
+        self.view.endEditing(true)
+    }
+    
+    // MARK: - Online
     
     func createAccount() {
         // Validate fields
         let error = validateSignUpFields()
         if error != nil {
-            // There is something wrong
+            errorLabel.text = error
         } else {
             // create user
             let enteredFirst = firstNameField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -86,36 +83,104 @@ class InfoViewController: UIViewController {
             Auth.auth().createUser(withEmail: enteredEmail, password: enteredPassword) { (result, error) in
                 if error != nil {
                     //error
+                    self.errorLabel.text = "something went wrong"
                 } else {
-                    let db = Firestore.firestore()
-                    var ref: DocumentReference? = nil
+                    let newUID = result!.user.uid
+                    // Data to be inserted
                     let payload = [
                         "first" : enteredFirst,
                         "last" : enteredLast,
-                        "uid" : result!.user.uid
+                        "uid" : newUID
                     ]
-                    ref = db.collection("users").addDocument(data: payload, completion: { (err) in
-                        if let err = err {
-                            print("Error adding document: \(err)")
-                        } else {
-                            print("Document added with ID: \(ref!.documentID)")
-                        }
-                    })
+                    // Upload data
+                    self.saveDataToFirebase(payload, newUID)
+//                    let db = Firestore.firestore()
+//                    var ref: DocumentReference? = nil
+//
+//                    // Create a new document for the user
+//                    ref = db.collection("users").document(newUID)
+//                    ref!.setData(payload, completion: { (error) in
+//                        if let error = error {
+//                            print("Error adding document: \(error)")
+//                        } else {
+//                            print("Document added with ID: \(ref!.documentID)")
+//                        }
+//                    })
+                    // go to home screen
+                    self.goToHomeScreen()
+                    //Save the user info to local
+                    UserController.theUser.createUser(enteredFirst, enteredLast, enteredEmail, newUID)
                 }
             }
+            
         }
     }
     
     func loginUser() {
         let error = validateLoginFields()
         if error != nil {
-            // There is something wrong
+            errorLabel.text = error
         } else {
             // log in
-            
-            // go to home screen
+            let enteredEmail = emailField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            let enteredPassword = passwordField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            Auth.auth().signIn(withEmail: enteredEmail, password: enteredPassword) { (result, error) in
+                if error != nil {
+                    self.errorLabel.text = error!.localizedDescription
+                } else {
+                    let newUID = result!.user.uid
+                    let data = self.getDataFromFirebase(newUID)
+                    if let first = data["firstName"], let last = data["lastName"] {
+                        UserController.theUser.createUser(first, last, enteredEmail, newUID)
+                    }
+//                    let db = Firestore.firestore()
+//                    let docRef = db.collection("users").document(result!.user.uid)
+//                    docRef.getDocument { (document, error) in
+//                        if let document = document, document.exists {
+//                            let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+//                            print("Document data: \(dataDescription)")
+//                        } else {
+//                            print("Document does not exist")
+//                        }
+//                    }
+                    // go to home screen
+                    self.goToHomeScreen()
+                   
+                }
+            }
         }
     }
+    
+    func saveDataToFirebase(_ payload: [String:String], _ uid: String) {
+        // Upload data
+        let db = Firestore.firestore()
+        var ref: DocumentReference? = nil
+        // Create a new document for the user
+        ref = db.collection("users").document(uid)
+        ref!.setData(payload, completion: { (error) in
+            if let error = error {
+                print("Error adding document: \(error)")
+            } else {
+                print("Document added with ID: \(ref!.documentID)")
+            }
+        })
+    }
+    
+    func getDataFromFirebase(_ uid: String) -> [String:String] {
+        var data = [String:String]()
+        let db = Firestore.firestore()
+        let docRef = db.collection("users").document(uid)
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                data = document.data() as! [String:String]
+            } else {
+                print("Document does not exist")
+            }
+        }
+        return data
+    }
+    
+    // MARK: - Helper
     
     func validateSignUpFields() -> String? {
         if firstNameField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
@@ -125,14 +190,14 @@ class InfoViewController: UIViewController {
             return "Please enter all the information"
         }
         
-        let enteredPassword = passwordField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-        if Helpers.checkPassword(enteredPassword) == false {
-            return "Password is not strong enough"
-        }
-        
         let enteredEmail = emailField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         if Helpers.isValidEmail(enteredEmail) == false {
             return "Please enter correct email fromat"
+        }
+        
+        let enteredPassword = passwordField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        if Helpers.checkPassword(enteredPassword) == false {
+            return "Password is not strong enough"
         }
         
         return nil
@@ -152,11 +217,22 @@ class InfoViewController: UIViewController {
         return nil
     }
     
+    func setupKeyboardAccessory() {
+        let toolbar = UIToolbar(frame: CGRect(origin: .zero, size: .init(width: view.frame.width, height: 30)))
+        let flexible = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let done = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissKeyboard))
+        toolbar.setItems([flexible, done], animated: false)
+        toolbar.sizeToFit()
+        firstNameField.inputAccessoryView = toolbar
+        lastNameField.inputAccessoryView = toolbar
+        emailField.inputAccessoryView = toolbar
+        passwordField.inputAccessoryView = toolbar
+    }
+    
     func goToHomeScreen() {
-        let home = storyboard?.instantiateViewController(withIdentifier: Constant.StoryBoardID.postsView) as? PostsTableViewController
+        let home = storyboard?.instantiateViewController(withIdentifier: Constant.StoryBoardID.appView)
         view.window?.rootViewController = home
         view.window?.makeKeyAndVisible()
-        
     }
 
 }

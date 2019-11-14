@@ -11,6 +11,7 @@ import Foundation
 struct Constant {
     struct StoryBoardID {
         static let postsView = "MyPosts"
+        static let appView = "MainApp"
         
     }
     
