@@ -12,7 +12,9 @@ struct Constant {
     struct StoryBoardID {
         static let postsView = "MyPosts"
         static let appView = "MainApp"
-        
+        static let composeView = "WritePostView"
+        static let loginView = "LoginView"
+        static let locationSearchView = "LocationSearchView"
     }
     
     struct Segues {

@@ -24,19 +24,42 @@ struct postParameters {
     var text: String
     var steps: String
     var isPublic: Bool
+    var isDraft: Bool
+    
+    init() {
+        time = Date()
+        type = Int16()
+        mood = Int16()
+        location = String()
+        weather = String()
+        text = String()
+        steps = String()
+        isPublic = false
+        isDraft = false
+    }
 }
 
 class PostController {
     static let postController = PostController()
     
     var posts: [Post]
+    var draft: Post?
     
     init() {
         // try to fetch a list of posts
         let context = DataManager.theManager.context
         let request = NSFetchRequest<Post>(entityName: "Post")
         do {
-            posts = try context.fetch(request)
+            let allPosts = try context.fetch(request)
+            var _posts = [Post]()
+            for aPost in allPosts {
+                if aPost.isDraft {
+                    self.draft = aPost
+                } else {
+                    _posts.append(aPost)
+                }
+            }
+            self.posts = _posts
         } catch {
             posts = [Post]()
         }
@@ -53,6 +76,7 @@ class PostController {
         post.text = configure.text
         post.steps = configure.steps
         post.isPublic = configure.isPublic
+        post.isDraft = false
         managedContext.insert(post)
         do {
             try managedContext.save()
@@ -83,10 +107,44 @@ class PostController {
         post.text = configure.text
         post.steps = configure.steps
         post.isPublic = configure.isPublic
+        post.isDraft = false
         do {
             try managedContext.save()
         } catch let error as NSError {
             print("Could not update post. \(error)")
         }
+    }
+    
+    // MARK: for draft
+    func createDraft(_ configure: postParameters) {
+        let managedContext = DataManager.theManager.context
+        let post = Post(context: managedContext)
+        post.time = configure.time
+        post.type = configure.type
+        post.mood = configure.mood
+        post.location = configure.location
+        post.weather = configure.weather
+        post.text = configure.text
+        post.steps = configure.steps
+        post.isPublic = configure.isPublic
+        post.isDraft = true
+        managedContext.insert(post)
+        do {
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Could not save post. \(error)")
+        }
+        self.draft = post
+    }
+    
+    func deleteDraft() {
+        // Make sure draft is not nil
+        guard self.draft != nil else {return}
+        // Delete draft from context
+        let managedContext = DataManager.theManager.context
+        managedContext.delete(self.draft!)
+        // Make pointer nil
+        self.draft = nil
+        
     }
 }

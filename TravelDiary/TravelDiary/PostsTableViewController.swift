@@ -10,6 +10,8 @@ import UIKit
 
 class PostsTableViewController: UITableViewController {
 
+    @IBOutlet weak var composeButton: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -86,5 +88,14 @@ class PostsTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    
+    // MARK: - Buttons
+    
+    @IBAction func composeButtonPressed(_ sender: Any) {
+        let composeNaviView = storyboard!.instantiateViewController(withIdentifier: Constant.StoryBoardID.composeView)
+        let composeView = composeNaviView.children[0] as! EditViewController
+        composeView.closureBlock =  {self.dismiss(animated: true, completion: nil)}
+        self.present(composeNaviView, animated: true, completion: nil)
+    }
+    
 }

@@ -32,6 +32,7 @@ class InfoViewController: UIViewController {
             firstNameField.isHidden = true
             lastNameField.isHidden = true
             actionButton.setTitle("Log in", for: .normal)
+            passwordField.placeholder = "Enter your password"
         default:
             break
         }
@@ -94,18 +95,6 @@ class InfoViewController: UIViewController {
                     ]
                     // Upload data
                     self.saveDataToFirebase(payload, newUID)
-//                    let db = Firestore.firestore()
-//                    var ref: DocumentReference? = nil
-//
-//                    // Create a new document for the user
-//                    ref = db.collection("users").document(newUID)
-//                    ref!.setData(payload, completion: { (error) in
-//                        if let error = error {
-//                            print("Error adding document: \(error)")
-//                        } else {
-//                            print("Document added with ID: \(ref!.documentID)")
-//                        }
-//                    })
                     // go to home screen
                     self.goToHomeScreen()
                     //Save the user info to local
@@ -133,19 +122,8 @@ class InfoViewController: UIViewController {
                     if let first = data["firstName"], let last = data["lastName"] {
                         UserController.theUser.createUser(first, last, enteredEmail, newUID)
                     }
-//                    let db = Firestore.firestore()
-//                    let docRef = db.collection("users").document(result!.user.uid)
-//                    docRef.getDocument { (document, error) in
-//                        if let document = document, document.exists {
-//                            let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-//                            print("Document data: \(dataDescription)")
-//                        } else {
-//                            print("Document does not exist")
-//                        }
-//                    }
                     // go to home screen
                     self.goToHomeScreen()
-                   
                 }
             }
         }
@@ -230,9 +208,11 @@ class InfoViewController: UIViewController {
     }
     
     func goToHomeScreen() {
+        let appDelegate = UIApplication.shared.delegate! as! AppDelegate
         let home = storyboard?.instantiateViewController(withIdentifier: Constant.StoryBoardID.appView)
-        view.window?.rootViewController = home
-        view.window?.makeKeyAndVisible()
+        appDelegate.window?.rootViewController = home
+        appDelegate.window?.makeKeyAndVisible()
+        self.view.removeFromSuperview()
     }
 
 }

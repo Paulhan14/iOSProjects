@@ -10,6 +10,8 @@
 		165A74AAD0D0A4EFC807317F /* Pods_TravelDiaryTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 236D2D51F803E6F281155E6A /* Pods_TravelDiaryTests.framework */; };
 		7558EF3A8C4680D530D076AC /* Pods_TravelDiary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4189C15F5AA3A3B15853F6D1 /* Pods_TravelDiary.framework */; };
 		DA20A98F237DF6AA0081DB72 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA20A98E237DF6AA0081DB72 /* DataManager.swift */; };
+		DA3386B62380A25700EBE722 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3386B52380A25700EBE722 /* TabViewController.swift */; };
+		DA3386B92380BF8900EBE722 /* LocationSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3386B82380BF8900EBE722 /* LocationSearchViewController.swift */; };
 		DA95BBAF2379090800880622 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA95BBAE2379090800880622 /* InfoViewController.swift */; };
 		DA95BBB1237911D400880622 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA95BBB0237911D400880622 /* Helpers.swift */; };
 		DA95BBB323791BE500880622 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA95BBB223791BE500880622 /* Constant.swift */; };
@@ -47,6 +49,8 @@
 		4189C15F5AA3A3B15853F6D1 /* Pods_TravelDiary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TravelDiary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B891CE737BB2309D8EDA5FB0 /* Pods-TravelDiaryTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelDiaryTests.debug.xcconfig"; path = "Target Support Files/Pods-TravelDiaryTests/Pods-TravelDiaryTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DA20A98E237DF6AA0081DB72 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		DA3386B52380A25700EBE722 /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
+		DA3386B82380BF8900EBE722 /* LocationSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchViewController.swift; sourceTree = "<group>"; };
 		DA95BBAE2379090800880622 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		DA95BBB0237911D400880622 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		DA95BBB223791BE500880622 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
@@ -112,6 +116,14 @@
 				2FF470A8028DB79C3ED2DA03 /* Pods-TravelDiaryTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		DA3386B72380BF6300EBE722 /* LocationSearch */ = {
+			isa = PBXGroup;
+			children = (
+				DA3386B82380BF8900EBE722 /* LocationSearchViewController.swift */,
+			);
+			name = LocationSearch;
 			sourceTree = "<group>";
 		};
 		DA981594237762430010B001 = {
@@ -180,6 +192,7 @@
 		DA9815CC237763CC0010B001 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				DA3386B72380BF6300EBE722 /* LocationSearch */,
 				DA9815CD23776D300010B001 /* PlazaTableViewController.swift */,
 				DA9815D123776D8F0010B001 /* PostsTableViewController.swift */,
 				DA9815D323776DB30010B001 /* CalendarViewController.swift */,
@@ -188,6 +201,7 @@
 				DA9815D523776DC30010B001 /* ProfileViewController.swift */,
 				DA9815D723776DD00010B001 /* EditViewController.swift */,
 				DA95BBAE2379090800880622 /* InfoViewController.swift */,
+				DA3386B52380A25700EBE722 /* TabViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -379,11 +393,13 @@
 				DA9815D223776D8F0010B001 /* PostsTableViewController.swift in Sources */,
 				DAA5F799237A575300C0AC52 /* PostController.swift in Sources */,
 				DA95BBAF2379090800880622 /* InfoViewController.swift in Sources */,
+				DA3386B62380A25700EBE722 /* TabViewController.swift in Sources */,
 				DAA5F79C237C5B3F00C0AC52 /* travelDiary.xcdatamodeld in Sources */,
 				DA9815DA237772C50010B001 /* LoginViewController.swift in Sources */,
 				DA9815A1237762430010B001 /* AppDelegate.swift in Sources */,
 				DA95BBB323791BE500880622 /* Constant.swift in Sources */,
 				DA9815D023776D4D0010B001 /* MapViewController.swift in Sources */,
+				DA3386B92380BF8900EBE722 /* LocationSearchViewController.swift in Sources */,
 				DAA5F797237A562D00C0AC52 /* UserController.swift in Sources */,
 				DA9815D823776DD00010B001 /* EditViewController.swift in Sources */,
 			);
