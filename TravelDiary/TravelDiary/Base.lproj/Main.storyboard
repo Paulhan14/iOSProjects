@@ -463,12 +463,18 @@
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="At" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qsa-Dh-wHa">
                                                                 <rect key="frame" x="59" y="0.0" width="19" height="24"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="19" id="TRG-8m-1Nk"/>
+                                                                </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                 <color key="textColor" red="0.36862745099999999" green="0.37647058820000001" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="17:04" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lfp-Aw-ukz">
                                                                 <rect key="frame" x="0.0" y="0.0" width="51" height="24"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="51" id="kpY-tm-dbN"/>
+                                                                </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -580,7 +586,7 @@
                                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="KUw-Yx-1vm">
                                                 <rect key="frame" x="0.0" y="100" width="414" height="180"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="180" id="l4m-D1-b2C"/>
+                                                    <constraint firstAttribute="height" constant="180" identifier="Height" id="l4m-D1-b2C"/>
                                                 </constraints>
                                             </mapView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qB1-mt-NYb" userLabel="Image Container">
@@ -643,9 +649,13 @@
                     <connections>
                         <outlet property="cancelButton" destination="Dhk-MD-wiK" id="s1a-7f-biQ"/>
                         <outlet property="doneButton" destination="oFR-EB-wL3" id="oC6-zg-AFa"/>
+                        <outlet property="editView" destination="cpr-G6-XYL" id="SAh-OG-WOn"/>
                         <outlet property="imagesView" destination="qB1-mt-NYb" id="Hhy-NU-ikU"/>
+                        <outlet property="imagesViewHeightConstraint" destination="H6V-RM-cky" id="ukS-AJ-xeO"/>
+                        <outlet property="infoView" destination="aAg-tq-2Vh" id="xg9-Mb-Ud6"/>
                         <outlet property="locationLabel" destination="d3F-kf-0ro" id="0eZ-Hz-JzU"/>
                         <outlet property="mapView" destination="KUw-Yx-1vm" id="koN-GH-ZBC"/>
+                        <outlet property="mapViewHeightConstraint" destination="l4m-D1-b2C" id="P4z-3n-mXL"/>
                         <outlet property="scrollView" destination="1I1-Eb-rVK" id="gNa-Mm-pWK"/>
                         <outlet property="stepImage" destination="C3u-zD-OXL" id="fcU-hC-a4L"/>
                         <outlet property="stepLabel" destination="tuX-YO-pAu" id="dFu-0S-Dtl"/>
@@ -668,7 +678,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uPV-vY-HTg">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <connections>
                                     <outlet property="delegate" destination="a9c-q7-EEj" id="fYr-H0-PUd"/>
                                 </connections>
@@ -678,7 +688,7 @@
                         <constraints>
                             <constraint firstItem="uPV-vY-HTg" firstAttribute="top" secondItem="RbP-0d-VHK" secondAttribute="top" id="40u-cB-qbC"/>
                             <constraint firstItem="uPV-vY-HTg" firstAttribute="leading" secondItem="RbP-0d-VHK" secondAttribute="leading" id="MU5-ir-ONU"/>
-                            <constraint firstItem="RbP-0d-VHK" firstAttribute="bottom" secondItem="uPV-vY-HTg" secondAttribute="bottom" id="YHN-rD-P6h"/>
+                            <constraint firstAttribute="bottom" secondItem="uPV-vY-HTg" secondAttribute="bottom" id="YHN-rD-P6h"/>
                             <constraint firstItem="RbP-0d-VHK" firstAttribute="trailing" secondItem="uPV-vY-HTg" secondAttribute="trailing" id="nmo-02-7VI"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="RbP-0d-VHK"/>
@@ -698,6 +708,50 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D6R-YH-RgH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-552" y="1657"/>
+        </scene>
+        <!--Location Search Table View Controller-->
+        <scene sceneID="jP1-cJ-QGg">
+            <objects>
+                <tableViewController storyboardIdentifier="LocationSearchTable" id="sOy-2S-3If" customClass="LocationSearchTableViewController" customModule="TravelDiary" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="SC1-Gx-CCv">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LocationCell" textLabel="mjq-OU-XDg" detailTextLabel="4ka-av-q63" style="IBUITableViewCellStyleSubtitle" id="KfN-hp-Ysp">
+                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KfN-hp-Ysp" id="pLZ-1e-pfp">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mjq-OU-XDg">
+                                            <rect key="frame" x="20" y="5" width="33.5" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4ka-av-q63">
+                                            <rect key="frame" x="20" y="25.5" width="44" height="14.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="sOy-2S-3If" id="whW-Qh-P4F"/>
+                            <outlet property="delegate" destination="sOy-2S-3If" id="hQg-re-8tu"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="O6O-lP-0Kh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="290" y="1657"/>
         </scene>
         <!--Profile-->
         <scene sceneID="jwV-fd-EkX">

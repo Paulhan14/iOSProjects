@@ -9,15 +9,23 @@
 import UIKit
 import MapKit
 
-class LocationSearchViewController: UIViewController, MKMapViewDelegate {
+protocol HandleMapSearch {
+    func dropPinZoomIn(placemark:MKPlacemark)
+}
+
+class LocationSearchViewController: UIViewController{
     let locationManager = CLLocationManager()
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     
-    var closureBlock : (() -> Void)?
+    var resultSearchController = UISearchController(searchResultsController: nil)
+    var selectedPin:MKPlacemark? = nil
+    
+    var closureBlock : ((_ location: MKPlacemark?) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = "Location Search"
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
@@ -27,9 +35,7 @@ class LocationSearchViewController: UIViewController, MKMapViewDelegate {
         }
         //Zoom to user location
         if let userLocation = locationManager.location?.coordinate {
-            let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-            let viewRegion = MKCoordinateRegion(center: userLocation, span: span)
-            mapView.setRegion(viewRegion, animated: true)
+            mapFocusOn(userLocation)
         }
         
         DispatchQueue.main.async {
@@ -39,6 +45,19 @@ class LocationSearchViewController: UIViewController, MKMapViewDelegate {
         mapView.delegate = self
         
         self.navigationItem.rightBarButtonItem = MKUserTrackingBarButtonItem(mapView: mapView)
+        let locationSearchTable = storyboard?.instantiateViewController(withIdentifier: Constant.StoryBoardID.locationSearchTable) as! LocationSearchTableViewController
+        locationSearchTable.mapView = self.mapView
+        locationSearchTable.handleMapSearchDelegate = self
+        resultSearchController = UISearchController(searchResultsController: locationSearchTable)
+        resultSearchController.searchResultsUpdater = locationSearchTable
+        resultSearchController.searchBar.sizeToFit()
+        resultSearchController.searchBar.placeholder = "Search for a place"
+        resultSearchController.searchBar.delegate = self
+        
+        self.navigationItem.searchController = resultSearchController
+        resultSearchController.hidesNavigationBarDuringPresentation = false
+        resultSearchController.dimsBackgroundDuringPresentation = true
+        self.definesPresentationContext = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -56,22 +75,19 @@ class LocationSearchViewController: UIViewController, MKMapViewDelegate {
             }
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     // MARK: - Button Handler
     @IBAction func cancelPressed(_ sender: Any) {
         if let block = self.closureBlock {
-            block()
+            block(nil)
         }
+    }
+    
+    // MARK: - Helper
+    func mapFocusOn(_ location: CLLocationCoordinate2D) {
+        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        let region = MKCoordinateRegion(center: location, span: span)
+        self.mapView.setRegion(region, animated: true)
     }
 }
 
@@ -89,13 +105,64 @@ extension LocationSearchViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
-            let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-            let region = MKCoordinateRegion(center: location.coordinate, span: span)
-            mapView.setRegion(region, animated: true)
+            mapFocusOn(location.coordinate)
         }
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Map error\(error)")
+    }
+}
+
+extension LocationSearchViewController: UISearchBarDelegate {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar)
+    {
+        searchBar.setShowsCancelButton(true, animated: true)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar)
+    {
+        searchBar.setShowsCancelButton(false, animated: true)
+        searchBar.text = String()             
+        searchBar.resignFirstResponder()
+    }
+}
+
+extension LocationSearchViewController: HandleMapSearch {
+    func dropPinZoomIn(placemark:MKPlacemark){
+        selectedPin = placemark
+        mapView.removeAnnotations(mapView.annotations)
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = placemark.coordinate
+        annotation.title = placemark.name
+        if let city = placemark.locality,let state = placemark.administrativeArea {
+            annotation.subtitle = "\(city) \(state)"
+        }
+        mapView.addAnnotation(annotation)
+        mapFocusOn(placemark.coordinate)
+    }
+}
+
+extension LocationSearchViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation is MKUserLocation {
+            return nil
+        }
+        let reuseId = "SearchResultPin"
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKMarkerAnnotationView
+        pinView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+        pinView?.canShowCallout = true
+        let button = UIButton(frame: CGRect(origin: .zero, size: CGSize(width: 30, height: 30)))
+        button.setBackgroundImage(UIImage(named: "add"), for: .normal)
+        button.addTarget(self, action: #selector(addLocation), for: .touchUpInside)
+        pinView?.leftCalloutAccessoryView = button
+        return pinView
+    }
+    
+    @objc func addLocation() {
+        guard self.selectedPin != nil else { return }
+        if let block = closureBlock {
+            block(self.selectedPin!)
+        }
     }
 }

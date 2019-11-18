@@ -20,6 +20,8 @@ struct postParameters {
     var type: Int16
     var mood: Int16
     var location: String
+    var longitude: Double
+    var latitude: Double
     var weather: String
     var text: String
     var steps: String
@@ -31,6 +33,8 @@ struct postParameters {
         type = Int16()
         mood = Int16()
         location = String()
+        longitude = Double()
+        latitude = Double()
         weather = String()
         text = String()
         steps = String()
@@ -53,6 +57,7 @@ class PostController {
             let allPosts = try context.fetch(request)
             var _posts = [Post]()
             for aPost in allPosts {
+                // If it is a draft
                 if aPost.isDraft {
                     self.draft = aPost
                 } else {
@@ -72,6 +77,8 @@ class PostController {
         post.type = configure.type
         post.mood = configure.mood
         post.location = configure.location
+        post.longitude = configure.longitude
+        post.latitude = configure.latitude
         post.weather = configure.weather
         post.text = configure.text
         post.steps = configure.steps
@@ -103,6 +110,8 @@ class PostController {
         post.type = configure.type
         post.mood = configure.mood
         post.location = configure.location
+        post.longitude = configure.longitude
+        post.latitude = configure.latitude
         post.weather = configure.weather
         post.text = configure.text
         post.steps = configure.steps
@@ -123,6 +132,8 @@ class PostController {
         post.type = configure.type
         post.mood = configure.mood
         post.location = configure.location
+        post.longitude = configure.longitude
+        post.latitude = configure.latitude
         post.weather = configure.weather
         post.text = configure.text
         post.steps = configure.steps
@@ -142,7 +153,23 @@ class PostController {
         guard self.draft != nil else {return}
         // Delete draft from context
         let managedContext = DataManager.theManager.context
-        managedContext.delete(self.draft!)
+        let request = NSFetchRequest<Post>(entityName: "Post")
+        do {
+            let allPosts = try managedContext.fetch(request)
+            for aPost in allPosts {
+                // If it is a draft
+                if aPost.isDraft {
+                    managedContext.delete(aPost)
+                }
+            }
+        } catch {
+            print("Error deleting")
+        }
+        do {
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Could not save post. \(error)")
+        }
         // Make pointer nil
         self.draft = nil
         

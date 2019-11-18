@@ -15,10 +15,15 @@ struct Constant {
         static let composeView = "WritePostView"
         static let loginView = "LoginView"
         static let locationSearchView = "LocationSearchView"
+        static let locationSearchTable = "LocationSearchTable"
     }
     
     struct Segues {
         static let signup = "SignupSegue"
         static let login = "LoginSegue"
+    }
+    
+    struct CellIdentifier {
+        static let locationCell = "LocationCell"
     }
 }

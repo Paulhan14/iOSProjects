@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
 class EditViewController: UIViewController {
 
@@ -20,29 +21,30 @@ class EditViewController: UIViewController {
     var controlToolBar: UIToolbar?
     var controlTooBarContainer: UIView?
     // MARK: - Info Views
+    @IBOutlet weak var infoView: UIView!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var weatherLabel: UILabel!
     @IBOutlet weak var weatherImage: UIImageView!
     @IBOutlet weak var stepLabel: UILabel!
     @IBOutlet weak var stepImage: UIImageView!
+    @IBOutlet weak var mapViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var imagesViewHeightConstraint: NSLayoutConstraint!
     // MARK: - Support Views
+    @IBOutlet weak var editView: UIView!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var imagesView: UIView!
-    
-    
     
     var closureBlock : (() -> Void)?
     var editingPost = postParameters()
     var draft = PostController.postController.draft
     
+    var placeSelected: MKPlacemark?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        if draft != nil {
-            textField.text = draft?.text
-        }
-        setupKeyboardAccessory()
         loadSetup()
+        setupKeyboardAccessory()
         textField.inputAccessoryView = controlToolBar
         let center = NotificationCenter.default
         center.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -106,17 +108,55 @@ class EditViewController: UIViewController {
         let searchNavi = storyboard.instantiateViewController(
             withIdentifier: Constant.StoryBoardID.locationSearchView)
         let searchView = searchNavi.children.first! as! LocationSearchViewController
-        searchView.closureBlock = {self.dismiss(animated: true, completion: nil)}
-        searchNavi.modalPresentationStyle = .overFullScreen
-        self.present(searchNavi, animated: true) {
-            //
+        searchView.closureBlock = { location in
+            self.dismiss(animated: true, completion: nil)
+            if location != nil {
+                self.placeSelected = location
+                self.locationLabel.text = location!.name
+                self.dropPinFor(location!)
+                self.locationLabel.isHidden = false
+                if self.mapViewHeightConstraint.constant == 0.0 {
+                    self.mapViewHeightConstraint.constant = 180.0
+                    self.editView.layoutIfNeeded()
+                }
+            }
         }
-        
+        searchNavi.modalPresentationStyle = .overFullScreen
+        self.present(searchNavi, animated: true) {}
     }
     
     // MARK: - Helper
+    func loadSetup() {
+        if draft != nil {
+            if draft!.text == "Write something about your day..." {
+                self.textField.textColor = .gray
+            }
+            textField.text = draft!.text
+            locationLabel.text = draft!.location
+            let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(floatLiteral: draft!.latitude), longitude: CLLocationDegrees(floatLiteral: draft!.longitude))
+            self.placeSelected = MKPlacemark(coordinate: coordinate)
+            self.dropPinFor(self.placeSelected!)
+        } else {
+            self.textField.text = "Write something about your day..."
+            self.textField.textColor = .gray
+            self.locationLabel.text = ""
+            self.locationLabel.isHidden = true
+            self.mapViewHeightConstraint.constant = 0.0
+            self.imagesViewHeightConstraint.constant = 0.0
+            self.editView.layoutIfNeeded()
+        }
+        self.mapView.delegate = self
+    }
+    
+    // Construct configuration for this post
     func prepareForClosing() {
         editingPost.text = textField.text
+        // If user added a location, record the data
+        if placeSelected != nil {
+            editingPost.location = placeSelected!.name ?? ""
+            editingPost.longitude = Double(placeSelected!.coordinate.longitude)
+            editingPost.latitude = Double(placeSelected!.coordinate.latitude)
+        }
     }
     
     func setupKeyboardAccessory() {
@@ -136,11 +176,6 @@ class EditViewController: UIViewController {
         controlToolBar!.backgroundColor = .orange
     }
     
-    func loadSetup() {
-        self.textField.text = "Write something about your day..."
-        self.textField.textColor = .gray
-    }
-    
     override var canBecomeFirstResponder: Bool { get { return true } }
     override var inputAccessoryView: UIView? {
         get {
@@ -156,6 +191,8 @@ class EditViewController: UIViewController {
             return self.controlTooBarContainer
         }
     }
+    
+    
 }
 
 extension EditViewController {
@@ -175,5 +212,38 @@ extension EditViewController {
         self.scrollView.contentInset = UIEdgeInsets.zero
         self.scrollView.scrollIndicatorInsets = UIEdgeInsets.zero
         
+    }
+}
+
+extension EditViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation is MKUserLocation {
+            return nil
+        }
+        let reuseId = "LocationPin"
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKMarkerAnnotationView
+        pinView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+        pinView?.canShowCallout = false
+        return pinView
+    }
+    
+    // Map helper functions
+    func mapFocusOn(_ location: CLLocationCoordinate2D) {
+        let span = MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03)
+        let region = MKCoordinateRegion(center: location, span: span)
+        self.mapView.setRegion(region, animated: true)
+    }
+    
+    func dropPinFor(_ placemark: MKPlacemark) {
+        guard self.placeSelected != nil else { return }
+        mapView.removeAnnotations(mapView.annotations)
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = placemark.coordinate
+        annotation.title = locationLabel.text
+        if let city = placemark.locality,let state = placemark.administrativeArea {
+            annotation.subtitle = "\(city) \(state)"
+        }
+        mapView.addAnnotation(annotation)
+        mapFocusOn(placemark.coordinate)
     }
 }

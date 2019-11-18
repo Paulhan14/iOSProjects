@@ -12,6 +12,7 @@
 		DA20A98F237DF6AA0081DB72 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA20A98E237DF6AA0081DB72 /* DataManager.swift */; };
 		DA3386B62380A25700EBE722 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3386B52380A25700EBE722 /* TabViewController.swift */; };
 		DA3386B92380BF8900EBE722 /* LocationSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3386B82380BF8900EBE722 /* LocationSearchViewController.swift */; };
+		DA3386BB2381160000EBE722 /* LocationSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3386BA2381160000EBE722 /* LocationSearchTableViewController.swift */; };
 		DA95BBAF2379090800880622 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA95BBAE2379090800880622 /* InfoViewController.swift */; };
 		DA95BBB1237911D400880622 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA95BBB0237911D400880622 /* Helpers.swift */; };
 		DA95BBB323791BE500880622 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA95BBB223791BE500880622 /* Constant.swift */; };
@@ -51,6 +52,7 @@
 		DA20A98E237DF6AA0081DB72 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		DA3386B52380A25700EBE722 /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
 		DA3386B82380BF8900EBE722 /* LocationSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchViewController.swift; sourceTree = "<group>"; };
+		DA3386BA2381160000EBE722 /* LocationSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTableViewController.swift; sourceTree = "<group>"; };
 		DA95BBAE2379090800880622 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		DA95BBB0237911D400880622 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		DA95BBB223791BE500880622 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				DA3386B82380BF8900EBE722 /* LocationSearchViewController.swift */,
+				DA3386BA2381160000EBE722 /* LocationSearchTableViewController.swift */,
 			);
 			name = LocationSearch;
 			sourceTree = "<group>";
@@ -389,6 +392,7 @@
 				DA20A98F237DF6AA0081DB72 /* DataManager.swift in Sources */,
 				DA9815D423776DB30010B001 /* CalendarViewController.swift in Sources */,
 				DA9815CE23776D300010B001 /* PlazaTableViewController.swift in Sources */,
+				DA3386BB2381160000EBE722 /* LocationSearchTableViewController.swift in Sources */,
 				DA95BBB1237911D400880622 /* Helpers.swift in Sources */,
 				DA9815D223776D8F0010B001 /* PostsTableViewController.swift in Sources */,
 				DAA5F799237A575300C0AC52 /* PostController.swift in Sources */,
