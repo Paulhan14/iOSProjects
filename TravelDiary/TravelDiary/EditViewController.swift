@@ -8,7 +8,9 @@
 
 import UIKit
 import MapKit
+import HealthKit
 import CoreLocation
+import CoreData
 
 class EditViewController: UIViewController {
 
@@ -33,16 +35,25 @@ class EditViewController: UIViewController {
     // MARK: - Support Views
     @IBOutlet weak var editView: UIView!
     @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var imagesView: UIView!
+    @IBOutlet weak var imagesContainerView: UIView!
+    @IBOutlet weak var selectedImageView: UIImageView!
     
     var closureBlock : (() -> Void)?
     var editingPost = postParameters()
     var draft = PostController.postController.draft
     
     var placeSelected: MKPlacemark?
+    let healthStore = HKHealthStore()
+    var stepCountInfo = String()
+    
+    let picker = UIImagePickerController()
+    let imageManager = ImageManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        picker.delegate = self
+        picker.sourceType = .photoLibrary
+        picker.allowsEditing = false
         loadSetup()
         setupKeyboardAccessory()
         textField.inputAccessoryView = controlToolBar
@@ -125,22 +136,92 @@ class EditViewController: UIViewController {
         self.present(searchNavi, animated: true) {}
     }
     
+    @objc func addSteps() {
+        if HKHealthStore.isHealthDataAvailable() {
+            let status = healthStore.authorizationStatus(for: HKObjectType.quantityType(forIdentifier: .stepCount)!)
+            switch status {
+            case .sharingAuthorized:
+                let stepsQuantityType = HKQuantityType.quantityType(forIdentifier: .stepCount)!
+                let now = Date()
+                let startOfDay = Calendar.current.startOfDay(for: now)
+                let predicate = HKQuery.predicateForSamples(withStart: startOfDay, end: now, options: .strictStartDate)
+                let query = HKStatisticsQuery(quantityType: stepsQuantityType, quantitySamplePredicate: predicate, options: .cumulativeSum) { (query, result, error) in
+                    guard let result = result else {
+                        print("\(String(describing: error?.localizedDescription)) ")
+                        return
+                    }
+                    if let count = result.sumQuantity() {
+                        let value = count.doubleValue(for: .count())
+                        self.stepCountInfo = String(Int(value))
+                    }
+                }
+                self.healthStore.execute(query)
+                self.stepLabel.text = self.stepCountInfo
+            case .notDetermined:
+                self.setupHealhKitData()
+            case .sharingDenied:
+                break
+            default:
+                break
+            }
+        }
+    }
+    
+    @objc func addImage() {
+        let alertController = UIAlertController(title: "Add a photo", message: "", preferredStyle: .actionSheet)
+        let actionSelect = UIAlertAction(title: "Select Form Library", style: .default) { (action) in
+            let imagePicker = UIImagePickerController()
+            if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum){
+                imagePicker.delegate = self
+                imagePicker.sourceType = .savedPhotosAlbum
+                imagePicker.allowsEditing = false
+                self.present(imagePicker, animated: true, completion: nil)
+            }
+        }
+        alertController.addAction(actionSelect)
+        let actionCancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(actionCancel)
+        if let presenter = alertController.popoverPresentationController {
+            presenter.sourceView = self.view
+            presenter.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+        }
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     // MARK: - Helper
     func loadSetup() {
+        let date = Date()
+        let format = DateFormatter()
+        format.dateFormat = "HH:mm"
+        self.timeLabel.text = format.string(from: date)
         if draft != nil {
             if draft!.text == "Write something about your day..." {
                 self.textField.textColor = .gray
             }
             textField.text = draft!.text
             locationLabel.text = draft!.location
-            let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(floatLiteral: draft!.latitude), longitude: CLLocationDegrees(floatLiteral: draft!.longitude))
-            self.placeSelected = MKPlacemark(coordinate: coordinate)
-            self.dropPinFor(self.placeSelected!)
+            if draft!.longitude != 0, draft!.latitude != 0 {
+                let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(floatLiteral: draft!.latitude), longitude: CLLocationDegrees(floatLiteral: draft!.longitude))
+                self.placeSelected = MKPlacemark(coordinate: coordinate)
+                self.dropPinFor(self.placeSelected!)
+            } else {
+                self.mapViewHeightConstraint.constant = 0.0
+            }
+            if draft!.image != nil {
+                let image = imageManager.convertToImage(data: draft!.image!)!
+                self.selectedImageView.image = image
+                self.imagesViewHeightConstraint.constant = 180.0
+            } else {
+                self.imagesViewHeightConstraint.constant = 0.0
+            }
+            
+            self.stepLabel.text = draft!.steps
         } else {
             self.textField.text = "Write something about your day..."
             self.textField.textColor = .gray
             self.locationLabel.text = ""
             self.locationLabel.isHidden = true
+            self.stepLabel.text = ""
             self.mapViewHeightConstraint.constant = 0.0
             self.imagesViewHeightConstraint.constant = 0.0
             self.editView.layoutIfNeeded()
@@ -157,6 +238,11 @@ class EditViewController: UIViewController {
             editingPost.longitude = Double(placeSelected!.coordinate.longitude)
             editingPost.latitude = Double(placeSelected!.coordinate.latitude)
         }
+        if selectedImageView.image != nil {
+            editingPost.image = imageManager.convertToData(image: selectedImageView.image!)!
+        }
+        editingPost.steps = stepLabel.text ?? ""
+        editingPost.time = Date()
     }
     
     func setupKeyboardAccessory() {
@@ -167,9 +253,9 @@ class EditViewController: UIViewController {
             flexibles.append(flexible)
         }
         let place = UIBarButtonItem(title: "Place", style: .plain, target: self, action: #selector(openLocationSearch))
-        let photo = UIBarButtonItem(title: "Photo", style: .plain, target: self, action: nil)
+        let photo = UIBarButtonItem(title: "Photo", style: .plain, target: self, action: #selector(addImage))
         let weather = UIBarButtonItem(title: "Weather", style: .plain, target: nil, action: nil)
-        let steps = UIBarButtonItem(title: "Steps", style: .plain, target: nil, action: nil)
+        let steps = UIBarButtonItem(title: "Steps", style: .plain, target: self, action: #selector(addSteps))
         let key = UIBarButtonItem(title: "V", style: .plain, target: self, action: #selector(dismissKeyboard))
         controlToolBar!.setItems([flexibles[0], place, flexibles[1], photo, flexibles[2], weather, flexibles[3], steps, flexibles[4], key, flexibles[5]], animated: false)
         controlToolBar!.sizeToFit()
@@ -192,7 +278,17 @@ class EditViewController: UIViewController {
         }
     }
     
-    
+    func setupHealhKitData() {
+        if HKHealthStore.isHealthDataAvailable() {
+            let stepCount = Set([HKObjectType.quantityType(forIdentifier: .stepCount)!])
+            healthStore.requestAuthorization(toShare: stepCount, read: stepCount) { (success, error) in
+                if !success {
+                    print("Error reading health data: \(String(describing: error))")
+                    return
+                }
+            }
+        }
+    }
 }
 
 extension EditViewController {
@@ -229,7 +325,7 @@ extension EditViewController: MKMapViewDelegate {
     
     // Map helper functions
     func mapFocusOn(_ location: CLLocationCoordinate2D) {
-        let span = MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03)
+        let span = MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
         let region = MKCoordinateRegion(center: location, span: span)
         self.mapView.setRegion(region, animated: true)
     }
@@ -245,5 +341,16 @@ extension EditViewController: MKMapViewDelegate {
         }
         mapView.addAnnotation(annotation)
         mapFocusOn(placemark.coordinate)
+    }
+}
+
+extension EditViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            self.imagesViewHeightConstraint.constant = 180.0
+            self.selectedImageView.image = image
+            self.selectedImageView.contentMode = .scaleAspectFit
+        }
+        self.dismiss(animated: true, completion: nil)
     }
 }

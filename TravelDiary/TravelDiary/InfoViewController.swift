@@ -14,14 +14,15 @@ import FirebaseFirestore
 class InfoViewController: UIViewController {
 
     // MARK: - UI
-    @IBOutlet weak var firstNameField: UITextField!
-    @IBOutlet weak var lastNameField: UITextField!
-    @IBOutlet weak var emailField: UITextField!
-    @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var firstNameField: LoginTextField!
+    @IBOutlet weak var lastNameField: LoginTextField!
+    @IBOutlet weak var emailField: LoginTextField!
+    @IBOutlet weak var passwordField: LoginTextField!
     @IBOutlet weak var actionButton: UIButton!
     @IBOutlet weak var errorLabel: UILabel!
     // MARK: variable
     var parentSegue: String?
+    var firebaseManager = FirebaseManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,7 +95,8 @@ class InfoViewController: UIViewController {
                         "uid" : newUID
                     ]
                     // Upload data
-                    self.saveDataToFirebase(payload, newUID)
+//                    self.saveDataToFirebase(payload, newUID)
+                    self.firebaseManager.saveUserDataToFirebase(payload, newUID)
                     // go to home screen
                     self.goToHomeScreen()
                     //Save the user info to local
@@ -118,7 +120,8 @@ class InfoViewController: UIViewController {
                     self.errorLabel.text = error!.localizedDescription
                 } else {
                     let newUID = result!.user.uid
-                    let data = self.getDataFromFirebase(newUID)
+//                    let data = self.getDataFromFirebase(newUID)
+                    let data = self.firebaseManager.getUserDataFromFirebase(newUID)
                     if let first = data["firstName"], let last = data["lastName"] {
                         UserController.theUser.createUser(first, last, enteredEmail, newUID)
                     }
@@ -127,35 +130,6 @@ class InfoViewController: UIViewController {
                 }
             }
         }
-    }
-    
-    func saveDataToFirebase(_ payload: [String:String], _ uid: String) {
-        // Upload data
-        let db = Firestore.firestore()
-        var ref: DocumentReference? = nil
-        // Create a new document for the user
-        ref = db.collection("users").document(uid)
-        ref!.setData(payload, completion: { (error) in
-            if let error = error {
-                print("Error adding document: \(error)")
-            } else {
-                print("Document added with ID: \(ref!.documentID)")
-            }
-        })
-    }
-    
-    func getDataFromFirebase(_ uid: String) -> [String:String] {
-        var data = [String:String]()
-        let db = Firestore.firestore()
-        let docRef = db.collection("users").document(uid)
-        docRef.getDocument { (document, error) in
-            if let document = document, document.exists {
-                data = document.data() as! [String:String]
-            } else {
-                print("Document does not exist")
-            }
-        }
-        return data
     }
     
     // MARK: - Helper

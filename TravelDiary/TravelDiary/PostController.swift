@@ -25,6 +25,7 @@ struct postParameters {
     var weather: String
     var text: String
     var steps: String
+    var image: Data
     var isPublic: Bool
     var isDraft: Bool
     
@@ -37,6 +38,7 @@ struct postParameters {
         latitude = Double()
         weather = String()
         text = String()
+        image = Data()
         steps = String()
         isPublic = false
         isDraft = false
@@ -81,6 +83,7 @@ class PostController {
         post.latitude = configure.latitude
         post.weather = configure.weather
         post.text = configure.text
+        post.image = configure.image
         post.steps = configure.steps
         post.isPublic = configure.isPublic
         post.isDraft = false
@@ -114,6 +117,7 @@ class PostController {
         post.latitude = configure.latitude
         post.weather = configure.weather
         post.text = configure.text
+        post.image = configure.image
         post.steps = configure.steps
         post.isPublic = configure.isPublic
         post.isDraft = false
@@ -136,6 +140,7 @@ class PostController {
         post.latitude = configure.latitude
         post.weather = configure.weather
         post.text = configure.text
+        post.image = configure.image
         post.steps = configure.steps
         post.isPublic = configure.isPublic
         post.isDraft = true

@@ -13,6 +13,11 @@
 		DA3386B62380A25700EBE722 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3386B52380A25700EBE722 /* TabViewController.swift */; };
 		DA3386B92380BF8900EBE722 /* LocationSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3386B82380BF8900EBE722 /* LocationSearchViewController.swift */; };
 		DA3386BB2381160000EBE722 /* LocationSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3386BA2381160000EBE722 /* LocationSearchTableViewController.swift */; };
+		DA3386BD2383566700EBE722 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA3386BC2383566700EBE722 /* HealthKit.framework */; };
+		DA3386C023849FFB00EBE722 /* LoginTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3386BF23849FFB00EBE722 /* LoginTextField.swift */; };
+		DA3386C22384A08000EBE722 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3386C12384A08000EBE722 /* UIButton.swift */; };
+		DA3386C42384A12A00EBE722 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3386C32384A12A00EBE722 /* FirebaseManager.swift */; };
+		DA4366492384B30700AA0821 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4366482384B30700AA0821 /* ImageManager.swift */; };
 		DA95BBAF2379090800880622 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA95BBAE2379090800880622 /* InfoViewController.swift */; };
 		DA95BBB1237911D400880622 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA95BBB0237911D400880622 /* Helpers.swift */; };
 		DA95BBB323791BE500880622 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA95BBB223791BE500880622 /* Constant.swift */; };
@@ -53,6 +58,12 @@
 		DA3386B52380A25700EBE722 /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
 		DA3386B82380BF8900EBE722 /* LocationSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchViewController.swift; sourceTree = "<group>"; };
 		DA3386BA2381160000EBE722 /* LocationSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTableViewController.swift; sourceTree = "<group>"; };
+		DA3386BC2383566700EBE722 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		DA3386BE2383566700EBE722 /* TravelDiary.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TravelDiary.entitlements; sourceTree = "<group>"; };
+		DA3386BF23849FFB00EBE722 /* LoginTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextField.swift; sourceTree = "<group>"; };
+		DA3386C12384A08000EBE722 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
+		DA3386C32384A12A00EBE722 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		DA4366482384B30700AA0821 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		DA95BBAE2379090800880622 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		DA95BBB0237911D400880622 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		DA95BBB223791BE500880622 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
@@ -86,6 +97,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7558EF3A8C4680D530D076AC /* Pods_TravelDiary.framework in Frameworks */,
+				DA3386BD2383566700EBE722 /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,6 +115,7 @@
 		536D9DC7CCF7D23D2363216E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DA3386BC2383566700EBE722 /* HealthKit.framework */,
 				4189C15F5AA3A3B15853F6D1 /* Pods_TravelDiary.framework */,
 				236D2D51F803E6F281155E6A /* Pods_TravelDiaryTests.framework */,
 			);
@@ -129,6 +142,14 @@
 			name = LocationSearch;
 			sourceTree = "<group>";
 		};
+		DA3386C52384A25400EBE722 /* Login&Signup */ = {
+			isa = PBXGroup;
+			children = (
+				DA95BBAE2379090800880622 /* InfoViewController.swift */,
+			);
+			name = "Login&Signup";
+			sourceTree = "<group>";
+		};
 		DA981594237762430010B001 = {
 			isa = PBXGroup;
 			children = (
@@ -152,6 +173,7 @@
 		DA98159F237762430010B001 /* TravelDiary */ = {
 			isa = PBXGroup;
 			children = (
+				DA3386BE2383566700EBE722 /* TravelDiary.entitlements */,
 				DA9815CC237763CC0010B001 /* Controller */,
 				DA9815C6237762EB0010B001 /* View */,
 				DA9815C3237762B10010B001 /* Model */,
@@ -188,6 +210,8 @@
 		DA9815C6237762EB0010B001 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				DA3386BF23849FFB00EBE722 /* LoginTextField.swift */,
+				DA3386C12384A08000EBE722 /* UIButton.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -195,6 +219,7 @@
 		DA9815CC237763CC0010B001 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				DA3386C52384A25400EBE722 /* Login&Signup */,
 				DA3386B72380BF6300EBE722 /* LocationSearch */,
 				DA9815CD23776D300010B001 /* PlazaTableViewController.swift */,
 				DA9815D123776D8F0010B001 /* PostsTableViewController.swift */,
@@ -203,7 +228,6 @@
 				DA9815D9237772C50010B001 /* LoginViewController.swift */,
 				DA9815D523776DC30010B001 /* ProfileViewController.swift */,
 				DA9815D723776DD00010B001 /* EditViewController.swift */,
-				DA95BBAE2379090800880622 /* InfoViewController.swift */,
 				DA3386B52380A25700EBE722 /* TabViewController.swift */,
 			);
 			name = Controller;
@@ -215,6 +239,8 @@
 				DA95BBB223791BE500880622 /* Constant.swift */,
 				DA95BBB0237911D400880622 /* Helpers.swift */,
 				DAA5F79A237C5B3F00C0AC52 /* travelDiary.xcdatamodeld */,
+				DA3386C32384A12A00EBE722 /* FirebaseManager.swift */,
+				DA4366482384B30700AA0821 /* ImageManager.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -272,6 +298,11 @@
 				TargetAttributes = {
 					DA98159C237762430010B001 = {
 						CreatedOnToolsVersion = 10.3;
+						SystemCapabilities = {
+							com.apple.HealthKit = {
+								enabled = 1;
+							};
+						};
 					};
 					DA9815B2237762440010B001 = {
 						CreatedOnToolsVersion = 10.3;
@@ -397,15 +428,19 @@
 				DA9815D223776D8F0010B001 /* PostsTableViewController.swift in Sources */,
 				DAA5F799237A575300C0AC52 /* PostController.swift in Sources */,
 				DA95BBAF2379090800880622 /* InfoViewController.swift in Sources */,
+				DA4366492384B30700AA0821 /* ImageManager.swift in Sources */,
+				DA3386C42384A12A00EBE722 /* FirebaseManager.swift in Sources */,
 				DA3386B62380A25700EBE722 /* TabViewController.swift in Sources */,
 				DAA5F79C237C5B3F00C0AC52 /* travelDiary.xcdatamodeld in Sources */,
 				DA9815DA237772C50010B001 /* LoginViewController.swift in Sources */,
 				DA9815A1237762430010B001 /* AppDelegate.swift in Sources */,
 				DA95BBB323791BE500880622 /* Constant.swift in Sources */,
 				DA9815D023776D4D0010B001 /* MapViewController.swift in Sources */,
+				DA3386C22384A08000EBE722 /* UIButton.swift in Sources */,
 				DA3386B92380BF8900EBE722 /* LocationSearchViewController.swift in Sources */,
 				DAA5F797237A562D00C0AC52 /* UserController.swift in Sources */,
 				DA9815D823776DD00010B001 /* EditViewController.swift in Sources */,
+				DA3386C023849FFB00EBE722 /* LoginTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -568,7 +603,9 @@
 			baseConfigurationReference = EA80EFB42E1B8384EA4A042D /* Pods-TravelDiary.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TravelDiary/TravelDiary.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HZW2XLNU57;
 				INFOPLIST_FILE = TravelDiary/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -586,7 +623,9 @@
 			baseConfigurationReference = E227007B686D84DB9210E08D /* Pods-TravelDiary.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TravelDiary/TravelDiary.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HZW2XLNU57;
 				INFOPLIST_FILE = TravelDiary/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
