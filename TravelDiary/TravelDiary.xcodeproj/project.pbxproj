@@ -18,6 +18,7 @@
 		DA3386C22384A08000EBE722 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3386C12384A08000EBE722 /* UIButton.swift */; };
 		DA3386C42384A12A00EBE722 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3386C32384A12A00EBE722 /* FirebaseManager.swift */; };
 		DA4366492384B30700AA0821 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4366482384B30700AA0821 /* ImageManager.swift */; };
+		DA43664B23850A7D00AA0821 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA43664A23850A7D00AA0821 /* UIView.swift */; };
 		DA95BBAF2379090800880622 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA95BBAE2379090800880622 /* InfoViewController.swift */; };
 		DA95BBB1237911D400880622 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA95BBB0237911D400880622 /* Helpers.swift */; };
 		DA95BBB323791BE500880622 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA95BBB223791BE500880622 /* Constant.swift */; };
@@ -37,6 +38,8 @@
 		DAA5F797237A562D00C0AC52 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA5F796237A562D00C0AC52 /* UserController.swift */; };
 		DAA5F799237A575300C0AC52 /* PostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA5F798237A575300C0AC52 /* PostController.swift */; };
 		DAA5F79C237C5B3F00C0AC52 /* travelDiary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DAA5F79A237C5B3F00C0AC52 /* travelDiary.xcdatamodeld */; };
+		DAC01D69238633900043230B /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC01D68238633900043230B /* DataSource.swift */; };
+		DAC01D6B23863DB60043230B /* MyPostViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC01D6A23863DB60043230B /* MyPostViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +67,7 @@
 		DA3386C12384A08000EBE722 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		DA3386C32384A12A00EBE722 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		DA4366482384B30700AA0821 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
+		DA43664A23850A7D00AA0821 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		DA95BBAE2379090800880622 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		DA95BBB0237911D400880622 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		DA95BBB223791BE500880622 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
@@ -87,6 +91,8 @@
 		DAA5F796237A562D00C0AC52 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		DAA5F798237A575300C0AC52 /* PostController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostController.swift; sourceTree = "<group>"; };
 		DAA5F79B237C5B3F00C0AC52 /* travelDiary.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = travelDiary.xcdatamodel; sourceTree = "<group>"; };
+		DAC01D68238633900043230B /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
+		DAC01D6A23863DB60043230B /* MyPostViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostViewCell.swift; sourceTree = "<group>"; };
 		E227007B686D84DB9210E08D /* Pods-TravelDiary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelDiary.release.xcconfig"; path = "Target Support Files/Pods-TravelDiary/Pods-TravelDiary.release.xcconfig"; sourceTree = "<group>"; };
 		EA80EFB42E1B8384EA4A042D /* Pods-TravelDiary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelDiary.debug.xcconfig"; path = "Target Support Files/Pods-TravelDiary/Pods-TravelDiary.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -200,9 +206,10 @@
 		DA9815C3237762B10010B001 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				DA20A98E237DF6AA0081DB72 /* DataManager.swift */,
 				DAA5F796237A562D00C0AC52 /* UserController.swift */,
 				DAA5F798237A575300C0AC52 /* PostController.swift */,
-				DA20A98E237DF6AA0081DB72 /* DataManager.swift */,
+				DAC01D68238633900043230B /* DataSource.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -212,6 +219,8 @@
 			children = (
 				DA3386BF23849FFB00EBE722 /* LoginTextField.swift */,
 				DA3386C12384A08000EBE722 /* UIButton.swift */,
+				DA43664A23850A7D00AA0821 /* UIView.swift */,
+				DAC01D6A23863DB60043230B /* MyPostViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -424,8 +433,11 @@
 				DA9815D423776DB30010B001 /* CalendarViewController.swift in Sources */,
 				DA9815CE23776D300010B001 /* PlazaTableViewController.swift in Sources */,
 				DA3386BB2381160000EBE722 /* LocationSearchTableViewController.swift in Sources */,
+				DAC01D6B23863DB60043230B /* MyPostViewCell.swift in Sources */,
 				DA95BBB1237911D400880622 /* Helpers.swift in Sources */,
+				DAC01D69238633900043230B /* DataSource.swift in Sources */,
 				DA9815D223776D8F0010B001 /* PostsTableViewController.swift in Sources */,
+				DA43664B23850A7D00AA0821 /* UIView.swift in Sources */,
 				DAA5F799237A575300C0AC52 /* PostController.swift in Sources */,
 				DA95BBAF2379090800880622 /* InfoViewController.swift in Sources */,
 				DA4366492384B30700AA0821 /* ImageManager.swift in Sources */,

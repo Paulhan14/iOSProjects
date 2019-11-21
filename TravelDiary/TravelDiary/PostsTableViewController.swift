@@ -7,32 +7,77 @@
 //
 
 import UIKit
+import CoreData
 
-class PostsTableViewController: UITableViewController {
+class PostsTableViewController: UITableViewController, DataSourceCellConfigurer {
+    
+    
 
     @IBOutlet weak var composeButton: UIBarButtonItem!
     
+    lazy var dataSource : DataSource = DataSource(entity: "Post", sortKeys: ["time"], predicate: nil, sectionNameKeyPath: "time")
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        dataSource.delegate = self
+        dataSource.tableView = self.tableView
+        tableView.dataSource = dataSource
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tableView.reloadData()
+    }
+    
+    func configureCell(_ cell: UITableViewCell, withObject object: NSManagedObject) {
+        let post = object as! Post
+        let myPostCell = cell as! MyPostViewCell
+        myPostCell.postField.text = post.text
+        if post.image != nil {
+            let image = ImageManager.shared.convertToImage(data: post.image!)
+            myPostCell.myImageView.image = image
+        }
+        
+        if let weather = post.weather {
+            var weatherImage = UIImage()
+            switch weather {
+            case "sunny":
+                weatherImage = UIImage(named: "sunny")!
+            case "rainy":
+                weatherImage = UIImage(named: "rainy")!
+            case "windy":
+                weatherImage = UIImage(named: "windy")!
+            case "snowy":
+                weatherImage = UIImage(named: "snowy")!
+            default:
+                print("no such weather")
+            }
+            myPostCell.weatherImage.image = weatherImage
+            myPostCell.weatherLabel.text = weather
+        }
+        
+        if let stepCount = post.steps {
+            myPostCell.stepLabel.text = stepCount
+        }
+        
+    }
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
+//    override func numberOfSections(in tableView: UITableView) -> Int {
+//        // #warning Incomplete implementation, return the number of sections
+//        return 0
+//    }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
-    }
+//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        // #warning Incomplete implementation, return the number of rows
+//        return 0
+//    }
 
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

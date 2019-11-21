@@ -188,6 +188,34 @@ class EditViewController: UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     
+    // pick weather
+    @objc func chooseWeather() {
+        let alertController = UIAlertController(title: "Choose a weather", message: "How would you describe today?", preferredStyle: .actionSheet)
+        let sunny = UIAlertAction(title: "Sunny", style: .default) { (action) in
+            self.setWeatherImage("sunny")
+        }
+        alertController.addAction(sunny)
+        let rainy = UIAlertAction(title: "Rainy", style: .default) { (action) in
+            self.setWeatherImage("rainy")
+        }
+        alertController.addAction(rainy)
+        let snowy = UIAlertAction(title: "Snowy", style: .default) { (action) in
+            self.setWeatherImage("snowy")
+        }
+        alertController.addAction(snowy)
+        let windy = UIAlertAction(title: "Windy", style: .default) { (action) in
+            self.setWeatherImage("windy")
+        }
+        alertController.addAction(windy)
+        let actionCancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(actionCancel)
+        if let presenter = alertController.popoverPresentationController {
+            presenter.sourceView = self.view
+            presenter.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+        }
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     // MARK: - Helper
     func loadSetup() {
         let date = Date()
@@ -214,7 +242,7 @@ class EditViewController: UIViewController {
             } else {
                 self.imagesViewHeightConstraint.constant = 0.0
             }
-            
+            self.setWeatherImage(draft!.weather ?? "")
             self.stepLabel.text = draft!.steps
         } else {
             self.textField.text = "Write something about your day..."
@@ -234,7 +262,7 @@ class EditViewController: UIViewController {
         editingPost.text = textField.text
         // If user added a location, record the data
         if placeSelected != nil {
-            editingPost.location = placeSelected!.name ?? ""
+            editingPost.location = locationLabel.text ?? ""
             editingPost.longitude = Double(placeSelected!.coordinate.longitude)
             editingPost.latitude = Double(placeSelected!.coordinate.latitude)
         }
@@ -243,6 +271,7 @@ class EditViewController: UIViewController {
         }
         editingPost.steps = stepLabel.text ?? ""
         editingPost.time = Date()
+        editingPost.weather = weatherLabel.text ?? ""
     }
     
     func setupKeyboardAccessory() {
@@ -254,9 +283,9 @@ class EditViewController: UIViewController {
         }
         let place = UIBarButtonItem(title: "Place", style: .plain, target: self, action: #selector(openLocationSearch))
         let photo = UIBarButtonItem(title: "Photo", style: .plain, target: self, action: #selector(addImage))
-        let weather = UIBarButtonItem(title: "Weather", style: .plain, target: nil, action: nil)
+        let weather = UIBarButtonItem(title: "Weather", style: .plain, target: self, action: #selector(chooseWeather))
         let steps = UIBarButtonItem(title: "Steps", style: .plain, target: self, action: #selector(addSteps))
-        let key = UIBarButtonItem(title: "V", style: .plain, target: self, action: #selector(dismissKeyboard))
+        let key = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(dismissKeyboard))
         controlToolBar!.setItems([flexibles[0], place, flexibles[1], photo, flexibles[2], weather, flexibles[3], steps, flexibles[4], key, flexibles[5]], animated: false)
         controlToolBar!.sizeToFit()
         controlToolBar!.backgroundColor = .orange
@@ -288,6 +317,12 @@ class EditViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    func setWeatherImage(_ weather: String) {
+        guard weather != "" else {return}
+        self.weatherImage.image = UIImage(named: weather)
+        self.weatherLabel.text = weather
     }
 }
 
@@ -325,7 +360,7 @@ extension EditViewController: MKMapViewDelegate {
     
     // Map helper functions
     func mapFocusOn(_ location: CLLocationCoordinate2D) {
-        let span = MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
+        let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
         let region = MKCoordinateRegion(center: location, span: span)
         self.mapView.setRegion(region, animated: true)
     }
@@ -349,7 +384,6 @@ extension EditViewController: UIImagePickerControllerDelegate, UINavigationContr
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             self.imagesViewHeightConstraint.constant = 180.0
             self.selectedImageView.image = image
-            self.selectedImageView.contentMode = .scaleAspectFit
         }
         self.dismiss(animated: true, completion: nil)
     }
