@@ -1,8 +1,8 @@
 //
-//  InfoViewController.swift
+//  LoginPageViewController.swift
 //  TravelDiary
 //
-//  Created by Jiaxing Han on 11/10/19.
+//  Created by Jiaxing Han on 11/21/19.
 //  Copyright © 2019 Jiaxing Han. All rights reserved.
 //
 
@@ -11,14 +11,11 @@ import FirebaseAuth
 import Firebase
 import FirebaseFirestore
 
-class InfoViewController: UIViewController {
-
-    // MARK: - UI
-    @IBOutlet weak var firstNameField: LoginTextField!
-    @IBOutlet weak var lastNameField: LoginTextField!
-    @IBOutlet weak var emailField: LoginTextField!
-    @IBOutlet weak var passwordField: LoginTextField!
-    @IBOutlet weak var actionButton: UIButton!
+class LoginPageViewController: UIViewController {
+    // MARK: Views
+    @IBOutlet weak var emailField: UITextField!
+    @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var loginButton: DesignableButton!
     @IBOutlet weak var errorLabel: UILabel!
     // MARK: variable
     var firebaseManager = FirebaseManager.shared
@@ -30,68 +27,57 @@ class InfoViewController: UIViewController {
     }
     
     func fieldPlaceHolderSetUp() {
-        firstNameField.placeholder = "Ex: John"
-        lastNameField.placeholder = "Ex: Smith"
         emailField.placeholder = "Ex: name@company.com"
         passwordField.placeholder = "Set your password"
     }
-    
-    // MARK: - Buttons
-    @IBAction func actionButtonPressed(_ sender: Any) {
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
+    */
+    @IBAction func loginButtonPressed(_ sender: Any) {
         // Dismiss keyboard if it is still showing
         self.view.endEditing(true)
-        // sign up
-        createAccount()
+        loginUser()
     }
     
     @objc func dismissKeyboard() {
         self.view.endEditing(true)
     }
     
-    // MARK: - Online
+    // MARK: Helper
     
-    func createAccount() {
-        // Validate fields
-        let error = validateSignUpFields()
+    func loginUser() {
+        let error = validateLoginFields()
         if error != nil {
             errorLabel.text = error
         } else {
-            // create user
-            let enteredFirst = firstNameField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-            let enteredLast = lastNameField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            // log in
             let enteredEmail = emailField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let enteredPassword = passwordField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-            Auth.auth().createUser(withEmail: enteredEmail, password: enteredPassword) { (result, error) in
+            Auth.auth().signIn(withEmail: enteredEmail, password: enteredPassword) { (result, error) in
                 if error != nil {
-                    //error
-                    self.errorLabel.text = "something went wrong"
+                    self.errorLabel.text = error!.localizedDescription
                 } else {
                     let newUID = result!.user.uid
-                    // Data to be inserted
-                    let payload = [
-                        "first" : enteredFirst,
-                        "last" : enteredLast,
-                        "uid" : newUID
-                    ]
-                    // Upload data
-//                    self.saveDataToFirebase(payload, newUID)
-                    self.firebaseManager.saveUserDataToFirebase(payload, newUID)
+                    //                    let data = self.getDataFromFirebase(newUID)
+                    let data = self.firebaseManager.getUserDataFromFirebase(newUID)
+                    if let first = data["firstName"], let last = data["lastName"] {
+                        UserController.theUser.createUser(first, last, enteredEmail, newUID)
+                    }
                     // go to home screen
                     self.goToHomeScreen()
-                    //Save the user info to local
-                    UserController.theUser.createUser(enteredFirst, enteredLast, enteredEmail, newUID)
                 }
             }
-            
         }
     }
     
-    // MARK: - Helper
-    
-    func validateSignUpFields() -> String? {
-        if firstNameField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-            lastNameField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-            emailField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+    func validateLoginFields() -> String? {
+        if emailField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             passwordField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
             return "Please enter all the information"
         }
@@ -99,11 +85,6 @@ class InfoViewController: UIViewController {
         let enteredEmail = emailField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         if Helpers.isValidEmail(enteredEmail) == false {
             return "Please enter correct email fromat"
-        }
-        
-        let enteredPassword = passwordField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-        if Helpers.checkPassword(enteredPassword) == false {
-            return "Password is not strong enough"
         }
         
         return nil
@@ -115,8 +96,6 @@ class InfoViewController: UIViewController {
         let done = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissKeyboard))
         toolbar.setItems([flexible, done], animated: false)
         toolbar.sizeToFit()
-        firstNameField.inputAccessoryView = toolbar
-        lastNameField.inputAccessoryView = toolbar
         emailField.inputAccessoryView = toolbar
         passwordField.inputAccessoryView = toolbar
     }
@@ -128,5 +107,5 @@ class InfoViewController: UIViewController {
         appDelegate.window?.makeKeyAndVisible()
         self.view.removeFromSuperview()
     }
-
+    
 }

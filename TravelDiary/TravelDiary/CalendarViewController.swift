@@ -8,11 +8,17 @@
 
 import UIKit
 
-class CalendarViewController: UIViewController {
+class CalendarViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate{
 
+    @IBOutlet weak var nextMonthButton: DesignableButton!
+    @IBOutlet weak var backMonthButton: DesignableButton!
+    @IBOutlet weak var dateView: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        dateView.dataSource = self
+        dateView.delegate = self
         // Do any additional setup after loading the view.
     }
     
@@ -26,5 +32,23 @@ class CalendarViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
 
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 31
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell =
+            collectionView.dequeueReusableCell(withReuseIdentifier:
+                Constant.CellIdentifier.dateCell, for: indexPath)
+        if let textLabel = cell.contentView.subviews[0] as? UILabel{
+            textLabel.text = "\(indexPath.row)"
+        }
+        return cell
+    }
+    
 }

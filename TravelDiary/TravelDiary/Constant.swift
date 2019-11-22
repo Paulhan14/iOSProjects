@@ -26,5 +26,6 @@ struct Constant {
     struct CellIdentifier {
         static let locationCell = "LocationCell"
         static let myPostCell = "MyPostCell"
+        static let dateCell = "DateCell"
     }
 }

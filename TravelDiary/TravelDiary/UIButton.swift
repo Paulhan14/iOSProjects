@@ -9,37 +9,45 @@
 import Foundation
 import UIKit
 
+@IBDesignable
+class DesignableButton: UIButton {
+}
+
 extension UIButton {
-    func configure(color: UIColor = .blue, font: UIFont = UIFont.boldSystemFont(ofSize: 12)) {
-        self.setTitleColor(color, for: .normal)
-        self.titleLabel?.font = font
-        self.layer.borderColor = color.cgColor
-        self.layer.borderWidth = 1.0
-        self.layer.cornerRadius = 5.0
-    }
-    
-    func configure(icon: UIImage, color: UIColor? = nil) {
-        self.setImage(icon, for: .normal)
-        if let color = color {
-            tintColor = color
+    @IBInspectable
+    override var cornerRadius: CGFloat {
+        get {
+            return layer.cornerRadius
+        }
+        set {
+            layer.cornerRadius = newValue
         }
     }
     
-    func configure(color: UIColor = .blue,
-                   font: UIFont = UIFont.boldSystemFont(ofSize: 12),
-                   cornerRadius: CGFloat,
-                   borderColor: UIColor? = nil,
-                   backgroundColor: UIColor,
-                   borderWidth: CGFloat? = nil) {
-        self.setTitleColor(color, for: .normal)
-        self.titleLabel?.font = font
-        self.backgroundColor = backgroundColor
-        if let borderColor = borderColor {
-            self.layer.borderColor = borderColor.cgColor
+    @IBInspectable
+    override var borderWidth: CGFloat {
+        get {
+            return layer.borderWidth
         }
-        if let borderWidth = borderWidth {
-            self.layer.borderWidth = borderWidth
+        set {
+            layer.borderWidth = newValue
         }
-        self.layer.cornerRadius = cornerRadius
+    }
+    
+    @IBInspectable
+    override var borderColor: UIColor? {
+        get {
+            if let color = layer.borderColor {
+                return UIColor(cgColor: color)
+            }
+            return nil
+        }
+        set {
+            if let color = newValue {
+                layer.borderColor = color.cgColor
+            } else {
+                layer.borderColor = nil
+            }
+        }
     }
 }
