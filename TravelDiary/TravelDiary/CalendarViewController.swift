@@ -65,6 +65,17 @@ class CalendarViewController: UIViewController, UICollectionViewDataSource, UICo
             cell.dateLabel.text = ""
         } else {
             cell.dateLabel.text = "\(indexPath.row + 2 - weekDayOf1st)"
+            for post in postController.posts {
+                if let postDate = post.time {
+                    let format = DateFormatter()
+                    format.dateFormat = "MM/dd/yyyy"
+                    let postDateString = format.string(from: postDate)
+                    if postDateString == self.getSelectedDate(indexPath) {
+                        cell.dateLabel.layer.borderWidth = 2.0
+                        cell.dateLabel.layer.borderColor = UIColor.gray.cgColor
+                    }
+                }
+            }
         }
         return cell
     }

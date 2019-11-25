@@ -16,4 +16,5 @@ class MyPostViewCell: UITableViewCell {
     @IBOutlet weak var postField: UITextView!
     @IBOutlet weak var myImageView: UIImageView!
     
+    @IBOutlet weak var imageWidth: NSLayoutConstraint!
 }

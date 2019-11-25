@@ -38,9 +38,18 @@ class PostsTableViewController: UITableViewController, DataSourceCellConfigurer 
         let post = object as! Post
         let myPostCell = cell as! MyPostViewCell
         myPostCell.postField.text = post.text
-        if post.image != nil {
-            let image = ImageManager.shared.convertToImage(data: post.image!)
-            myPostCell.myImageView.image = image
+//        if post.image != nil {
+//            let image = ImageManager.shared.convertToImage(data: post.image!)
+//            myPostCell.myImageView.image = image
+//        }
+        if let imageData = post.image {
+            if imageData.description == "0 bytes" {
+                myPostCell.imageWidth.constant = 0
+            } else {
+                myPostCell.imageWidth.constant = 134
+                myPostCell.myImageView.image = ImageManager.shared.convertToImage(data: imageData)
+            }
+            
         }
         
         if let weather = post.weather {

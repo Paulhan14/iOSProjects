@@ -28,7 +28,7 @@ class LoginPageViewController: UIViewController {
     
     func fieldPlaceHolderSetUp() {
         emailField.placeholder = "Ex: name@company.com"
-        passwordField.placeholder = "Set your password"
+        passwordField.placeholder = "Enter your password"
     }
     /*
     // MARK: - Navigation
