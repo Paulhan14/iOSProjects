@@ -74,5 +74,7 @@ extension DataSource: UITableViewDataSource {
 }
 
 extension DataSource: NSFetchedResultsControllerDelegate {
-    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        self.tableView.reloadData()
+    }
 }

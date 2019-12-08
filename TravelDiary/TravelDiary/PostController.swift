@@ -47,9 +47,11 @@ struct postParameters {
 
 class PostController {
     static let postController = PostController()
+    let firebaseManager = FirebaseManager.shared
+    let userController = UserController.userController
     
     var posts: [Post]
-    var draft: Post?
+    var draft: Draft?
     
     init() {
         // try to fetch a list of posts
@@ -57,18 +59,25 @@ class PostController {
         let request = NSFetchRequest<Post>(entityName: "Post")
         do {
             let allPosts = try context.fetch(request)
-            var _posts = [Post]()
-            for aPost in allPosts {
-                // If it is a draft
-                if aPost.isDraft {
-                    self.draft = aPost
-                } else {
-                    _posts.append(aPost)
+            var _posts:[Post] = []
+            for post in allPosts {
+                if post.owner?.uid == UserController.userController.loginUser?.uid {
+                    _posts.append(post)
                 }
             }
             self.posts = _posts
         } catch {
             posts = [Post]()
+        }
+        
+        let draftRequest = NSFetchRequest<Draft>(entityName: "Draft")
+        do {
+            let drafts = try context.fetch(draftRequest)
+            if drafts.count >= 1 {
+                self.draft = drafts[0]
+            }
+        } catch {
+            self.draft = Draft()
         }
     }
     
@@ -87,6 +96,7 @@ class PostController {
         post.steps = configure.steps
         post.isPublic = configure.isPublic
         post.isDraft = false
+        post.owner = UserController.userController.loginUser
         managedContext.insert(post)
         do {
             try managedContext.save()
@@ -94,6 +104,8 @@ class PostController {
             print("Could not save post. \(error)")
         }
         posts.append(post)
+        // Upload post to firebase
+        firebaseManager.savePostToFirebase(post)
     }
     
     func deletePost(at index: Int) {
@@ -131,26 +143,26 @@ class PostController {
     // MARK: for draft
     func createDraft(_ configure: postParameters) {
         let managedContext = DataManager.theManager.context
-        let post = Post(context: managedContext)
-        post.time = configure.time
-        post.type = configure.type
-        post.mood = configure.mood
-        post.location = configure.location
-        post.longitude = configure.longitude
-        post.latitude = configure.latitude
-        post.weather = configure.weather
-        post.text = configure.text
-        post.image = configure.image
-        post.steps = configure.steps
-        post.isPublic = configure.isPublic
-        post.isDraft = true
-        managedContext.insert(post)
+        let draft = Draft(context: managedContext)
+        draft.time = configure.time
+        draft.time = configure.time
+        draft.type = configure.type
+        draft.mood = configure.mood
+        draft.location = configure.location
+        draft.longitude = configure.longitude
+        draft.latitude = configure.latitude
+        draft.weather = configure.weather
+        draft.text = configure.text
+        draft.image = configure.image
+        draft.steps = configure.steps
+        draft.isPublic = configure.isPublic
+        managedContext.insert(draft)
         do {
             try managedContext.save()
         } catch let error as NSError {
-            print("Could not save post. \(error)")
+            print("Could not save draft. \(error)")
         }
-        self.draft = post
+        self.draft = draft
     }
     
     func deleteDraft() {
@@ -158,14 +170,11 @@ class PostController {
         guard self.draft != nil else {return}
         // Delete draft from context
         let managedContext = DataManager.theManager.context
-        let request = NSFetchRequest<Post>(entityName: "Post")
+        let request = NSFetchRequest<Draft>(entityName: "Draft")
         do {
-            let allPosts = try managedContext.fetch(request)
-            for aPost in allPosts {
-                // If it is a draft
-                if aPost.isDraft {
-                    managedContext.delete(aPost)
-                }
+            let allDrafts = try managedContext.fetch(request)
+            for aDraft in allDrafts {
+                managedContext.delete(aDraft)
             }
         } catch {
             print("Error deleting")
@@ -173,10 +182,55 @@ class PostController {
         do {
             try managedContext.save()
         } catch let error as NSError {
-            print("Could not save post. \(error)")
+            print("Could not save draft. \(error)")
         }
         // Make pointer nil
         self.draft = nil
-        
+    }
+    
+    // Get posts
+    func getPostForCurrentUser(_ uid: String) {
+        var _posts = [Post]()
+        firebaseManager.getUserPosts(uid) { postGot in
+            let managedContext = DataManager.theManager.context
+            for postData in postGot {
+                let post = Post(context: managedContext)
+                post.text = postData["text"] as? String
+                post.location = postData["location"] as? String
+                post.latitude = postData["latitude"] as! Double
+                post.longitude = postData["longitude"] as! Double
+                post.weather = postData["weather"] as? String
+                post.steps = postData["steps"] as? String
+                let format = DateFormatter()
+                format.dateFormat = "MM/dd/yyyy HH:mm"
+                let postDateString: String? = postData["time"] as? String
+                post.time = format.date(from: postDateString!)
+                post.owner = self.userController.loginUser
+                _posts.append(post)
+            }
+            self.posts = _posts
+            
+            // Delete draft from context
+            let request = NSFetchRequest<Post>(entityName: "Post")
+            do {
+                let allPosts = try managedContext.fetch(request)
+                for aPost in allPosts {
+                    managedContext.delete(aPost)
+                }
+            } catch {
+                print("Error deleting")
+            }
+            
+            for aPost in self.posts{
+                managedContext.insert(aPost)
+            }
+            
+            do {
+                try managedContext.save()
+            } catch let error as NSError {
+                print("Could not save draft. \(error)")
+            }
+        }
     }
 }
+

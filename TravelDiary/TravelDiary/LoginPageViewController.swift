@@ -19,6 +19,7 @@ class LoginPageViewController: UIViewController {
     @IBOutlet weak var errorLabel: UILabel!
     // MARK: variable
     var firebaseManager = FirebaseManager.shared
+    var userController = UserController.userController
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,15 +31,7 @@ class LoginPageViewController: UIViewController {
         emailField.placeholder = "Ex: name@company.com"
         passwordField.placeholder = "Enter your password"
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
     @IBAction func loginButtonPressed(_ sender: Any) {
         // Dismiss keyboard if it is still showing
         self.view.endEditing(true)
@@ -64,13 +57,31 @@ class LoginPageViewController: UIViewController {
                     self.errorLabel.text = error!.localizedDescription
                 } else {
                     let newUID = result!.user.uid
-                    //                    let data = self.getDataFromFirebase(newUID)
-                    let data = self.firebaseManager.getUserDataFromFirebase(newUID)
-                    if let first = data["firstName"], let last = data["lastName"] {
-                        UserController.theUser.createUser(first, last, enteredEmail, newUID)
+                    var data = [String:String]()
+                    let db = Firestore.firestore()
+                    let docRef = db.collection("users").document(newUID)
+                    docRef.getDocument { (document, error) in
+                        if let document = document, document.exists {
+                            data = document.data() as! [String:String]
+                            if let first = data["first"], let last = data["last"] {
+                                let loginUser = self.userController.getUser(by: newUID)
+                                if loginUser == nil {
+                                    self.userController.createUser(first, last, enteredEmail, newUID)
+                                    // go to home screen
+                                    self.goToHomeScreen()
+                                    //
+                                    PostController.postController.getPostForCurrentUser(newUID)
+                                } else {
+                                    self.userController.loginUser = loginUser
+                                    // go to home screen
+                                    self.goToHomeScreen()
+                                    PostController.postController.getPostForCurrentUser(newUID)
+                                }
+                            }
+                        } else {
+                            print("Document does not exist")
+                        }
                     }
-                    // go to home screen
-                    self.goToHomeScreen()
                 }
             }
         }

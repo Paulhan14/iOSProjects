@@ -152,11 +152,13 @@ class EditViewController: UIViewController {
                     }
                     if let count = result.sumQuantity() {
                         let value = count.doubleValue(for: .count())
-                        self.stepCountInfo = String(Int(value))
+//                        self.stepCountInfo = String(Int(value))
+                        let block = {self.stepLabel.text = String(Int(value))}
+                        DispatchQueue.main.async(execute: block)
                     }
                 }
                 self.healthStore.execute(query)
-                self.stepLabel.text = self.stepCountInfo
+//                self.stepLabel.text = self.stepCountInfo
             case .notDetermined:
                 self.setupHealhKitData()
             case .sharingDenied:
@@ -326,7 +328,7 @@ class EditViewController: UIViewController {
     }
 }
 
-extension EditViewController {
+extension EditViewController: UITextViewDelegate {
     //Mark: - Notification Handlers
     @objc func keyboardWillShow(notification:Notification) {
         let userInfo = notification.userInfo!
@@ -343,6 +345,20 @@ extension EditViewController {
         self.scrollView.contentInset = UIEdgeInsets.zero
         self.scrollView.scrollIndicatorInsets = UIEdgeInsets.zero
         
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if self.textField.textColor == UIColor.gray {
+            self.textField.textColor = .black
+            self.textField.text = ""
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if self.textField.text == "" {
+            self.textField.text = "Write something about your day..."
+            self.textField.textColor = .gray
+        }
     }
 }
 
@@ -384,6 +400,7 @@ extension EditViewController: UIImagePickerControllerDelegate, UINavigationContr
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             self.imagesViewHeightConstraint.constant = 180.0
             self.selectedImageView.image = image
+            self.selectedImageView.contentMode = .scaleAspectFill
         }
         self.dismiss(animated: true, completion: nil)
     }

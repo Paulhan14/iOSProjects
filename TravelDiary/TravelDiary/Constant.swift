@@ -29,3 +29,7 @@ struct Constant {
         static let dateCell = "DateCell"
     }
 }
+
+extension Notification.Name {
+    static let userCreated = Notification.Name("UserCreatedNotification")
+}

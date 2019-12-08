@@ -17,14 +17,53 @@
                     <view key="view" contentMode="scaleToFill" id="pmp-z3-yW0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JF1-Sc-JjF">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qc5-Ci-3EO">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="800"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TgJ-i5-lEj">
+                                                <rect key="frame" x="10" y="0.0" width="394" height="230"/>
+                                                <color key="backgroundColor" red="0.69803921570000005" green="0.82745098039999998" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="230" id="vS8-tC-YPE"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" red="1" green="0.54117647059999996" blue="0.36078431370000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="TgJ-i5-lEj" secondAttribute="trailing" constant="10" id="KnW-JE-YxW"/>
+                                            <constraint firstItem="TgJ-i5-lEj" firstAttribute="leading" secondItem="qc5-Ci-3EO" secondAttribute="leading" constant="10" id="S8C-pb-jYL"/>
+                                            <constraint firstAttribute="height" constant="800" id="hAF-BO-qr8"/>
+                                            <constraint firstItem="TgJ-i5-lEj" firstAttribute="top" secondItem="qc5-Ci-3EO" secondAttribute="top" id="kcu-4B-m1v"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="qc5-Ci-3EO" firstAttribute="leading" secondItem="JF1-Sc-JjF" secondAttribute="leading" id="5Ds-rR-RkR"/>
+                                    <constraint firstItem="qc5-Ci-3EO" firstAttribute="top" secondItem="JF1-Sc-JjF" secondAttribute="top" id="E2K-hw-vO6"/>
+                                    <constraint firstAttribute="bottom" secondItem="qc5-Ci-3EO" secondAttribute="bottom" id="Nt2-7g-oiK"/>
+                                    <constraint firstAttribute="trailing" secondItem="qc5-Ci-3EO" secondAttribute="trailing" id="cFc-Uf-Vfr"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="LBZ-zE-Y5b" firstAttribute="trailing" secondItem="JF1-Sc-JjF" secondAttribute="trailing" id="7rG-87-MJ5"/>
+                            <constraint firstItem="JF1-Sc-JjF" firstAttribute="leading" secondItem="LBZ-zE-Y5b" secondAttribute="leading" id="QLk-S5-leV"/>
+                            <constraint firstItem="qc5-Ci-3EO" firstAttribute="width" secondItem="pmp-z3-yW0" secondAttribute="width" id="Yb5-K3-wHP"/>
+                            <constraint firstAttribute="bottom" secondItem="JF1-Sc-JjF" secondAttribute="bottom" id="gVg-bM-jgw"/>
+                            <constraint firstItem="JF1-Sc-JjF" firstAttribute="top" secondItem="pmp-z3-yW0" secondAttribute="top" id="khN-pg-LDC"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="LBZ-zE-Y5b"/>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="O64-Fc-7Y9"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NOs-ax-Jbf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2568.1159420289855" y="1157.8125"/>
+            <point key="canvasLocation" x="2566.666666666667" y="1157.8125"/>
         </scene>
         <!--Plaza-->
         <scene sceneID="VKn-Cs-MQP">
@@ -132,7 +171,7 @@
                                                         <constraint firstItem="Pik-vt-5fY" firstAttribute="top" secondItem="nVs-xj-8DP" secondAttribute="top" id="x4H-5M-3Je"/>
                                                     </constraints>
                                                 </view>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BWB-cb-Mby">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BWB-cb-Mby">
                                                     <rect key="frame" x="144" y="8" width="225" height="119"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
@@ -442,7 +481,7 @@
                                             <constraint firstItem="TLB-dK-IQh" firstAttribute="top" secondItem="6Gg-br-Vut" secondAttribute="top" id="tDO-5Y-Zvu"/>
                                         </constraints>
                                     </view>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rB4-gv-AJa">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rB4-gv-AJa">
                                         <rect key="frame" x="139" y="8" width="230" height="150"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -1056,7 +1095,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="89t-l5-xVw" customClass="DesignableTextView" customModule="TravelDiary" customModuleProvider="target">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="89t-l5-xVw" customClass="DesignableTextView" customModule="TravelDiary" customModuleProvider="target">
                                                 <rect key="frame" x="10" y="480" width="394" height="280"/>
                                                 <color key="backgroundColor" red="0.98823529409999999" green="0.97647058819999999" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>

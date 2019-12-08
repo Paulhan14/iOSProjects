@@ -10,9 +10,11 @@ import Foundation
 import CoreData
 
 class UserController {
-    static let theUser = UserController()
+    static let userController = UserController()
+    var loginUser: User?
     
     init() {
+        
     }
     
     func createUser(_ first: String, _ last: String, _ email: String, _ uid: String) {
@@ -23,7 +25,7 @@ class UserController {
         user.setValue(email, forKey: "email")
         user.setValue(uid, forKey: "uid")
         managedContext.insert(user)
-        
+        self.loginUser = user
         do {
             try managedContext.save()
         } catch let error as NSError {
@@ -33,7 +35,7 @@ class UserController {
     
     func updateUser(_ first: String, _ last: String, _ email: String, _ uid: String) throws {
         let managedContext = DataManager.theManager.context
-        let user = try getUser(by: uid)
+        let user = getUser(by: uid)
         user!.firstName = first
         user!.lastName = last
         user!.email = email
@@ -44,11 +46,20 @@ class UserController {
         }
     }
     
-    func getUser(by uid: String) throws -> User? {
+    func getUser(by uid: String) -> User? {
+        var returnUser: User? = nil
         let managedContext = DataManager.theManager.context
         let request = NSFetchRequest<User>(entityName: "User")
         request.predicate = NSPredicate(format: "uid == %@", uid)
-        let user = try managedContext.fetch(request)
-        return user[0]
+        
+        do {
+            let users = try managedContext.fetch(request)
+            if users.count >= 1 {
+                returnUser = users[0]
+            }
+        } catch {
+            print("user fetch error")
+        }
+        return returnUser
     }
 }

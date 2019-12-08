@@ -12,8 +12,11 @@ class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//        self.navigationController?.navigationBar.shadowImage = UIImage()
+//        var barImageView = self.navigationController?.navigationBar.subviews.first
+//        barImageView?.alpha = 0.0
+//        self.scrollBgView?.delegate = self
     }
     
 

@@ -79,10 +79,9 @@ class InfoViewController: UIViewController {
                     // go to home screen
                     self.goToHomeScreen()
                     //Save the user info to local
-                    UserController.theUser.createUser(enteredFirst, enteredLast, enteredEmail, newUID)
+                    UserController.userController.createUser(enteredFirst, enteredLast, enteredEmail, newUID)
                 }
             }
-            
         }
     }
     
