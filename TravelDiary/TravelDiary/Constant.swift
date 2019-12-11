@@ -16,6 +16,7 @@ struct Constant {
         static let loginView = "LoginView"
         static let locationSearchView = "LocationSearchView"
         static let locationSearchTable = "LocationSearchTable"
+        static let postView = "PostViewController"
     }
     
     struct Segues {

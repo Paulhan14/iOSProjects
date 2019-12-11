@@ -47,18 +47,6 @@ class PostsTableViewController: UITableViewController, DataSourceCellConfigurer 
         if let weather = post.weather {
             var weatherImage = UIImage()
             weatherImage = UIImage(named: weather)!
-//            switch weather {
-//            case "sunny":
-//                weatherImage = UIImage(named: "sunny")!
-//            case "rainy":
-//                weatherImage = UIImage(named: "rainy")!
-//            case "windy":
-//                weatherImage = UIImage(named: "windy")!
-//            case "snowy":
-//                weatherImage = UIImage(named: "snowy")!
-//            default:
-//                print("no such weather")
-//            }
             myPostCell.weatherImage.image = weatherImage
             myPostCell.weatherLabel.text = weather
         }
@@ -68,7 +56,14 @@ class PostsTableViewController: UITableViewController, DataSourceCellConfigurer 
         }
         
     }
-
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let postView = storyboard!.instantiateViewController(withIdentifier: Constant.StoryBoardID.postView)
+        let singleView = postView as! PostViewController
+        singleView.closureBlock =  {self.dismiss(animated: true, completion: nil)}
+        singleView.postToShow = dataSource.objectAtIndexPath(indexPath) as? Post
+        self.present(singleView, animated: true, completion: nil)
+    }
     
     
     // MARK: - Buttons

@@ -25,6 +25,7 @@ class CalendarViewController: UIViewController, UICollectionViewDataSource, UICo
     
     let postController = PostController.postController
     var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    var allPostDate = [String]()
     var displayedYear = Calendar.current.component(.year, from: Date())
     var displayedMonth = Calendar.current.component(.month, from: Date())
     
@@ -37,6 +38,10 @@ class CalendarViewController: UIViewController, UICollectionViewDataSource, UICo
         detailView.isHidden = true
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        getAllPostsDate()
+//        dateView.reloadData()
+    }
 
     /*
     // MARK: - Navigation
@@ -61,19 +66,15 @@ class CalendarViewController: UIViewController, UICollectionViewDataSource, UICo
             collectionView.dequeueReusableCell(withReuseIdentifier:
                 Constant.CellIdentifier.dateCell, for: indexPath) as! DateCollectionViewCell
         let weekDayOf1st = self.getWeekDay()
+        cell.dateLabel.layer.borderWidth = 0
+        cell.dateLabel.layer.borderColor = UIColor.gray.cgColor
         if indexPath.row < (weekDayOf1st - 1) {
             cell.dateLabel.text = ""
         } else {
             cell.dateLabel.text = "\(indexPath.row + 2 - weekDayOf1st)"
-            for post in postController.posts {
-                if let postDate = post.time {
-                    let format = DateFormatter()
-                    format.dateFormat = "MM/dd/yyyy"
-                    let postDateString = format.string(from: postDate)
-                    if postDateString == self.getSelectedDate(indexPath) {
-                        cell.dateLabel.layer.borderWidth = 2.0
-                        cell.dateLabel.layer.borderColor = UIColor.gray.cgColor
-                    }
+            for date in allPostDate {
+                if date == self.getSelectedDate(indexPath) {
+                    cell.dateLabel.layer.borderWidth = 2.0
                 }
             }
         }
@@ -81,17 +82,12 @@ class CalendarViewController: UIViewController, UICollectionViewDataSource, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        for post in postController.posts {
-            if let postDate = post.time {
-                let format = DateFormatter()
-                format.dateFormat = "MM/dd/yyyy"
-                let postDateString = format.string(from: postDate)
-                if postDateString == self.getSelectedDate(indexPath) {
-                    populateViewWith(post)
-                    break
-                } else {
-                    detailView.isHidden = true
-                }
+        for i in 0..<allPostDate.count {
+            if allPostDate[i] == self.getSelectedDate(indexPath) {
+                populateViewWith(postController.posts[i])
+                break
+            } else {
+                detailView.isHidden = true
             }
         }
     }
@@ -124,6 +120,7 @@ class CalendarViewController: UIViewController, UICollectionViewDataSource, UICo
         self.dateView.reloadData()
     }
     
+    // Get the number of days in a month
     func numberOfDays() -> Int {
         let dateComponents = DateComponents(year: displayedYear, month: displayedMonth)
         let date = Calendar.current.date(from: dateComponents)!
@@ -131,6 +128,7 @@ class CalendarViewController: UIViewController, UICollectionViewDataSource, UICo
         return range?.count ?? 0
     }
     
+    // Get the weekday at which a month start with
     func getWeekDay() -> Int {
         let dateComponents = DateComponents(year: displayedYear, month: displayedMonth)
         let date = Calendar.current.date(from: dateComponents)!
@@ -138,9 +136,23 @@ class CalendarViewController: UIViewController, UICollectionViewDataSource, UICo
     }
     
     func getSelectedDate(_ indexPath: IndexPath) -> String {
-        let dateToday = indexPath.row - 4
+        let startDay = self.getWeekDay()
+        let dateToday = indexPath.row - startDay + 2
         let dateString = "\(displayedMonth)/\(dateToday)/\(displayedYear)"
         return dateString
+    }
+    
+    func getAllPostsDate() {
+        var _allPostsDate = [String]()
+        for post in postController.posts {
+            if let postDate = post.time {
+                let format = DateFormatter()
+                format.dateFormat = "MM/d/yyyy"
+                let postDateString = format.string(from: postDate)
+                _allPostsDate.append(postDateString)
+            }
+        }
+        self.allPostDate = _allPostsDate
     }
     
     func populateViewWith(_ post: Post) {

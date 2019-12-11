@@ -29,7 +29,7 @@ class DataSource: NSObject {
         let sortDescriptors : [NSSortDescriptor] = {
             var _sortDescriptors = [NSSortDescriptor]()
             for key in sortKeys {
-                let descriptor = NSSortDescriptor(key: key, ascending: true)
+                let descriptor = NSSortDescriptor(key: key, ascending: false)
                 _sortDescriptors.append(descriptor)
             }
             return _sortDescriptors

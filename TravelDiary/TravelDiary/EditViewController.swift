@@ -26,6 +26,7 @@ class EditViewController: UIViewController {
     @IBOutlet weak var infoView: UIView!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var atLabel: UILabel!
     @IBOutlet weak var weatherLabel: UILabel!
     @IBOutlet weak var weatherImage: UIImageView!
     @IBOutlet weak var stepLabel: UILabel!

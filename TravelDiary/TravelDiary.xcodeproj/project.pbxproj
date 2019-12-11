@@ -42,6 +42,7 @@
 		DAC01D6B23863DB60043230B /* MyPostViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC01D6A23863DB60043230B /* MyPostViewCell.swift */; };
 		DAC01D6D23878ECA0043230B /* LoginPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC01D6C23878ECA0043230B /* LoginPageViewController.swift */; };
 		DAC01D6F23879B720043230B /* DateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC01D6E23879B720043230B /* DateCollectionViewCell.swift */; };
+		DAE837E323A0A9A90067E1EA /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE837E223A0A9A90067E1EA /* PostViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +98,7 @@
 		DAC01D6A23863DB60043230B /* MyPostViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostViewCell.swift; sourceTree = "<group>"; };
 		DAC01D6C23878ECA0043230B /* LoginPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPageViewController.swift; sourceTree = "<group>"; };
 		DAC01D6E23879B720043230B /* DateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCollectionViewCell.swift; sourceTree = "<group>"; };
+		DAE837E223A0A9A90067E1EA /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		E227007B686D84DB9210E08D /* Pods-TravelDiary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelDiary.release.xcconfig"; path = "Target Support Files/Pods-TravelDiary/Pods-TravelDiary.release.xcconfig"; sourceTree = "<group>"; };
 		EA80EFB42E1B8384EA4A042D /* Pods-TravelDiary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelDiary.debug.xcconfig"; path = "Target Support Files/Pods-TravelDiary/Pods-TravelDiary.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -244,6 +246,7 @@
 				DA9815D523776DC30010B001 /* ProfileViewController.swift */,
 				DA9815D723776DD00010B001 /* EditViewController.swift */,
 				DA3386B52380A25700EBE722 /* TabViewController.swift */,
+				DAE837E223A0A9A90067E1EA /* PostViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -450,6 +453,7 @@
 				DA3386C42384A12A00EBE722 /* FirebaseManager.swift in Sources */,
 				DA3386B62380A25700EBE722 /* TabViewController.swift in Sources */,
 				DAA5F79C237C5B3F00C0AC52 /* travelDiary.xcdatamodeld in Sources */,
+				DAE837E323A0A9A90067E1EA /* PostViewController.swift in Sources */,
 				DAC01D6F23879B720043230B /* DateCollectionViewCell.swift in Sources */,
 				DA9815DA237772C50010B001 /* LoginViewController.swift in Sources */,
 				DAC01D6D23878ECA0043230B /* LoginPageViewController.swift in Sources */,

@@ -50,25 +50,24 @@ class PostController {
     let firebaseManager = FirebaseManager.shared
     let userController = UserController.userController
     
-    var posts: [Post]
+    var posts = [Post]()
     var draft: Draft?
     
     init() {
-        // try to fetch a list of posts
         let context = DataManager.theManager.context
-        let request = NSFetchRequest<Post>(entityName: "Post")
-        do {
-            let allPosts = try context.fetch(request)
-            var _posts:[Post] = []
-            for post in allPosts {
-                if post.owner?.uid == UserController.userController.loginUser?.uid {
-                    _posts.append(post)
-                }
-            }
-            self.posts = _posts
-        } catch {
-            posts = [Post]()
-        }
+//        let request = NSFetchRequest<Post>(entityName: "Post")
+//        do {
+//            let allPosts = try context.fetch(request)
+//            var _posts:[Post] = []
+//            for post in allPosts {
+//                if post.owner?.uid == UserController.userController.loginUser?.uid {
+//                    _posts.append(post)
+//                }
+//            }
+//            self.posts = _posts
+//        } catch {
+//            posts = [Post]()
+//        }
         
         let draftRequest = NSFetchRequest<Draft>(entityName: "Draft")
         do {
@@ -97,7 +96,7 @@ class PostController {
         post.isPublic = configure.isPublic
         post.isDraft = false
         post.owner = UserController.userController.loginUser
-        managedContext.insert(post)
+//        managedContext.insert(post)
         do {
             try managedContext.save()
         } catch let error as NSError {
@@ -156,7 +155,7 @@ class PostController {
         draft.image = configure.image
         draft.steps = configure.steps
         draft.isPublic = configure.isPublic
-        managedContext.insert(draft)
+//        managedContext.insert(draft)
         do {
             try managedContext.save()
         } catch let error as NSError {
@@ -193,6 +192,17 @@ class PostController {
         var _posts = [Post]()
         firebaseManager.getUserPosts(uid) { postGot in
             let managedContext = DataManager.theManager.context
+            // Delete the existing posts from context
+            let request = NSFetchRequest<Post>(entityName: "Post")
+            do {
+                let allPosts = try managedContext.fetch(request)
+                for aPost in allPosts {
+                    managedContext.delete(aPost)
+                }
+            } catch {
+                print("Error deleting")
+            }
+            // Insert new posts into context
             for postData in postGot {
                 let post = Post(context: managedContext)
                 post.text = postData["text"] as? String
@@ -209,21 +219,6 @@ class PostController {
                 _posts.append(post)
             }
             self.posts = _posts
-            
-            // Delete draft from context
-            let request = NSFetchRequest<Post>(entityName: "Post")
-            do {
-                let allPosts = try managedContext.fetch(request)
-                for aPost in allPosts {
-                    managedContext.delete(aPost)
-                }
-            } catch {
-                print("Error deleting")
-            }
-            
-            for aPost in self.posts{
-                managedContext.insert(aPost)
-            }
             
             do {
                 try managedContext.save()
