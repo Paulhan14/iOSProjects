@@ -60,6 +60,7 @@ class PostsTableViewController: UITableViewController, DataSourceCellConfigurer 
         let singleView = postView.children[0] as! PostViewController
         singleView.closureBlock =  {self.dismiss(animated: true, completion: nil)}
         singleView.postToShow = dataSource.objectAtIndexPath(indexPath) as? Post
+        singleView.segueType = "My"
         self.present(postView, animated: true, completion: nil)
     }
     

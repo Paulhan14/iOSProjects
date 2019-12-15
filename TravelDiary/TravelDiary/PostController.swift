@@ -228,9 +228,60 @@ class PostController {
                 print("Could not save draft. \(error)")
             }
         }
+    }
+    
+    func getFeedPosts() {
+        let managedContext = DataManager.theManager.context
+        // Delete the existing posts from context
+        let request = NSFetchRequest<FeedPost>(entityName: "FeedPost")
+        do {
+            let allFeedPosts = try managedContext.fetch(request)
+            for aPost in allFeedPosts {
+                managedContext.delete(aPost)
+            }
+        } catch {
+            print("Error deleting")
+        }
         
         
+        firebaseManager.getUserList { (uids, names) in
+            for uid in uids {
+                self.firebaseManager.getUserPosts(uid, completion: { (data) in
+                    var _feedPosts = [FeedPost]()
+                    for postData in data {
+                        let feedPost = FeedPost(context: managedContext)
+                        feedPost.id = postData["id"] as? String
+                        feedPost.text = postData["text"] as? String
+                        feedPost.location = postData["location"] as? String
+                        feedPost.latitude = postData["latitude"] as! Double
+                        feedPost.longitude = postData["longitude"] as! Double
+                        feedPost.weather = postData["weather"] as? String
+                        feedPost.steps = postData["steps"] as? String
+                        let format = DateFormatter()
+                        format.dateFormat = "MM/dd/yyyy HH:mm"
+                        let postDateString: String? = postData["time"] as? String
+                        feedPost.time = format.date(from: postDateString!)
+                        feedPost.userId = uid
+                        feedPost.userName = names[uid]
+                        _feedPosts.append(feedPost)
+                    }
+                    
+                    for feedPost in _feedPosts {
+                        self.firebaseManager.downloadFeedImages(uid: feedPost.userId!, postId: feedPost.id!, completion: { (data) in
+                            feedPost.image = data
+                        })
+                    }
+                    
+                    do {
+                        try managedContext.save()
+                    } catch let error as NSError {
+                        print("Could not save context. \(error)")
+                    }
+                })
+            }
+        }
         
     }
+    
 }
 

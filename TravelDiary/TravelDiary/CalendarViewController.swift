@@ -23,12 +23,18 @@ class CalendarViewController: UIViewController, UICollectionViewDataSource, UICo
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var imageWidth: NSLayoutConstraint!
     
+    @IBOutlet weak var nextPost: UIButton!
+    @IBOutlet weak var lastPost: UIButton!
+    
     let postController = PostController.postController
     var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     var allPostDate = [String]()
     var displayedYear = Calendar.current.component(.year, from: Date())
     var displayedMonth = Calendar.current.component(.month, from: Date())
     var dateSelected = String()
+    
+    var currentDayIndex = 0
+    var dayPosts = [Post]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +46,8 @@ class CalendarViewController: UIViewController, UICollectionViewDataSource, UICo
         detailView.isHidden = true
         let tapOnDetail = UITapGestureRecognizer(target: self, action: #selector(showDetail))
         detailView.addGestureRecognizer(tapOnDetail)
+        nextPost.isHidden = true
+        lastPost.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -77,7 +85,6 @@ class CalendarViewController: UIViewController, UICollectionViewDataSource, UICo
             cell.dateLabel.text = "\(indexPath.row + 2 - weekDayOf1st)"
             for date in allPostDate {
                 if date == self.getSelectedDate(indexPath) {
-//                    cell.dateLabel.layer.borderWidth = 2.0
                     cell.dotView.isHidden = false
                 }
             }
@@ -86,15 +93,26 @@ class CalendarViewController: UIViewController, UICollectionViewDataSource, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        var _dayPost = [Post]()
         for i in 0..<allPostDate.count {
             let date = self.getSelectedDate(indexPath)
             if allPostDate[i] == date {
-                populateViewWith(postController.posts[i])
-                dateSelected = date
-                break
-            } else {
-                detailView.isHidden = true
+                _dayPost.append(postController.posts[i])
             }
+        }
+        dayPosts = _dayPost
+        
+        if dayPosts.count != 0 {
+            populateViewWith(dayPosts[currentDayIndex])
+            if dayPosts.count > 1 {
+                nextPost.isHidden = false
+                lastPost.isHidden = true
+            } else if dayPosts.count == 1 {
+                nextPost.isHidden = true
+                lastPost.isHidden = true
+            }
+        } else {
+            detailView.isHidden = true
         }
     }
     
@@ -106,6 +124,7 @@ class CalendarViewController: UIViewController, UICollectionViewDataSource, UICo
             displayedMonth = 12
         }
         setupCalendar()
+        detailView.isHidden = true
     }
     
     @IBAction func nextPressed(_ sender: Any) {
@@ -115,6 +134,7 @@ class CalendarViewController: UIViewController, UICollectionViewDataSource, UICo
             displayedMonth = 1
         }
         setupCalendar()
+        detailView.isHidden = true
     }
     
     @objc func goToToday() {
@@ -123,7 +143,34 @@ class CalendarViewController: UIViewController, UICollectionViewDataSource, UICo
         setupCalendar()
     }
     
+    @IBAction func moveToNextPost(_ sender: Any) {
+        guard currentDayIndex + 1 < dayPosts.count else { return }
+        currentDayIndex += 1
+        populateViewWith(dayPosts[currentDayIndex])
+        // This is the last one today
+        if currentDayIndex == dayPosts.count - 1 {
+            nextPost.isHidden = true
+            lastPost.isHidden = false
+        } else {
+            nextPost.isHidden = false
+            lastPost.isHidden = false
+        }
+        
+    }
     
+    @IBAction func moveBackToLastPost(_ sender: Any) {
+        guard currentDayIndex - 1 >= 0 else { return }
+        currentDayIndex -= 1
+        populateViewWith(dayPosts[currentDayIndex])
+        // This is the first one today
+        if currentDayIndex == 0 {
+            nextPost.isHidden = false
+            lastPost.isHidden = true
+        } else {
+            nextPost.isHidden = false
+            lastPost.isHidden = false
+        }
+    }
     
     // MARK: - Helpers
     func setupCalendar() {
@@ -193,12 +240,8 @@ class CalendarViewController: UIViewController, UICollectionViewDataSource, UICo
         let postView = storyboard!.instantiateViewController(withIdentifier: Constant.StoryBoardID.postView)
         let singleView = postView.children[0] as! PostViewController
         singleView.closureBlock =  {self.dismiss(animated: true, completion: nil)}
-        for i in 0..<allPostDate.count {
-            if allPostDate[i] == dateSelected {
-                singleView.postToShow = postController.posts[i]
-                break
-            }
-        }
+        singleView.segueType = "My"
+        singleView.postToShow = dayPosts[currentDayIndex]
         self.present(postView, animated: true, completion: nil)
     }
     

@@ -63,13 +63,18 @@ class LoginPageViewController: UIViewController {
                             if loginUser == nil {
                                 self.userController.createUser(first, last, enteredEmail, newUID)
                                 // go to home screen
-                                self.goToHomeScreen()
                                 PostController.postController.getPostForCurrentUser(newUID)
+                                PostController.postController.getFeedPosts()
+                                self.goToHomeScreen()
+                                
+                                
                             } else {
                                 self.userController.loginUser = loginUser
                                 // go to home screen
-                                self.goToHomeScreen()
                                 PostController.postController.getPostForCurrentUser(newUID)
+                                PostController.postController.getFeedPosts()
+                                self.goToHomeScreen()
+                                
                             }
                         }
                     })

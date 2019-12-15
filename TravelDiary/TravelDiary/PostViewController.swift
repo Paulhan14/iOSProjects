@@ -33,11 +33,22 @@ class PostViewController: UIViewController {
     // Variables
     var closureBlock : (() -> Void)?
     var postToShow: Post?
+    var feedPostToShow: FeedPost?
+    var segueType: String?
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.mapView.delegate = self
+        
+        switch segueType {
+        case "My":
+            configurePage()
+        case "Feed":
+            configureFeedPage()
+        default:
+            print("Unrecognized segue in show post")
+        }
         if postToShow != nil {
             configurePage()
         }
@@ -124,6 +135,45 @@ class PostViewController: UIViewController {
         }
         
         self.stepLabel.text = postToShow!.steps
+    }
+    
+    func configureFeedPage() {
+        textField.text = feedPostToShow!.text
+        locationLabel.text = feedPostToShow!.location
+        // Has location infos
+        if feedPostToShow!.longitude != 0, feedPostToShow!.latitude != 0 {
+            // Construct MKPlacemark
+            let coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(floatLiteral: feedPostToShow!.latitude), longitude: CLLocationDegrees(floatLiteral: feedPostToShow!.longitude))
+            let placeSelected = MKPlacemark(coordinate: coordinate)
+            // Drop a pin
+            self.dropPinFor(placeSelected)
+            self.mapViewHeight.constant = 180.0
+        } else {
+            // No location info, hide mapview
+            self.mapViewHeight.constant = 0.0
+        }
+        
+        if let imageData = feedPostToShow!.image {
+            if imageData.description == "0 bytes" {
+                self.imageViewHeight.constant = 0.0
+            } else {
+                self.imageView.image = ImageManager.shared.convertToImage(data: imageData)
+                self.imageViewHeight.constant = 180.0
+            }
+        } else {
+            self.imageViewHeight.constant = 0.0
+        }
+        
+        if let weather = feedPostToShow!.weather {
+            if weather != "" {
+                self.weatherImage.image = UIImage(named: weather)
+                self.weatherLabel.text = weather
+            } else {
+                self.weatherImage.image = UIImage(named: "weather")
+                self.weatherLabel.text = "Weather"
+            }
+        }
+        self.stepLabel.text = feedPostToShow!.steps
     }
 }
     

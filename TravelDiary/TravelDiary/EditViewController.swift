@@ -58,6 +58,7 @@ class EditViewController: UIViewController {
         loadSetup()
         setupKeyboardAccessory()
         textField.inputAccessoryView = controlToolBar
+        textField.delegate = self
         let center = NotificationCenter.default
         center.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         center.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)

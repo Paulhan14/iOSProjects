@@ -38,6 +38,8 @@
 		DAA5F797237A562D00C0AC52 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA5F796237A562D00C0AC52 /* UserController.swift */; };
 		DAA5F799237A575300C0AC52 /* PostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA5F798237A575300C0AC52 /* PostController.swift */; };
 		DAA5F79C237C5B3F00C0AC52 /* travelDiary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DAA5F79A237C5B3F00C0AC52 /* travelDiary.xcdatamodeld */; };
+		DAA8C47223A6D8A900E82A57 /* FeedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA8C47123A6D8A900E82A57 /* FeedDataSource.swift */; };
+		DAA8C47423A6D99100E82A57 /* FeedPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA8C47323A6D99100E82A57 /* FeedPostCell.swift */; };
 		DAC01D69238633900043230B /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC01D68238633900043230B /* DataSource.swift */; };
 		DAC01D6B23863DB60043230B /* MyPostViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC01D6A23863DB60043230B /* MyPostViewCell.swift */; };
 		DAC01D6D23878ECA0043230B /* LoginPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC01D6C23878ECA0043230B /* LoginPageViewController.swift */; };
@@ -97,6 +99,8 @@
 		DAA5F796237A562D00C0AC52 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		DAA5F798237A575300C0AC52 /* PostController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostController.swift; sourceTree = "<group>"; };
 		DAA5F79B237C5B3F00C0AC52 /* travelDiary.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = travelDiary.xcdatamodel; sourceTree = "<group>"; };
+		DAA8C47123A6D8A900E82A57 /* FeedDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDataSource.swift; sourceTree = "<group>"; };
+		DAA8C47323A6D99100E82A57 /* FeedPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPostCell.swift; sourceTree = "<group>"; };
 		DAC01D68238633900043230B /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		DAC01D6A23863DB60043230B /* MyPostViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostViewCell.swift; sourceTree = "<group>"; };
 		DAC01D6C23878ECA0043230B /* LoginPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPageViewController.swift; sourceTree = "<group>"; };
@@ -223,6 +227,7 @@
 				DAA5F796237A562D00C0AC52 /* UserController.swift */,
 				DAA5F798237A575300C0AC52 /* PostController.swift */,
 				DAC01D68238633900043230B /* DataSource.swift */,
+				DAA8C47123A6D8A900E82A57 /* FeedDataSource.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -238,6 +243,7 @@
 				DAE837E423A436270067E1EA /* PostAnnotationView.swift */,
 				DAE837E623A436510067E1EA /* PostCalloutView.swift */,
 				DAE837E823A437AD0067E1EA /* CustomCalloutView.swift */,
+				DAA8C47323A6D99100E82A57 /* FeedPostCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -458,8 +464,10 @@
 				DAC01D69238633900043230B /* DataSource.swift in Sources */,
 				DA9815D223776D8F0010B001 /* PostsTableViewController.swift in Sources */,
 				DA43664B23850A7D00AA0821 /* UIView.swift in Sources */,
+				DAA8C47423A6D99100E82A57 /* FeedPostCell.swift in Sources */,
 				DAA5F799237A575300C0AC52 /* PostController.swift in Sources */,
 				DA95BBAF2379090800880622 /* InfoViewController.swift in Sources */,
+				DAA8C47223A6D8A900E82A57 /* FeedDataSource.swift in Sources */,
 				DA4366492384B30700AA0821 /* ImageManager.swift in Sources */,
 				DA3386C42384A12A00EBE722 /* FirebaseManager.swift in Sources */,
 				DA3386B62380A25700EBE722 /* TabViewController.swift in Sources */,

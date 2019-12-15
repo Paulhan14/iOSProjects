@@ -29,6 +29,7 @@ struct Constant {
         static let myPostCell = "MyPostCell"
         static let dateCell = "DateCell"
         static let settingCell = "SettingCell"
+        static let feedCell = "PlazaCell"
     }
 }
 

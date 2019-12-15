@@ -79,6 +79,7 @@ class InfoViewController: UIViewController {
                     self.firebaseManager.saveUserDataToFirebase(payload, newUID)
                     self.postController.deleteAllPosts()
                     // go to home screen
+                    PostController.postController.getFeedPosts()
                     self.goToHomeScreen()
                     //Save the user info to local
                     UserController.userController.createUser(enteredFirst, enteredLast, enteredEmail, newUID)

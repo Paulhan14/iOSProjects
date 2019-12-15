@@ -169,6 +169,19 @@ class FirebaseManager {
         
     }
     
+    func downloadFeedImages(uid: String, postId: String, completion: @escaping (Data) -> Void) {
+        let storage = Storage.storage()
+        let storageRef = storage.reference()
+        let imageRef = storageRef.child("\(uid)/posts/\(postId).jpeg")
+        imageRef.getData(maxSize: 3 * 1024 * 1024) { data, error in
+            if let error = error {
+                print("Download error: \(error.localizedDescription)")
+            } else {
+                completion(data!)
+            }
+        }
+    }
+    
     func uploadProfileImageOfUser(_ uid: String, _ imageData: Data) {
         let storage = Storage.storage()
         let storageRef = storage.reference()
@@ -227,6 +240,30 @@ class FirebaseManager {
                 print("Download profile image error: \(error.localizedDescription)")
             } else {
                 completion(data!)
+            }
+        }
+    }
+    
+    func getUserList(completion: @escaping ([String], [String:String]) -> Void) {
+        var userList = [String]()
+        var names = [String: String]()
+        let db = Firestore.firestore()
+        let docRef = db.collection("users")
+        docRef.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                for document in querySnapshot!.documents {
+                    if document.documentID != Auth.auth().currentUser?.uid {
+                        userList.append(document.documentID)
+                        var userData = document.data() as! [String : String]
+                        if let first = userData["first"], let last = userData["last"] {
+                            let name = "\(first) \(last)"
+                            names[document.documentID] = name
+                        }
+                    }
+                }
+                completion(userList, names)
             }
         }
     }
