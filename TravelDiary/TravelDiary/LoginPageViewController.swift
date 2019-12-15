@@ -57,31 +57,22 @@ class LoginPageViewController: UIViewController {
                     self.errorLabel.text = error!.localizedDescription
                 } else {
                     let newUID = result!.user.uid
-                    var data = [String:String]()
-                    let db = Firestore.firestore()
-                    let docRef = db.collection("users").document(newUID)
-                    docRef.getDocument { (document, error) in
-                        if let document = document, document.exists {
-                            data = document.data() as! [String:String]
-                            if let first = data["first"], let last = data["last"] {
-                                let loginUser = self.userController.getUser(by: newUID)
-                                if loginUser == nil {
-                                    self.userController.createUser(first, last, enteredEmail, newUID)
-                                    // go to home screen
-                                    self.goToHomeScreen()
-                                    //
-                                    PostController.postController.getPostForCurrentUser(newUID)
-                                } else {
-                                    self.userController.loginUser = loginUser
-                                    // go to home screen
-                                    self.goToHomeScreen()
-                                    PostController.postController.getPostForCurrentUser(newUID)
-                                }
+                    self.firebaseManager.getUserDataFromFirebase(newUID, completion: { (data) in
+                        if let first = data["first"], let last = data["last"] {
+                            let loginUser = self.userController.getUser(by: newUID)
+                            if loginUser == nil {
+                                self.userController.createUser(first, last, enteredEmail, newUID)
+                                // go to home screen
+                                self.goToHomeScreen()
+                                PostController.postController.getPostForCurrentUser(newUID)
+                            } else {
+                                self.userController.loginUser = loginUser
+                                // go to home screen
+                                self.goToHomeScreen()
+                                PostController.postController.getPostForCurrentUser(newUID)
                             }
-                        } else {
-                            print("Document does not exist")
                         }
-                    }
+                    })
                 }
             }
         }

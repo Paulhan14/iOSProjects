@@ -16,7 +16,7 @@ struct Constant {
         static let loginView = "LoginView"
         static let locationSearchView = "LocationSearchView"
         static let locationSearchTable = "LocationSearchTable"
-        static let postView = "PostViewController"
+        static let postView = "PageViewNavigation"
     }
     
     struct Segues {
@@ -28,6 +28,7 @@ struct Constant {
         static let locationCell = "LocationCell"
         static let myPostCell = "MyPostCell"
         static let dateCell = "DateCell"
+        static let settingCell = "SettingCell"
     }
 }
 

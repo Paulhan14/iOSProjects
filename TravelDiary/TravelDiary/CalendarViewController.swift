@@ -28,14 +28,18 @@ class CalendarViewController: UIViewController, UICollectionViewDataSource, UICo
     var allPostDate = [String]()
     var displayedYear = Calendar.current.component(.year, from: Date())
     var displayedMonth = Calendar.current.component(.month, from: Date())
+    var dateSelected = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Today", style: .plain, target: self, action: #selector(goToToday))
         dateView.dataSource = self
         dateView.delegate = self
         setupCalendar()
         detailView.isHidden = true
+        let tapOnDetail = UITapGestureRecognizer(target: self, action: #selector(showDetail))
+        detailView.addGestureRecognizer(tapOnDetail)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,15 +70,15 @@ class CalendarViewController: UIViewController, UICollectionViewDataSource, UICo
             collectionView.dequeueReusableCell(withReuseIdentifier:
                 Constant.CellIdentifier.dateCell, for: indexPath) as! DateCollectionViewCell
         let weekDayOf1st = self.getWeekDay()
-        cell.dateLabel.layer.borderWidth = 0
-        cell.dateLabel.layer.borderColor = UIColor.gray.cgColor
+        cell.dotView.isHidden = true
         if indexPath.row < (weekDayOf1st - 1) {
             cell.dateLabel.text = ""
         } else {
             cell.dateLabel.text = "\(indexPath.row + 2 - weekDayOf1st)"
             for date in allPostDate {
                 if date == self.getSelectedDate(indexPath) {
-                    cell.dateLabel.layer.borderWidth = 2.0
+//                    cell.dateLabel.layer.borderWidth = 2.0
+                    cell.dotView.isHidden = false
                 }
             }
         }
@@ -83,8 +87,10 @@ class CalendarViewController: UIViewController, UICollectionViewDataSource, UICo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         for i in 0..<allPostDate.count {
-            if allPostDate[i] == self.getSelectedDate(indexPath) {
+            let date = self.getSelectedDate(indexPath)
+            if allPostDate[i] == date {
                 populateViewWith(postController.posts[i])
+                dateSelected = date
                 break
             } else {
                 detailView.isHidden = true
@@ -108,6 +114,12 @@ class CalendarViewController: UIViewController, UICollectionViewDataSource, UICo
             displayedYear += 1
             displayedMonth = 1
         }
+        setupCalendar()
+    }
+    
+    @objc func goToToday() {
+        displayedYear = Calendar.current.component(.year, from: Date())
+        displayedMonth = Calendar.current.component(.month, from: Date())
         setupCalendar()
     }
     
@@ -172,8 +184,26 @@ class CalendarViewController: UIViewController, UICollectionViewDataSource, UICo
                 imageWidth.constant = 134
                 imageView.image = ImageManager.shared.convertToImage(data: imageData)
             }
-            
+        } else {
+            imageWidth.constant = 0
         }
+    }
+    
+    @objc func showDetail() {
+        let postView = storyboard!.instantiateViewController(withIdentifier: Constant.StoryBoardID.postView)
+        let singleView = postView.children[0] as! PostViewController
+        singleView.closureBlock =  {self.dismiss(animated: true, completion: nil)}
+        for i in 0..<allPostDate.count {
+            if allPostDate[i] == dateSelected {
+                singleView.postToShow = postController.posts[i]
+                break
+            }
+        }
+        self.present(postView, animated: true, completion: nil)
+    }
+    
+    func findPostByDate() {
+        
     }
 }
 

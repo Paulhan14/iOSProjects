@@ -14,6 +14,7 @@
         <attribute name="weather" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Post" representedClassName="Post" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="image" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <attribute name="isDraft" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="isPublic" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
@@ -36,8 +37,8 @@
         <relationship name="writes" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Post" inverseName="owner" inverseEntity="Post" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Post" positionX="-54" positionY="18" width="128" height="30"/>
-        <element name="User" positionX="-63" positionY="-18" width="128" height="120"/>
         <element name="Draft" positionX="-63" positionY="108" width="128" height="210"/>
+        <element name="Post" positionX="-54" positionY="18" width="128" height="255"/>
+        <element name="User" positionX="-63" positionY="-18" width="128" height="120"/>
     </elements>
 </model>

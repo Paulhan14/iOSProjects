@@ -34,6 +34,8 @@
 	<string>Travel Diary would like to read your step count</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Travel Diary would like to get a photo from your library</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Travel Diary would like to save image to your library</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

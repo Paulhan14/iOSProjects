@@ -14,7 +14,7 @@ class ImageManager {
     static let shared = ImageManager()
     
     func convertToData(image: UIImage) -> Data? {
-        return image.pngData()
+        return image.jpegData(compressionQuality: 0.3)
     }
     
     func convertToImage(data: Data) -> UIImage? {

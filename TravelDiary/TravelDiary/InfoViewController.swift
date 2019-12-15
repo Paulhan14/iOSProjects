@@ -22,6 +22,7 @@ class InfoViewController: UIViewController {
     @IBOutlet weak var errorLabel: UILabel!
     // MARK: variable
     var firebaseManager = FirebaseManager.shared
+    var postController = PostController.postController
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,6 +77,7 @@ class InfoViewController: UIViewController {
                     // Upload data
 //                    self.saveDataToFirebase(payload, newUID)
                     self.firebaseManager.saveUserDataToFirebase(payload, newUID)
+                    self.postController.deleteAllPosts()
                     // go to home screen
                     self.goToHomeScreen()
                     //Save the user info to local

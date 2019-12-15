@@ -67,6 +67,15 @@ extension DataSource: UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let indexPath = IndexPath(row: 0, section: section)
+        let managedObject = objectAtIndexPath(indexPath) as! Post
+        let format = DateFormatter()
+        format.dateFormat = "MM/d/yyyy hh:mm"
+        let postDateString = format.string(from: managedObject.time!)
+        return postDateString
+    }
+    
     func objectAtIndexPath(_ indexPath: IndexPath) -> NSManagedObject {
         let obj = fetchedResultsController.object(at: indexPath) as! NSManagedObject
         return obj

@@ -43,6 +43,9 @@
 		DAC01D6D23878ECA0043230B /* LoginPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC01D6C23878ECA0043230B /* LoginPageViewController.swift */; };
 		DAC01D6F23879B720043230B /* DateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC01D6E23879B720043230B /* DateCollectionViewCell.swift */; };
 		DAE837E323A0A9A90067E1EA /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE837E223A0A9A90067E1EA /* PostViewController.swift */; };
+		DAE837E523A436270067E1EA /* PostAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE837E423A436270067E1EA /* PostAnnotationView.swift */; };
+		DAE837E723A436510067E1EA /* PostCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE837E623A436510067E1EA /* PostCalloutView.swift */; };
+		DAE837E923A437AD0067E1EA /* CustomCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE837E823A437AD0067E1EA /* CustomCalloutView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +102,9 @@
 		DAC01D6C23878ECA0043230B /* LoginPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPageViewController.swift; sourceTree = "<group>"; };
 		DAC01D6E23879B720043230B /* DateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCollectionViewCell.swift; sourceTree = "<group>"; };
 		DAE837E223A0A9A90067E1EA /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		DAE837E423A436270067E1EA /* PostAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostAnnotationView.swift; sourceTree = "<group>"; };
+		DAE837E623A436510067E1EA /* PostCalloutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCalloutView.swift; sourceTree = "<group>"; };
+		DAE837E823A437AD0067E1EA /* CustomCalloutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCalloutView.swift; sourceTree = "<group>"; };
 		E227007B686D84DB9210E08D /* Pods-TravelDiary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelDiary.release.xcconfig"; path = "Target Support Files/Pods-TravelDiary/Pods-TravelDiary.release.xcconfig"; sourceTree = "<group>"; };
 		EA80EFB42E1B8384EA4A042D /* Pods-TravelDiary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelDiary.debug.xcconfig"; path = "Target Support Files/Pods-TravelDiary/Pods-TravelDiary.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -229,6 +235,9 @@
 				DA43664A23850A7D00AA0821 /* UIView.swift */,
 				DAC01D6A23863DB60043230B /* MyPostViewCell.swift */,
 				DAC01D6E23879B720043230B /* DateCollectionViewCell.swift */,
+				DAE837E423A436270067E1EA /* PostAnnotationView.swift */,
+				DAE837E623A436510067E1EA /* PostCalloutView.swift */,
+				DAE837E823A437AD0067E1EA /* CustomCalloutView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -441,6 +450,8 @@
 				DA20A98F237DF6AA0081DB72 /* DataManager.swift in Sources */,
 				DA9815D423776DB30010B001 /* CalendarViewController.swift in Sources */,
 				DA9815CE23776D300010B001 /* PlazaTableViewController.swift in Sources */,
+				DAE837E923A437AD0067E1EA /* CustomCalloutView.swift in Sources */,
+				DAE837E523A436270067E1EA /* PostAnnotationView.swift in Sources */,
 				DA3386BB2381160000EBE722 /* LocationSearchTableViewController.swift in Sources */,
 				DAC01D6B23863DB60043230B /* MyPostViewCell.swift in Sources */,
 				DA95BBB1237911D400880622 /* Helpers.swift in Sources */,
@@ -459,6 +470,7 @@
 				DAC01D6D23878ECA0043230B /* LoginPageViewController.swift in Sources */,
 				DA9815A1237762430010B001 /* AppDelegate.swift in Sources */,
 				DA95BBB323791BE500880622 /* Constant.swift in Sources */,
+				DAE837E723A436510067E1EA /* PostCalloutView.swift in Sources */,
 				DA9815D023776D4D0010B001 /* MapViewController.swift in Sources */,
 				DA3386C22384A08000EBE722 /* UIButton.swift in Sources */,
 				DA3386B92380BF8900EBE722 /* LocationSearchViewController.swift in Sources */,

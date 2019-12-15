@@ -9,6 +9,13 @@
 import UIKit
 import MapKit
 
+class PostAnnotation : MKPointAnnotation {
+    var post: Post
+    init(post: Post) {
+        self.post = post
+    }
+}
+
 class MapViewController: UIViewController {
     
     let locationManager = CLLocationManager()
@@ -20,24 +27,31 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         mapView.delegate = self
         dropPostPins()
+        self.navigationItem.title = "Location Search"
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        if (CLLocationManager.locationServicesEnabled()) {
+            locationManager.requestAlwaysAuthorization()
+            locationManager.requestWhenInUseAuthorization()
+        }
+        //Zoom to user location
+        if let userLocation = locationManager.location?.coordinate {
+            mapFocusOn(userLocation)
+        }
+        
+        DispatchQueue.main.async {
+            self.locationManager.startUpdatingLocation()
+        }
+        mapView.showsUserLocation = true
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     func dropPostPins(){
         var postCoordinate = CLLocationCoordinate2D()
         for post in postController.posts {
-            let annotation = MKPointAnnotation()
+            guard post.latitude != 0, post.longitude != 0 else {continue}
             postCoordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(floatLiteral: post.latitude), longitude: CLLocationDegrees(floatLiteral: post.longitude))
+            let annotation = PostAnnotation(post: post)
             annotation.coordinate = postCoordinate
             annotation.title = post.location
             mapView.addAnnotation(annotation)
@@ -58,8 +72,37 @@ extension MapViewController: MKMapViewDelegate {
             return nil
         }
         let reuseId = "MapPostPin"
-        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKMarkerAnnotationView
-        pinView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
+        if pinView == nil {
+            pinView = PostAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+        } else {
+            pinView?.annotation = annotation
+        }
+//        pinView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+//        pinView?.canShowCallout = true
         return pinView
+    }
+}
+
+extension MapViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .denied, .restricted:
+            mapView.showsUserLocation = false
+        case .authorizedWhenInUse, .authorizedAlways:
+            mapView.showsUserLocation = true
+        default:
+            break
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            mapFocusOn(location.coordinate)
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Map error\(error)")
     }
 }

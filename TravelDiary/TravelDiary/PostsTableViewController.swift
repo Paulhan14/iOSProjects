@@ -10,9 +10,6 @@ import UIKit
 import CoreData
 
 class PostsTableViewController: UITableViewController, DataSourceCellConfigurer {
-    
-    
-
     @IBOutlet weak var composeButton: UIBarButtonItem!
     
     lazy var dataSource : DataSource = DataSource(entity: "Post", sortKeys: ["time"], predicate: nil, sectionNameKeyPath: "time")
@@ -35,13 +32,14 @@ class PostsTableViewController: UITableViewController, DataSourceCellConfigurer 
         myPostCell.postField.text = post.text
 
         if let imageData = post.image {
-            if imageData.description == "0 bytes" {
-                myPostCell.imageWidth.constant = 0
-            } else {
+            if imageData.description != "0 bytes" {
                 myPostCell.imageWidth.constant = 134
                 myPostCell.myImageView.image = ImageManager.shared.convertToImage(data: imageData)
+            } else {
+                myPostCell.imageWidth.constant = 0
             }
-            
+        } else {
+            myPostCell.imageWidth.constant = 0
         }
         
         if let weather = post.weather {
@@ -59,10 +57,10 @@ class PostsTableViewController: UITableViewController, DataSourceCellConfigurer 
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let postView = storyboard!.instantiateViewController(withIdentifier: Constant.StoryBoardID.postView)
-        let singleView = postView as! PostViewController
+        let singleView = postView.children[0] as! PostViewController
         singleView.closureBlock =  {self.dismiss(animated: true, completion: nil)}
         singleView.postToShow = dataSource.objectAtIndexPath(indexPath) as? Post
-        self.present(singleView, animated: true, completion: nil)
+        self.present(postView, animated: true, completion: nil)
     }
     
     
