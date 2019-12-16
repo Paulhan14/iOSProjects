@@ -32,6 +32,8 @@ class CalendarViewController: UIViewController, UICollectionViewDataSource, UICo
     var displayedYear = Calendar.current.component(.year, from: Date())
     var displayedMonth = Calendar.current.component(.month, from: Date())
     var dateSelected = String()
+    var currentDay = Date()
+    var color: UIColor?
     
     var currentDayIndex = 0
     var dayPosts = [Post]()
@@ -39,6 +41,8 @@ class CalendarViewController: UIViewController, UICollectionViewDataSource, UICo
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.prefersLargeTitles = true
+        let colorT = ColorTheme()
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: colorT.noflashWhite]
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Today", style: .plain, target: self, action: #selector(goToToday))
         dateView.dataSource = self
         dateView.delegate = self
@@ -52,7 +56,6 @@ class CalendarViewController: UIViewController, UICollectionViewDataSource, UICo
     
     override func viewWillAppear(_ animated: Bool) {
         getAllPostsDate()
-//        dateView.reloadData()
     }
 
     /*
@@ -89,6 +92,16 @@ class CalendarViewController: UIViewController, UICollectionViewDataSource, UICo
                 }
             }
         }
+        
+        let format = DateFormatter()
+        format.dateFormat = "MM/d/yyyy"
+        let dateString = format.string(from: currentDay)
+        if dateString == self.getSelectedDate(indexPath) {
+             cell.dateLabel.textColor = .red
+        } else {
+            cell.dateLabel.textColor = .orange
+        }
+        
         return cell
     }
     

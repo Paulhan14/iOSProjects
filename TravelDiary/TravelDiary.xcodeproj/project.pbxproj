@@ -17,6 +17,7 @@
 		DA3386C023849FFB00EBE722 /* LoginTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3386BF23849FFB00EBE722 /* LoginTextField.swift */; };
 		DA3386C22384A08000EBE722 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3386C12384A08000EBE722 /* UIButton.swift */; };
 		DA3386C42384A12A00EBE722 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3386C32384A12A00EBE722 /* FirebaseManager.swift */; };
+		DA355FCC23A715EA007EF54F /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA355FCB23A715EA007EF54F /* UIColor+.swift */; };
 		DA4366492384B30700AA0821 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4366482384B30700AA0821 /* ImageManager.swift */; };
 		DA43664B23850A7D00AA0821 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA43664A23850A7D00AA0821 /* UIView.swift */; };
 		DA95BBAF2379090800880622 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA95BBAE2379090800880622 /* InfoViewController.swift */; };
@@ -74,6 +75,7 @@
 		DA3386BF23849FFB00EBE722 /* LoginTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextField.swift; sourceTree = "<group>"; };
 		DA3386C12384A08000EBE722 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		DA3386C32384A12A00EBE722 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		DA355FCB23A715EA007EF54F /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		DA4366482384B30700AA0821 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		DA43664A23850A7D00AA0821 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		DA95BBAE2379090800880622 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 				DAC01D6A23863DB60043230B /* MyPostViewCell.swift */,
 				DAC01D6E23879B720043230B /* DateCollectionViewCell.swift */,
 				DAA8C47323A6D99100E82A57 /* FeedPostCell.swift */,
+				DA355FCB23A715EA007EF54F /* UIColor+.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -479,6 +482,7 @@
 				DAC01D6D23878ECA0043230B /* LoginPageViewController.swift in Sources */,
 				DA9815A1237762430010B001 /* AppDelegate.swift in Sources */,
 				DA95BBB323791BE500880622 /* Constant.swift in Sources */,
+				DA355FCC23A715EA007EF54F /* UIColor+.swift in Sources */,
 				DA9815D023776D4D0010B001 /* MapViewController.swift in Sources */,
 				DA3386C22384A08000EBE722 /* UIButton.swift in Sources */,
 				DA3386B92380BF8900EBE722 /* LocationSearchViewController.swift in Sources */,

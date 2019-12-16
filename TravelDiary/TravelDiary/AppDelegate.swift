@@ -19,6 +19,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
+        let colorT = ColorTheme()
+        let navigationBarAppearace = UINavigationBar.appearance()
+        navigationBarAppearace.isOpaque = true
+        navigationBarAppearace.tintColor = colorT.noflashWhite
+        navigationBarAppearace.barTintColor = colorT.lapiz
+        let attrs = [NSAttributedString.Key.foregroundColor: colorT.noflashWhite]
+        navigationBarAppearace.titleTextAttributes = attrs
         return true
     }
 
