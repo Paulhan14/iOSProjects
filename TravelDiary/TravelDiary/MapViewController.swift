@@ -66,7 +66,7 @@ class MapViewController: UIViewController {
     }
 }
 
-extension MapViewController: MKMapViewDelegate {
+extension MapViewController: MKMapViewDelegate, DetailMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is MKUserLocation {
             return nil
@@ -75,12 +75,20 @@ extension MapViewController: MKMapViewDelegate {
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
         if pinView == nil {
             pinView = PostAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            (pinView as! PostAnnotationView).detailViewDelegate = self
         } else {
-            pinView?.annotation = annotation
+            pinView!.annotation = annotation
         }
-//        pinView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-//        pinView?.canShowCallout = true
         return pinView
+    }
+    
+    func detailsRequestedForPost(post: Post) {
+        let postView = storyboard!.instantiateViewController(withIdentifier: Constant.StoryBoardID.postView)
+        let singleView = postView.children[0] as! PostViewController
+        singleView.closureBlock =  {self.dismiss(animated: true, completion: nil)}
+        singleView.postToShow = post
+        singleView.segueType = "My"
+        self.present(postView, animated: true, completion: nil)
     }
 }
 
