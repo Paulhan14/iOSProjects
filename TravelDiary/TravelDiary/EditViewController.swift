@@ -104,12 +104,26 @@ class EditViewController: UIViewController {
     @IBAction func doneButtonPressed(_ sender: Any) {
         // Create a new MO using the editing post
         self.prepareForClosing()
-        PostController.postController.createPost(self.editingPost)
-        PostController.postController.deleteDraft()
-        // Dismiss the view
-        if let block = closureBlock {
-            block()
-        }
+        
+        let alert = UIAlertController(title: "Set to public?", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Private", style: .default, handler: { action in
+            PostController.postController.createPost(self.editingPost, false)
+            PostController.postController.deleteDraft()
+            // Dismiss the view
+            if let block = self.closureBlock {
+                block()
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "Sure", style: .destructive, handler: { action in
+            PostController.postController.createPost(self.editingPost, true)
+            PostController.postController.deleteDraft()
+            // Dismiss the view
+            if let block = self.closureBlock {
+                block()
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(alert, animated: true)
     }
     
     @objc func dismissKeyboard() {

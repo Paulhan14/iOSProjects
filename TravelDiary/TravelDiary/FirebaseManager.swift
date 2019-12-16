@@ -60,6 +60,7 @@ class FirebaseManager {
         payload["text"] = post.text
         payload["weather"] = post.weather
         payload["steps"] = post.steps
+        payload["isPublic"] = post.isPublic.description
         let format = DateFormatter()
         format.dateFormat = "MM/dd/yyyy HH:mm"
         let postDateString = format.string(from: post.time!)

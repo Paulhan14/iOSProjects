@@ -64,7 +64,7 @@ class PostController {
         }
     }
     
-    func createPost(_ configure: postParameters) {
+    func createPost(_ configure: postParameters, _ isPublic: Bool) {
         let managedContext = DataManager.theManager.context
         let post = Post(context: managedContext)
         let format = DateFormatter()
@@ -81,7 +81,7 @@ class PostController {
         post.text = configure.text
         post.image = configure.image
         post.steps = configure.steps
-        post.isPublic = configure.isPublic
+        post.isPublic = isPublic
         post.isDraft = false
         post.owner = UserController.userController.loginUser
         do {
@@ -249,6 +249,10 @@ class PostController {
                 self.firebaseManager.getUserPosts(uid, completion: { (data) in
                     var _feedPosts = [FeedPost]()
                     for postData in data {
+                        let isPublic = postData["isPublic"] as? String
+                        if isPublic == "false" {
+                            continue
+                        }
                         let feedPost = FeedPost(context: managedContext)
                         feedPost.id = postData["id"] as? String
                         feedPost.text = postData["text"] as? String
@@ -257,6 +261,8 @@ class PostController {
                         feedPost.longitude = postData["longitude"] as! Double
                         feedPost.weather = postData["weather"] as? String
                         feedPost.steps = postData["steps"] as? String
+                        let tf = postData["isPublic"] as! String
+                        feedPost.isPublic = (tf == "true")
                         let format = DateFormatter()
                         format.dateFormat = "MM/dd/yyyy HH:mm"
                         let postDateString: String? = postData["time"] as? String
