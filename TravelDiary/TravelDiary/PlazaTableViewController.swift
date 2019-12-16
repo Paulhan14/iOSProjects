@@ -19,6 +19,12 @@ class PlazaTableViewController: UITableViewController, FeedDataSourceCellConfigu
         dataSource.delegate = self
         dataSource.tableView = self.tableView
         tableView.dataSource = dataSource
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action:  #selector(refreshFeed), for: .valueChanged)
+        let colorT = ColorTheme()
+        refreshControl.tintColor = colorT.lapiz
+        self.refreshControl?.attributedTitle = NSAttributedString(string: "Getting new posts")
+        self.refreshControl = refreshControl
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -63,5 +69,10 @@ class PlazaTableViewController: UITableViewController, FeedDataSourceCellConfigu
         singleView.feedPostToShow = dataSource.objectAtIndexPath(indexPath) as? FeedPost
         singleView.segueType = "Feed"
         self.present(postView, animated: true, completion: nil)
+    }
+    
+    @objc func refreshFeed() {
+        PostController.postController.getFeedPosts()
+        refreshControl?.endRefreshing()
     }
 }

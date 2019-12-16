@@ -20,22 +20,22 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
-	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Travel Diary wants to use your location</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Travel Diary wants to use your location</string>
 	<key>NSHealthShareUsageDescription</key>
 	<string>Travel Diary would like to read your step count</string>
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>Travel Diary would like to read your step count</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Travel Diary would like to get a photo from your library</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Travel Diary wants to use your location</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Travel Diary wants to use your location</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Travel Diary would like to save image to your library</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Travel Diary would like to get a photo from your library</string>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>UIMainStoryboardFile</key>
+	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -53,8 +53,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
