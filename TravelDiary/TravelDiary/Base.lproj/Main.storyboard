@@ -217,10 +217,10 @@
             </objects>
             <point key="canvasLocation" x="2568.1159420289855" y="1149.1071428571429"/>
         </scene>
-        <!--View Controller-->
+        <!--Account View Controller-->
         <scene sceneID="1OT-HN-e2d">
             <objects>
-                <viewController id="PXZ-9F-YLC" sceneMemberID="viewController">
+                <viewController id="PXZ-9F-YLC" customClass="AccountViewController" customModule="TravelDiary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SaH-tt-27f">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -255,6 +255,9 @@
                                                         <real key="value" value="15"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="changePasswordPressed:" destination="PXZ-9F-YLC" eventType="touchUpInside" id="HuL-bV-kzy"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -299,6 +302,9 @@
                                                         <real key="value" value="15"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="changeNamePressed:" destination="PXZ-9F-YLC" eventType="touchUpInside" id="dLK-HU-Krf"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -337,6 +343,9 @@
                                                         <real key="value" value="15"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="signoutPressed:" destination="PXZ-9F-YLC" eventType="touchUpInside" id="zxe-vB-czx"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -369,6 +378,11 @@
                         <viewLayoutGuide key="safeArea" id="bWO-KY-xoU"/>
                     </view>
                     <navigationItem key="navigationItem" id="ksI-Ua-uYj"/>
+                    <connections>
+                        <outlet property="changeNameButton" destination="Twu-BA-bou" id="Gcw-ok-hAM"/>
+                        <outlet property="changePasswordButton" destination="FiG-u8-Q9L" id="J7O-V8-WT2"/>
+                        <outlet property="signoutButton" destination="ZP6-n7-xxb" id="xGF-nv-aj5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I8m-Q5-65i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

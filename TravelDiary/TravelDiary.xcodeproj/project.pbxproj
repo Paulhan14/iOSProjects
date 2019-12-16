@@ -18,6 +18,7 @@
 		DA3386C22384A08000EBE722 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3386C12384A08000EBE722 /* UIButton.swift */; };
 		DA3386C42384A12A00EBE722 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3386C32384A12A00EBE722 /* FirebaseManager.swift */; };
 		DA355FCC23A715EA007EF54F /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA355FCB23A715EA007EF54F /* UIColor+.swift */; };
+		DA355FCE23A72332007EF54F /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA355FCD23A72332007EF54F /* AccountViewController.swift */; };
 		DA4366492384B30700AA0821 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4366482384B30700AA0821 /* ImageManager.swift */; };
 		DA43664B23850A7D00AA0821 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA43664A23850A7D00AA0821 /* UIView.swift */; };
 		DA95BBAF2379090800880622 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA95BBAE2379090800880622 /* InfoViewController.swift */; };
@@ -76,6 +77,7 @@
 		DA3386C12384A08000EBE722 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		DA3386C32384A12A00EBE722 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		DA355FCB23A715EA007EF54F /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		DA355FCD23A72332007EF54F /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		DA4366482384B30700AA0821 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		DA43664A23850A7D00AA0821 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		DA95BBAE2379090800880622 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 				DA9815D723776DD00010B001 /* EditViewController.swift */,
 				DA3386B52380A25700EBE722 /* TabViewController.swift */,
 				DAE837E223A0A9A90067E1EA /* PostViewController.swift */,
+				DA355FCD23A72332007EF54F /* AccountViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -464,6 +467,7 @@
 				DA3386BB2381160000EBE722 /* LocationSearchTableViewController.swift in Sources */,
 				DAC01D6B23863DB60043230B /* MyPostViewCell.swift in Sources */,
 				DA95BBB1237911D400880622 /* Helpers.swift in Sources */,
+				DA355FCE23A72332007EF54F /* AccountViewController.swift in Sources */,
 				DAC01D69238633900043230B /* DataSource.swift in Sources */,
 				DAA8C47A23A6F68900E82A57 /* DetailMapView.swift in Sources */,
 				DA9815D223776D8F0010B001 /* PostsTableViewController.swift in Sources */,
