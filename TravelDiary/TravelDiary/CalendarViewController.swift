@@ -10,6 +10,7 @@ import UIKit
 
 class CalendarViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
+    // MARK: - Calendar components
     @IBOutlet weak var nextMonthButton: DesignableButton!
     @IBOutlet weak var backMonthButton: DesignableButton!
     @IBOutlet weak var monthYearLabel: UILabel!
@@ -56,18 +57,10 @@ class CalendarViewController: UIViewController, UICollectionViewDataSource, UICo
     
     override func viewWillAppear(_ animated: Bool) {
         getAllPostsDate()
+        setupCalendar()
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
+    // MARK: - Data source
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -106,6 +99,9 @@ class CalendarViewController: UIViewController, UICollectionViewDataSource, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        nextPost.isHidden = true
+        lastPost.isHidden = true
+        
         var _dayPost = [Post]()
         for i in 0..<allPostDate.count {
             let date = self.getSelectedDate(indexPath)
@@ -114,6 +110,8 @@ class CalendarViewController: UIViewController, UICollectionViewDataSource, UICo
             }
         }
         dayPosts = _dayPost
+        
+        currentDayIndex = 0
         
         if dayPosts.count != 0 {
             populateViewWith(dayPosts[currentDayIndex])
@@ -138,6 +136,8 @@ class CalendarViewController: UIViewController, UICollectionViewDataSource, UICo
         }
         setupCalendar()
         detailView.isHidden = true
+        nextPost.isHidden = true
+        lastPost.isHidden = true
     }
     
     @IBAction func nextPressed(_ sender: Any) {
@@ -148,6 +148,8 @@ class CalendarViewController: UIViewController, UICollectionViewDataSource, UICo
         }
         setupCalendar()
         detailView.isHidden = true
+        nextPost.isHidden = true
+        lastPost.isHidden = true
     }
     
     @objc func goToToday() {

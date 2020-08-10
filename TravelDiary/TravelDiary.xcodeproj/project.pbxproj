@@ -240,8 +240,8 @@
 			isa = PBXGroup;
 			children = (
 				DAA8C47D23A6FEDE00E82A57 /* DetailMapView.xib */,
-				DAA8C47923A6F68900E82A57 /* DetailMapView.swift */,
 				DAE837E423A436270067E1EA /* PostAnnotationView.swift */,
+				DAA8C47923A6F68900E82A57 /* DetailMapView.swift */,
 				DA3386BF23849FFB00EBE722 /* LoginTextField.swift */,
 				DA3386C12384A08000EBE722 /* UIButton.swift */,
 				DA43664A23850A7D00AA0821 /* UIView.swift */,

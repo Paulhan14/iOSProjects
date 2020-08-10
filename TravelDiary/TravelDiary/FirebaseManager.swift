@@ -257,7 +257,7 @@ class FirebaseManager {
                 for document in querySnapshot!.documents {
                     if document.documentID != Auth.auth().currentUser?.uid {
                         userList.append(document.documentID)
-                        var userData = document.data() as! [String : String]
+                        let userData = document.data() as! [String : String]
                         if let first = userData["first"], let last = userData["last"] {
                             let name = "\(first) \(last)"
                             names[document.documentID] = name

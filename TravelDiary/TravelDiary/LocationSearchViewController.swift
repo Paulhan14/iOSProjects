@@ -56,7 +56,7 @@ class LocationSearchViewController: UIViewController{
         
         self.navigationItem.searchController = resultSearchController
         resultSearchController.hidesNavigationBarDuringPresentation = false
-        resultSearchController.dimsBackgroundDuringPresentation = true
+//        resultSearchController.dimsBackgroundDuringPresentation = true
         self.definesPresentationContext = true
     }
     
