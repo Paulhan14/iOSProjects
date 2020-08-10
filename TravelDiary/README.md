@@ -1,19 +1,41 @@
-## Run Project
-To run the project, Firebase dependency is required.
+# TravelDiary
+> Write travel blogs, add photos, tag locations, and share!
 
-1. Open terminal
-2. Change directory to the project's folder
-3. Run pod install
-4. It should be good
+[![Swift Version][swift-image]][swift-url]
+[![CocoaPods Compatible](https://img.shields.io/cocoapods/v/EZSwiftExtensions.svg)](https://img.shields.io/cocoapods/v/LFAlertController.svg)  
+[![Platform](https://img.shields.io/cocoapods/p/LFAlertController.svg?style=flat)](http://cocoapods.org/pods/LFAlertController)
 
-*To install pod, please visit: https://cocoapods.org
+**Creating and editing a personal diary:**
 
-When opening the project in Xcode, please open TravelDiary.xcworkspace.
+Writing about what happened every day or during trips, adding photos, recording locations of restaurants, museums and more.
+The content of each blog can be customized to meet the personal preference of a user. 
 
-*If there is any problem building the project, please do email me. I am available during the break.
+**Blogs will be organized and presented to users in different ways:**
+1. Calendar view: The interface resembles the iOS default calendar application. When a user taps a specific date, the corresponding blog, if exists, will appear in full screen.
+2. Table view: A list of all blogs created by the user. The sections will be generated according to the user-defined categories.
+3. Map view: This view will present a map that contains all the blogs in the form of map annotations. Tapping on each pin will bring up the corresponding blog.
 
-## About the project
-Please test login feature using email: name@c.com password: asdf1234
-The access of this project on Firebase is linked to my personal Google account.
-After user sign up, the first and last name along with the unique user id will be stored in database.
-The posts are for now only stored locally.
+
+## Features
+
+- [x] Plaza
+- [x] Calendar View
+- [x] Map View
+- [x] Share
+
+## Requirements
+
+- iOS 8.0+
+- Xcode 7.3
+
+## Meta
+
+Jiaxing Han – pauljasonhan@gmail.com
+
+
+[View this Project](https://github.com/Paulhan14/iOSProjects/tree/master/TravelDiary)
+
+[swift-image]:https://img.shields.io/badge/swift-3.0-orange.svg
+[swift-url]: https://swift.org/
+[codebeat-image]: https://codebeat.co/badges/c19b47ea-2f9d-45df-8458-b2d952fe9dad
+[codebeat-url]: https://codebeat.co/projects/github-com-vsouza-awesomeios-com
