@@ -1,2 +1,2 @@
-# CMPSC 475 Homework Projects
+# Personal iOS Projects
 ## By Jiaxing Han

@@ -20,7 +20,9 @@ The content of each blog can be customized to meet the personal preference of a 
 
 - [x] Plaza
 - [x] Calendar View
+<img width="300" alt="TravelDiary" src="https://github.com/Paulhan14/iOSProjects/blob/master/TravelDiary/pics/cal.png"> 
 - [x] Map View
+<img width="300" alt="TravelDiary" src="https://github.com/Paulhan14/iOSProjects/blob/master/TravelDiary/pics/map.png">
 - [x] Share
 
 ## Requirements
