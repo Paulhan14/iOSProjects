@@ -212,7 +212,13 @@ class CalendarViewController: UIViewController, UICollectionViewDataSource, UICo
     func getSelectedDate(_ indexPath: IndexPath) -> String {
         let startDay = self.getWeekDay()
         let dateToday = indexPath.row - startDay + 2
-        let dateString = "\(displayedMonth)/\(dateToday)/\(displayedYear)"
+        var dateComponents = DateComponents()
+        dateComponents.year = displayedYear
+        dateComponents.month = displayedMonth
+        dateComponents.day = dateToday
+        let format = DateFormatter()
+        format.dateFormat = "MM/d/yyyy"
+        let dateString = format.string(from: Calendar.current.date(from: dateComponents)!)
         return dateString
     }
     
